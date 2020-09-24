@@ -1,0 +1,78 @@
+{
+	"extends": "eslint:recommended",
+	"env": {
+		"node": true,
+		"es6": true,
+		"mocha": true
+	},
+	"parserOptions": {
+		"ecmaVersion": 2017,
+		"sourceType": "module"
+	},
+	"ignorePatterns": [
+		"gen",
+		"swagger",
+		"node_modules",
+		"lib"
+	],
+	"globals": {
+		"SELECT": true,
+		"INSERT": true,
+		"UPDATE": true,
+		"DELETE": true,
+		"CREATE": true,
+		"DROP": true,
+		"cds": true
+	},
+	"rules": {
+		"semi": "error",
+		"no-extra-semi": "warn",
+		"curly": "warn",
+		"quotes": [
+			"error",
+			"double",
+			{
+				"allowTemplateLiterals": true
+			}
+		],
+		"eqeqeq": "error",
+		"indent": [
+			"warn",
+			"tab",
+			{
+				"SwitchCase": 1
+			}
+		],
+		"no-console": "error",
+		"space-before-blocks": "warn",
+		"spaced-comment": "warn",
+		"no-var": "error",
+		"require-atomic-updates": "off",
+		"camelcase": [
+			"error",
+			{
+				"allow": [
+					"^VH_",
+					"^SH_",
+					"_Id$"
+				]
+			}
+		],
+		"new-cap": [
+			"warn",
+			{
+				"capIsNewExceptionPattern": "^UPDATE"
+			}
+		],
+		"complexity": [
+			"error",
+			11
+		],
+		"consistent-return": "warn",
+		"no-unused-expressions": "warn",
+		"brace-style": [
+			"warn",
+			"1tbs"
+		]
+	}
+}

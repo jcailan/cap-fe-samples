@@ -1,0 +1,1012 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Communication.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Alias="Communication" Namespace="com.sap.vocabularies.Communication.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Measures.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Alias="Measures" Namespace="Org.OData.Measures.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+  </edmx:Reference>
+  <edmx:DataServices m:DataServiceVersion="2.0">
+    <Schema Namespace="northwind" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+        <EntitySet Name="Products" EntityType="northwind.Products"/>
+        <EntitySet Name="Reviews" EntityType="northwind.Reviews"/>
+        <EntitySet Name="SalesData" EntityType="northwind.SalesData"/>
+        <EntitySet Name="StockAvailability" EntityType="northwind.StockAvailability"/>
+        <EntitySet Name="Suppliers" EntityType="northwind.Suppliers"/>
+        <EntitySet Name="VH_Categories" EntityType="northwind.VH_Categories"/>
+        <EntitySet Name="VH_Currencies" EntityType="northwind.VH_Currencies"/>
+        <EntitySet Name="VH_DimensionUnits" EntityType="northwind.VH_DimensionUnits"/>
+        <EntitySet Name="VH_UnitOfMeasures" EntityType="northwind.VH_UnitOfMeasures"/>
+        <AssociationSet Name="Products_ToUnitOfMeasure" Association="northwind.Products_ToUnitOfMeasure">
+          <End Role="Products" EntitySet="Products"/>
+          <End Role="VH_UnitOfMeasures" EntitySet="VH_UnitOfMeasures"/>
+        </AssociationSet>
+        <AssociationSet Name="Products_ToCurrency" Association="northwind.Products_ToCurrency">
+          <End Role="Products" EntitySet="Products"/>
+          <End Role="VH_Currencies" EntitySet="VH_Currencies"/>
+        </AssociationSet>
+        <AssociationSet Name="Products_ToCategory" Association="northwind.Products_ToCategory">
+          <End Role="Products" EntitySet="Products"/>
+          <End Role="VH_Categories" EntitySet="VH_Categories"/>
+        </AssociationSet>
+        <AssociationSet Name="Products_ToDimensionUnit" Association="northwind.Products_ToDimensionUnit">
+          <End Role="Products" EntitySet="Products"/>
+          <End Role="VH_DimensionUnits" EntitySet="VH_DimensionUnits"/>
+        </AssociationSet>
+        <AssociationSet Name="Products_ToStockAvailability" Association="northwind.Products_ToStockAvailability">
+          <End Role="Products" EntitySet="Products"/>
+          <End Role="StockAvailability" EntitySet="StockAvailability"/>
+        </AssociationSet>
+        <AssociationSet Name="Products_ToSupplier" Association="northwind.Products_ToSupplier">
+          <End Role="Products" EntitySet="Products"/>
+          <End Role="Suppliers" EntitySet="Suppliers"/>
+        </AssociationSet>
+        <AssociationSet Name="Reviews_ToProduct" Association="northwind.Reviews_ToProduct">
+          <End Role="Reviews" EntitySet="Reviews"/>
+          <End Role="Products" EntitySet="Products"/>
+        </AssociationSet>
+        <AssociationSet Name="SalesData_ToProduct" Association="northwind.SalesData_ToProduct">
+          <End Role="SalesData" EntitySet="SalesData"/>
+          <End Role="Products" EntitySet="Products"/>
+        </AssociationSet>
+        <AssociationSet Name="StockAvailability_ToProduct" Association="northwind.StockAvailability_ToProduct">
+          <End Role="StockAvailability" EntitySet="StockAvailability"/>
+          <End Role="Products" EntitySet="Products"/>
+        </AssociationSet>
+      </EntityContainer>
+      <EntityType Name="Products">
+        <Key>
+          <PropertyRef Name="Id"/>
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="Name" Type="Edm.String"/>
+        <Property Name="Description" Type="Edm.String"/>
+        <Property Name="ImageUrl" Type="Edm.String"/>
+        <Property Name="ReleaseDate" Type="Edm.DateTimeOffset"/>
+        <Property Name="DiscontinuedDate" Type="Edm.DateTimeOffset"/>
+        <Property Name="Rating" Type="Edm.Decimal" Scale="2" Precision="16"/>
+        <Property Name="Price" Type="Edm.Decimal" Scale="2" Precision="16"/>
+        <Property Name="Height" Type="Edm.Decimal" Scale="2" Precision="16"/>
+        <Property Name="Width" Type="Edm.Decimal" Scale="2" Precision="16"/>
+        <Property Name="Depth" Type="Edm.Decimal" Scale="2" Precision="16"/>
+        <Property Name="Quantity" Type="Edm.Decimal" Scale="2" Precision="16"/>
+        <NavigationProperty Name="ToUnitOfMeasure" Relationship="northwind.Products_ToUnitOfMeasure" FromRole="Products" ToRole="VH_UnitOfMeasures"/>
+        <NavigationProperty Name="ToCurrency" Relationship="northwind.Products_ToCurrency" FromRole="Products" ToRole="VH_Currencies"/>
+        <NavigationProperty Name="ToCategory" Relationship="northwind.Products_ToCategory" FromRole="Products" ToRole="VH_Categories"/>
+        <Property Name="Category" Type="Edm.String"/>
+        <NavigationProperty Name="ToDimensionUnit" Relationship="northwind.Products_ToDimensionUnit" FromRole="Products" ToRole="VH_DimensionUnits"/>
+        <NavigationProperty Name="ToSalesData" Relationship="northwind.SalesData_ToProduct" FromRole="Products" ToRole="SalesData"/>
+        <Property Name="StockAvailability" Type="Edm.Int32"/>
+        <NavigationProperty Name="ToStockAvailability" Relationship="northwind.Products_ToStockAvailability" FromRole="Products" ToRole="StockAvailability"/>
+        <NavigationProperty Name="ToSupplier" Relationship="northwind.Products_ToSupplier" FromRole="Products" ToRole="Suppliers"/>
+        <NavigationProperty Name="ToReviews" Relationship="northwind.Reviews_ToProduct" FromRole="Products" ToRole="Reviews"/>
+        <Property Name="ToUnitOfMeasure_Id" Type="Edm.String" MaxLength="2"/>
+        <Property Name="ToCurrency_Id" Type="Edm.String" MaxLength="3"/>
+        <Property Name="ToCategory_Id" Type="Edm.String" MaxLength="1"/>
+        <Property Name="ToDimensionUnit_Id" Type="Edm.String" MaxLength="2"/>
+        <Property Name="ToSupplier_Id" Type="Edm.Guid"/>
+      </EntityType>
+      <EntityType Name="Reviews">
+        <Key>
+          <PropertyRef Name="Id"/>
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="Name" Type="Edm.String"/>
+        <Property Name="Rating" Type="Edm.Int32"/>
+        <Property Name="Comment" Type="Edm.String"/>
+        <Property Name="CreatedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <NavigationProperty Name="ToProduct" Relationship="northwind.Reviews_ToProduct" FromRole="Reviews" ToRole="Products"/>
+        <Property Name="ToProduct_Id" Type="Edm.Guid"/>
+      </EntityType>
+      <EntityType Name="SalesData" sap:semantics="aggregate">
+        <Key>
+          <PropertyRef Name="Id"/>
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:aggregation-role="dimension"/>
+        <Property Name="DeliveryDate" Type="Edm.DateTimeOffset" sap:aggregation-role="dimension"/>
+        <Property Name="Revenue" Type="Edm.Decimal" Scale="2" Precision="16" sap:aggregation-role="measure"/>
+        <Property Name="CurrencyKey" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension"/>
+        <Property Name="DeliveryMonthId" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension"/>
+        <Property Name="DeliveryMonth" Type="Edm.String" sap:aggregation-role="dimension"/>
+        <NavigationProperty Name="ToProduct" Relationship="northwind.SalesData_ToProduct" FromRole="SalesData" ToRole="Products" sap:aggregation-role="dimension"/>
+        <Property Name="ToProduct_Id" Type="Edm.Guid" sap:aggregation-role="dimension"/>
+      </EntityType>
+      <EntityType Name="StockAvailability">
+        <Key>
+          <PropertyRef Name="Id"/>
+        </Key>
+        <Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+        <Property Name="Description" Type="Edm.String"/>
+        <NavigationProperty Name="ToProduct" Relationship="northwind.StockAvailability_ToProduct" FromRole="StockAvailability" ToRole="Products"/>
+      </EntityType>
+      <EntityType Name="Suppliers">
+        <Key>
+          <PropertyRef Name="Id"/>
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="Name" Type="Edm.String"/>
+        <Property Name="Email" Type="Edm.String"/>
+        <Property Name="Phone" Type="Edm.String"/>
+        <Property Name="Fax" Type="Edm.String"/>
+        <NavigationProperty Name="ToProduct" Relationship="northwind.Products_ToSupplier" FromRole="Suppliers" ToRole="Products"/>
+      </EntityType>
+      <EntityType Name="VH_Categories">
+        <Key>
+          <PropertyRef Name="Code"/>
+        </Key>
+        <Property Name="Code" Type="Edm.String" MaxLength="1" Nullable="false"/>
+        <Property Name="Text" Type="Edm.String"/>
+      </EntityType>
+      <EntityType Name="VH_Currencies">
+        <Key>
+          <PropertyRef Name="Code"/>
+        </Key>
+        <Property Name="Code" Type="Edm.String" MaxLength="3" Nullable="false"/>
+        <Property Name="Text" Type="Edm.String"/>
+      </EntityType>
+      <EntityType Name="VH_DimensionUnits">
+        <Key>
+          <PropertyRef Name="Code"/>
+        </Key>
+        <Property Name="Code" Type="Edm.String" MaxLength="2" Nullable="false"/>
+        <Property Name="Text" Type="Edm.String"/>
+      </EntityType>
+      <EntityType Name="VH_UnitOfMeasures">
+        <Key>
+          <PropertyRef Name="Code"/>
+        </Key>
+        <Property Name="Code" Type="Edm.String" MaxLength="2" Nullable="false"/>
+        <Property Name="Text" Type="Edm.String"/>
+      </EntityType>
+      <Association Name="Products_ToUnitOfMeasure">
+        <End Role="Products" Type="northwind.Products" Multiplicity="*"/>
+        <End Role="VH_UnitOfMeasures" Type="northwind.VH_UnitOfMeasures" Multiplicity="0..1"/>
+        <ReferentialConstraint>
+          <Principal Role="VH_UnitOfMeasures">
+            <PropertyRef Name="Code"/>
+          </Principal>
+          <Dependent Role="Products">
+            <PropertyRef Name="ToUnitOfMeasure_Id"/>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="Products_ToCurrency">
+        <End Role="Products" Type="northwind.Products" Multiplicity="*"/>
+        <End Role="VH_Currencies" Type="northwind.VH_Currencies" Multiplicity="0..1"/>
+        <ReferentialConstraint>
+          <Principal Role="VH_Currencies">
+            <PropertyRef Name="Code"/>
+          </Principal>
+          <Dependent Role="Products">
+            <PropertyRef Name="ToCurrency_Id"/>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="Products_ToCategory">
+        <End Role="Products" Type="northwind.Products" Multiplicity="*"/>
+        <End Role="VH_Categories" Type="northwind.VH_Categories" Multiplicity="0..1"/>
+        <ReferentialConstraint>
+          <Principal Role="VH_Categories">
+            <PropertyRef Name="Code"/>
+          </Principal>
+          <Dependent Role="Products">
+            <PropertyRef Name="ToCategory_Id"/>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="Products_ToDimensionUnit">
+        <End Role="Products" Type="northwind.Products" Multiplicity="*"/>
+        <End Role="VH_DimensionUnits" Type="northwind.VH_DimensionUnits" Multiplicity="0..1"/>
+        <ReferentialConstraint>
+          <Principal Role="VH_DimensionUnits">
+            <PropertyRef Name="Code"/>
+          </Principal>
+          <Dependent Role="Products">
+            <PropertyRef Name="ToDimensionUnit_Id"/>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="Products_ToStockAvailability">
+        <End Role="Products" Type="northwind.Products" Multiplicity="*"/>
+        <End Role="StockAvailability" Type="northwind.StockAvailability" Multiplicity="0..1"/>
+        <ReferentialConstraint>
+          <Principal Role="StockAvailability">
+            <PropertyRef Name="Id"/>
+          </Principal>
+          <Dependent Role="Products">
+            <PropertyRef Name="StockAvailability"/>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="Products_ToSupplier">
+        <End Role="Products" Type="northwind.Products" Multiplicity="*"/>
+        <End Role="Suppliers" Type="northwind.Suppliers" Multiplicity="0..1"/>
+        <ReferentialConstraint>
+          <Principal Role="Suppliers">
+            <PropertyRef Name="Id"/>
+          </Principal>
+          <Dependent Role="Products">
+            <PropertyRef Name="ToSupplier_Id"/>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="Reviews_ToProduct">
+        <End Role="Reviews" Type="northwind.Reviews" Multiplicity="*"/>
+        <End Role="Products" Type="northwind.Products" Multiplicity="0..1"/>
+        <ReferentialConstraint>
+          <Principal Role="Products">
+            <PropertyRef Name="Id"/>
+          </Principal>
+          <Dependent Role="Reviews">
+            <PropertyRef Name="ToProduct_Id"/>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="SalesData_ToProduct">
+        <End Role="SalesData" Type="northwind.SalesData" Multiplicity="*"/>
+        <End Role="Products" Type="northwind.Products" Multiplicity="0..1"/>
+        <ReferentialConstraint>
+          <Principal Role="Products">
+            <PropertyRef Name="Id"/>
+          </Principal>
+          <Dependent Role="SalesData">
+            <PropertyRef Name="ToProduct_Id"/>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="StockAvailability_ToProduct">
+        <End Role="StockAvailability" Type="northwind.StockAvailability" Multiplicity="*"/>
+        <End Role="Products" Type="northwind.Products" Multiplicity="0..1"/>
+      </Association>
+      <Annotations Target="northwind.Products" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Products"/>
+        <Annotation Term="UI.DataPoint" Qualifier="Availability">
+          <Record Type="UI.DataPointType">
+            <PropertyValue Property="Criticality" Path="StockAvailability"/>
+            <PropertyValue Property="Description" String="Stock Availability Indicator"/>
+            <PropertyValue Property="TargetValue" Int="20"/>
+            <PropertyValue Property="Title" String="Availability"/>
+            <PropertyValue Property="Value" Path="Quantity"/>
+            <PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Progress"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.DataPoint" Qualifier="AverageRatingValue">
+          <Record Type="UI.DataPointType">
+            <PropertyValue Property="TargetValue" Int="5"/>
+            <PropertyValue Property="Title" String="Rating"/>
+            <PropertyValue Property="Value" Path="Rating"/>
+            <PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Rating"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.DataPoint" Qualifier="Price">
+          <Record Type="UI.DataPointType">
+            <PropertyValue Property="Title" String="Price"/>
+            <PropertyValue Property="Value" Path="Price"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.DataPoint" Qualifier="StockAvailability">
+          <Record Type="UI.DataPointType">
+            <PropertyValue Property="Criticality" Path="StockAvailability"/>
+            <PropertyValue Property="Title" String="Stock Availability"/>
+            <PropertyValue Property="Value" Path="ToStockAvailability/Id"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.Facets">
+          <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#TechnicalData"/>
+              <PropertyValue Property="Label" String="Technical Data"/>
+            </Record>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="ToReviews/@UI.LineItem"/>
+              <PropertyValue Property="Label" String="Product Reviews"/>
+            </Record>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="ToSalesData/@UI.Chart"/>
+              <PropertyValue Property="Label" String="Monthly Revenue"/>
+            </Record>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="ToSalesData/@UI.LineItem"/>
+              <PropertyValue Property="Label" String="Sales Data"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.FieldGroup" Qualifier="GeneralInformation">
+          <Record Type="UI.FieldGroupType">
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="ToCategory_Id"/>
+                  <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="ReleaseDate"/>
+                  <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Low"/>
+                </Record>
+                <Record Type="UI.DataFieldForAnnotation">
+                  <PropertyValue Property="Label" String="Supplier"/>
+                  <PropertyValue Property="Target" AnnotationPath="ToSupplier/@Communication.Contact"/>
+                  <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.FieldGroup" Qualifier="TechnicalData">
+          <Record Type="UI.FieldGroupType">
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="Height"/>
+                  <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="Width"/>
+                  <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="Depth"/>
+                  <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.HeaderFacets">
+          <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneralInformation"/>
+              <PropertyValue Property="Label" String="General Information"/>
+            </Record>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#AverageRatingValue"/>
+            </Record>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#Price"/>
+            </Record>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#StockAvailability"/>
+            </Record>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#Availability"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.HeaderInfo">
+          <Record Type="UI.HeaderInfoType">
+            <PropertyValue Property="Description">
+              <Record Type="UI.DataField">
+                <PropertyValue Property="Value" Path="Description"/>
+              </Record>
+            </PropertyValue>
+            <PropertyValue Property="ImageUrl" Path="ImageUrl"/>
+            <PropertyValue Property="Title">
+              <Record Type="UI.DataField">
+                <PropertyValue Property="Value" Path="Name"/>
+              </Record>
+            </PropertyValue>
+            <PropertyValue Property="TypeName" String="Product"/>
+            <PropertyValue Property="TypeNamePlural" String="Products"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="ImageUrl"/>
+              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="Name"/>
+              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="Description"/>
+              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="ToCategory_Id"/>
+              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+            </Record>
+            <Record Type="UI.DataFieldForAnnotation">
+              <PropertyValue Property="Label" String="Supplier"/>
+              <PropertyValue Property="Target" AnnotationPath="ToSupplier/@Communication.Contact"/>
+              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="ReleaseDate"/>
+              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="ToStockAvailability/Id"/>
+              <PropertyValue Property="Criticality" Path="ToStockAvailability/Id"/>
+              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+            </Record>
+            <Record Type="UI.DataFieldForAnnotation">
+              <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#AverageRatingValue"/>
+              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="Price"/>
+              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.SelectionFields">
+          <Collection>
+            <PropertyPath>ToCategory_Id</PropertyPath>
+            <PropertyPath>ToCurrency_Id</PropertyPath>
+            <PropertyPath>StockAvailability</PropertyPath>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.Products/Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="ID"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/Name" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+        <Annotation Term="Common.Label" String="Name"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/Description" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+        <Annotation Term="Common.Label" String="Description"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/ImageUrl" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Image"/>
+        <Annotation Term="UI.IsImageURL" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/ReleaseDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Release Date"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/DiscontinuedDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Discontinued Date"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/Rating" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Rating"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/Price" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+        <Annotation Term="Common.Label" String="Price"/>
+        <Annotation Term="Measures.Unit" Path="ToCurrency_Id"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/Height" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Height"/>
+        <Annotation Term="Measures.Unit" Path="ToDimensionUnit_Id"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/Width" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Width"/>
+        <Annotation Term="Measures.Unit" Path="ToDimensionUnit_Id"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/Depth" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Depth"/>
+        <Annotation Term="Measures.Unit" Path="ToDimensionUnit_Id"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/Quantity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+        <Annotation Term="Common.Label" String="Quantity"/>
+        <Annotation Term="Measures.Unit" Path="ToUnitOfMeasure_Id"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/ToUnitOfMeasure" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Unit Of Measure"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/ToCurrency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Currency"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/ToCategory" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Category"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/Category" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/ToDimensionUnit" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Dimension Unit"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/StockAvailability" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Stock Availability"/>
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="CollectionPath" String="StockAvailability"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="StockAvailability"/>
+                  <PropertyValue Property="ValueListProperty" String="Id"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/ToUnitOfMeasure_Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+        <Annotation Term="Common.Label" String="Unit Of Measure"/>
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="CollectionPath" String="VH_UnitOfMeasures"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="ToUnitOfMeasure_Id"/>
+                  <PropertyValue Property="ValueListProperty" String="Code"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Text"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="SearchSupported" Bool="true"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.ValueListWithFixedValues" Bool="false"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/ToCurrency_Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+        <Annotation Term="Common.Label" String="Currency"/>
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="CollectionPath" String="VH_Currencies"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="ToCurrency_Id"/>
+                  <PropertyValue Property="ValueListProperty" String="Code"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Text"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="SearchSupported" Bool="true"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.ValueListWithFixedValues" Bool="false"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/ToCategory_Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+        <Annotation Term="Common.Label" String="Category"/>
+        <Annotation Term="Common.Text" Path="Category">
+          <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+        </Annotation>
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="CollectionPath" String="VH_Categories"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="ToCategory_Id"/>
+                  <PropertyValue Property="ValueListProperty" String="Code"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Text"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="SearchSupported" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.Products/ToDimensionUnit_Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+        <Annotation Term="Common.Label" String="Dimension Unit"/>
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="CollectionPath" String="VH_DimensionUnits"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="ToDimensionUnit_Id"/>
+                  <PropertyValue Property="ValueListProperty" String="Code"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Text"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="SearchSupported" Bool="true"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.ValueListWithFixedValues" Bool="false"/>
+      </Annotations>
+      <Annotations Target="northwind.Reviews" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.DataPoint" Qualifier="Rating">
+          <Record Type="UI.DataPointType">
+            <PropertyValue Property="TargetValue" Int="5"/>
+            <PropertyValue Property="Title" String="Rating"/>
+            <PropertyValue Property="Value" Path="Rating"/>
+            <PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Rating"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.Facets">
+          <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Comment"/>
+              <PropertyValue Property="Label" String="Review"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.FieldGroup" Qualifier="Comment">
+          <Record Type="UI.FieldGroupType">
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="Comment"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.HeaderFacets">
+          <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#Rating"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.HeaderInfo">
+          <Record Type="UI.HeaderInfoType">
+            <PropertyValue Property="Description">
+              <Record Type="UI.DataField">
+                <PropertyValue Property="Value" Path="CreatedAt"/>
+              </Record>
+            </PropertyValue>
+            <PropertyValue Property="Title">
+              <Record Type="UI.DataField">
+                <PropertyValue Property="Value" Path="Name"/>
+              </Record>
+            </PropertyValue>
+            <PropertyValue Property="TypeName" String="Review"/>
+            <PropertyValue Property="TypeNamePlural" String="Reviews"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="Name"/>
+              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="CreatedAt"/>
+              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+            </Record>
+            <Record Type="UI.DataFieldForAnnotation">
+              <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#Rating"/>
+              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="Comment"/>
+              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.EntityContainer/Reviews" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.Reviews/Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.Reviews/Name" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Name"/>
+      </Annotations>
+      <Annotations Target="northwind.Reviews/Rating" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Rating"/>
+      </Annotations>
+      <Annotations Target="northwind.Reviews/Comment" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Comment"/>
+        <Annotation Term="UI.MultiLineText" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.Reviews/CreatedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Created On"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.Reviews/ToProduct" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.Reviews/ToProduct_Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.SalesData" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.Chart">
+          <Record Type="UI.ChartDefinitionType">
+            <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Column"/>
+            <PropertyValue Property="DimensionAttributes">
+              <Collection>
+                <Record Type="UI.ChartDimensionAttributeType">
+                  <PropertyValue Property="Dimension" PropertyPath="DeliveryMonthId"/>
+                  <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="Dimensions">
+              <Collection>
+                <PropertyPath>DeliveryMonthId</PropertyPath>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="MeasureAttributes">
+              <Collection>
+                <Record Type="UI.ChartMeasureAttributeType">
+                  <PropertyValue Property="Measure" PropertyPath="Revenue"/>
+                  <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="Measures">
+              <Collection>
+                <PropertyPath>Revenue</PropertyPath>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="Title" String="Revenue History"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.HeaderInfo">
+          <Record Type="UI.HeaderInfoType">
+            <PropertyValue Property="TypeName" String="Sales Order"/>
+            <PropertyValue Property="TypeNamePlural" String="Sales Orders"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="DeliveryMonthId"/>
+              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="Revenue"/>
+              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="DeliveryDate"/>
+              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.PresentationVariant">
+          <Record Type="UI.PresentationVariantType">
+            <PropertyValue Property="SortOrder">
+              <Collection>
+                <Record Type="Common.SortOrderType">
+                  <PropertyValue Property="Property" PropertyPath="DeliveryMonthId"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="Visualizations">
+              <Collection>
+                <AnnotationPath>@UI.LineItem</AnnotationPath>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.EntityContainer/SalesData" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.SalesData/Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.SalesData/DeliveryDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Delivery Date"/>
+      </Annotations>
+      <Annotations Target="northwind.SalesData/Revenue" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Revenue"/>
+        <Annotation Term="Measures.Unit" Path="CurrencyKey"/>
+      </Annotations>
+      <Annotations Target="northwind.SalesData/CurrencyKey" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.SalesData/DeliveryMonthId" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Month"/>
+        <Annotation Term="Common.Text" Path="DeliveryMonth">
+          <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.SalesData/DeliveryMonth" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Delivery Month"/>
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.SalesData/ToProduct" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.SalesData/ToProduct_Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.EntityContainer/StockAvailability" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.StockAvailability/Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Stock Availability"/>
+        <Annotation Term="Common.Text" Path="Description">
+          <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.Suppliers" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Communication.Contact">
+          <Record Type="Communication.ContactType">
+            <PropertyValue Property="email">
+              <Collection>
+                <Record Type="Communication.EmailAddressType">
+                  <PropertyValue Property="type" EnumMember="Communication.ContactInformationType/work"/>
+                  <PropertyValue Property="address" Path="Email"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="fn" Path="Name"/>
+            <PropertyValue Property="photo" String="sap-icon://supplier"/>
+            <PropertyValue Property="role" String="Supplier"/>
+            <PropertyValue Property="tel">
+              <Collection>
+                <Record Type="Communication.PhoneNumberType">
+                  <PropertyValue Property="type" EnumMember="Communication.PhoneType/work"/>
+                  <PropertyValue Property="uri" Path="Phone"/>
+                </Record>
+                <Record Type="Communication.PhoneNumberType">
+                  <PropertyValue Property="type" EnumMember="Communication.PhoneType/fax"/>
+                  <PropertyValue Property="uri" Path="Fax"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.EntityContainer/Suppliers" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.EntityContainer/VH_Categories" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.VH_Categories/Code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Code"/>
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.VH_Categories/Text" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Category"/>
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.EntityContainer/VH_Currencies" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.VH_Currencies/Code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Currency"/>
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.VH_Currencies/Text" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Description"/>
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.EntityContainer/VH_DimensionUnits" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.EntityContainer/VH_UnitOfMeasures" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
