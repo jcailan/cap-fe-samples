@@ -15,15 +15,26 @@ For more information see blog posts below:
 
 ## REPOSITORY
 
-This is a mono-repo demo project that contains 2 project set up:
-- SAP CAP Project - [root](./) folder
+### [master](../../tree/master) branch
+This is the main and the default branch where the core demo application is located. This is a mono-repo demo project that contains 2 project set up:
+- SAP CAP Project - [root](../../tree/master) folder
 - SAP Fiori Element - [app/product](./app/product) folder
+
+### multi-master branches
+
+These are the branches that may be a copy of the main master branch or can be a branch on their own. The branches in this category serves a particular purpose and act like a mini master branches.
+
+| No. | Branch | Purpose |
+| ---:|:------ |:------- |
+| 1.  | [demo-list-report][branch-1] | Serves as the step by step guide for replicating the List Report App
+
+[branch-1]: ../../tree/demo-list-report
 
 ## GETTING STARTED
 
 #### 1. SAP CAP Project
 
-- From [root](./) folder, install node modules _(one-time step)_
+- From [root](../../tree/master) folder, install node modules _(one-time step)_
 ```swift
 > npm install
 ```
