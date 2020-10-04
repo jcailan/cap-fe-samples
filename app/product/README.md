@@ -2,11 +2,11 @@
 
 ## Manage Products - List Report App
 
-- From [this](./) folder, install node modules (one-time step)
+- From [this](./) folder, install node modules _(one-time step)_
 ```swift
 > npm install
 ```
-- Launch the cap service
+- Launch the Fiori Element App
 ```swift
 > npm start
 ```

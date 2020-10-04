@@ -1,7 +1,7 @@
 {
 	"name": "product",
-	"version": "0.0.1",
-	"private": true,
+	"version": "1.0.0",
+	"private": false,
 	"sapux": true,
 	"description": "A Fiori elements application.",
 	"keywords": [
@@ -37,7 +37,7 @@
 		]
 	},
 	"dependencies": {
-		"@sap/ux-specification": "1.76.12",
-		"@sap/ux-ui5-tooling": "1.0.0"
+		"@sap/ux-specification": "1.78.9",
+		"@sap/ux-ui5-tooling": "1.0.18"
 	}
 }

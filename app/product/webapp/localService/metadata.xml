@@ -452,6 +452,13 @@
           </Collection>
         </Annotation>
       </Annotations>
+      <Annotations Target="northwind.EntityContainer/Products" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
       <Annotations Target="northwind.Products/Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="ID"/>
       </Annotations>
@@ -601,7 +608,6 @@
         </Annotation>
       </Annotations>
       <Annotations Target="northwind.Products/ToDimensionUnit_Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
         <Annotation Term="Common.Label" String="Dimension Unit"/>
         <Annotation Term="Common.ValueList">
           <Record Type="Common.ValueListType">
@@ -990,6 +996,14 @@
           </Record>
         </Annotation>
       </Annotations>
+      <Annotations Target="northwind.VH_DimensionUnits/Code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Code"/>
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.VH_DimensionUnits/Text" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Description"/>
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+      </Annotations>
       <Annotations Target="northwind.EntityContainer/VH_UnitOfMeasures" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Capabilities.DeleteRestrictions">
           <Record Type="Capabilities.DeleteRestrictionsType">
@@ -1006,6 +1020,14 @@
             <PropertyValue Property="Updatable" Bool="false"/>
           </Record>
         </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.VH_UnitOfMeasures/Code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Code"/>
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.VH_UnitOfMeasures/Text" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Description"/>
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
       </Annotations>
     </Schema>
   </edmx:DataServices>
