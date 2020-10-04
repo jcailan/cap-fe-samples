@@ -1,0 +1,12 @@
+Id,Name,Description,ReleaseDate,DiscontinuedDate,Rating,Price
+08c142fa-01b0-441d-b01d-eeaa3291f6f0,Bread,Whole grain bread,1992-01-01T00:00:00Z,,4,2.5
+aa74747d-c297-4f0a-981a-8fb0ca92b756,Milk,Low fat milk,1995-10-01T00:00:00Z,,3,3.5
+ea610da1-ea93-4258-85e1-099167d67bf9,Vint soda,Americana Variety - Mix of 6 flavors,2000-10-01T00:00:00Z,,3,20.9
+d97de1ec-7fd1-4c56-8e15-0246dc7a0cbf,Havina Cola,The Original Key Lime Cola,2005-10-01T00:00:00Z,2006-10-01T00:00:00Z,3,19.9
+9e800613-7b96-4203-8817-f25fcc89dfbc,Fruit Punch,"Mango flavor, 8.3 Ounce Cans (Pack of 24)",2003-01-05T00:00:00Z,,3,22.99
+fe613858-7385-4c1c-8f4e-b3439a5ec637,Cranberry Juice,16-Ounce Plastic Bottles (Pack of 12),2006-08-04T00:00:00Z,,3,22.8
+06f86ef1-1525-4932-b1ce-d40661464c66,Pink Lemonade,36 Ounce Cans (Pack of 3),2006-11-05T00:00:00Z,,3,18.8
+5ee16f77-171c-4f1e-b455-221a1530b242,DVD Player,1080P Upconversion DVD Player,2006-11-15T00:00:00Z,,5,35.88
+58a8c519-2aa6-4289-84c3-d79de5a67dd0,LCD HDTV,42 inch 1080p LCD with Built-in Blu-ray Disc Player,2008-05-08T00:00:00Z,,3,1088.8
+aa7d843f-c6c5-4bc9-846b-ddac07966f10,Lemonade,"Classic, refreshing lemonade (Single bottle)",1970-01-01T00:00:00Z,,7,1.01
+de411986-f74c-4082-83bc-2aa5c5a25aad,Coffee,Bulk size can of instant coffee,1982-12-31T00:00:00Z,,1,6.99 

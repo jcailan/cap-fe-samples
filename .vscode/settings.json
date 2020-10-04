@@ -1,0 +1,9 @@
+{
+    "files.exclude": {
+        "**/.gitignore": false,
+        "**/.git": true,
+        "**/.vscode": false
+    },
+    "editor.detectIndentation": false,
+    "editor.formatOnSave": true
+}
