@@ -8,8 +8,8 @@ This branch is used to breakdown the List Report App into smaller topics that is
 
 | No. | Topic | Frontend | Backend |
 | ---:|:----- |:--------:|:-------:|
-| 1.  | [Build basic CAP Data Model and Service][commits] |   |   |
-| 2.  | Add OData V2 Proxy Adapter |   |   |
+| 1.  | [Build basic CAP Data Model and Service][commit-1] |   | ✔️ |
+| 2.  | [Add OData V2 Proxy Adapter][commits] |   | ✔️ |
 | 3.  | Add SAP Fiori Element - List Report |   |   |
 | 4.  | Add Line Item and Label Annotations |   |   |
 | 5.  | Add Categories Value Help and use it a ValueList Annotation |   |   |
@@ -31,4 +31,5 @@ This branch is used to breakdown the List Report App into smaller topics that is
 | 21. | Object Page 2: Add Header and Section of Product Review |   |   |
 | 22. | Products Entity: Add support for Create and Update |   |   |
 
-[commits]: ../commits/demo-list-report
+[commits]: ../../commits/demo-list-report
+[commit-1]: https://github.com/jcailan/cap-fe-samples/commit/0baeed6310c132f0765c38288003471153eb205e
