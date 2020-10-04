@@ -2,15 +2,15 @@
 
 #### ==WORK IN PROGRESS==
 
-This branch is used to breakdown the List Report App into smaller topics that is documented via different **Git Commits**. The main objective here is to be able to trace the changes performed for a particular application behavior. The changes are marked with ✔️ for **Frontend** _(Fiori Element)_ or **Backend** _(CAP Model)_ changes.
+This branch is used to breakdown the List Report App into smaller topics that is documented via different [Git Commits][commits]. The main objective here is to be able to trace the changes performed for a particular application behavior. The changes are marked with ✔️ for **Frontend** _(Fiori Element & Annotations)_ or **Backend** _(CAP Model)_ changes.
 
 ## CONTENT
 
 | No. | Topic | Frontend | Backend |
 | ---:|:----- |:--------:|:-------:|
 | 1.  | [Build basic CAP Data Model and Service][commit-1] |   | ✔️ |
-| 2.  | [Add OData V2 Proxy Adapter][commits] |   | ✔️ |
-| 3.  | Add SAP Fiori Element - List Report |   |   |
+| 2.  | [Add OData V2 Proxy Adapter][commit-2] |   | ✔️ |
+| 3.  | [Add SAP Fiori Element - List Report App][commits] | ✔️ |   |
 | 4.  | Add Line Item and Label Annotations |   |   |
 | 5.  | Add Categories Value Help and use it a ValueList Annotation |   |   |
 | 6.  | Add Header Information for the Products Entity |   |   |
@@ -32,4 +32,5 @@ This branch is used to breakdown the List Report App into smaller topics that is
 | 22. | Products Entity: Add support for Create and Update |   |   |
 
 [commits]: ../../commits/demo-list-report
-[commit-1]: https://github.com/jcailan/cap-fe-samples/commit/0baeed6310c132f0765c38288003471153eb205e
+[commit-1]: ../../commit/0baeed6310c132f0765c38288003471153eb205e
+[commit-2]: ../../commit/e1e066b31adb313bccf2a9e932b30217cf026556
