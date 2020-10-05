@@ -3,7 +3,7 @@ using {md} from '../db/schema';
 service northwind {
 
     @readonly
-    entity Products as
+    entity Products      as
         select from md.Products {
             Id,
             Name,
@@ -11,6 +11,15 @@ service northwind {
             ReleaseDate,
             DiscontinuedDate,
             Rating,
-            Price
+            Price,
+            ToCategory,
+            ToCategory.Name as Category
+        };
+
+    @readonly
+    entity VH_Categories as
+        select from md.Categories {
+            Id   as Code,
+            Name as Text
         };
 }

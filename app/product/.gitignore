@@ -2,4 +2,3 @@ src/
 node_modules/
 dist/
 .scp/
-.vscode/

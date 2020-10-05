@@ -11,5 +11,11 @@ context md {
         DiscontinuedDate : DateTime;
         Rating           : Integer;
         Price            : Double;
+        ToCategory       : Association to Categories;
+    }
+
+    entity Categories {
+        key Id   : String(1);
+            Name : localized String;
     }
 }
