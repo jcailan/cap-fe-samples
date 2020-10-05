@@ -491,8 +491,12 @@ annotate northwind.StockAvailability with {
  */
 annotate northwind.VH_Categories with {
     Code @(
-        title : '{i18n>Code}',
-        UI    : {Hidden : true}
+        title  : '{i18n>Code}',
+        UI     : {Hidden : true},
+        Common : {Text : {
+            $value                 : Text,
+            ![@UI.TextArrangement] : #TextOnly
+        }}
     );
     Text @(
         title : '{i18n>Category}',

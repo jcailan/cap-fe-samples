@@ -23,7 +23,7 @@
       <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
         <EntitySet Name="Products" EntityType="northwind.Products"/>
         <EntitySet Name="Reviews" EntityType="northwind.Reviews"/>
-        <EntitySet Name="SalesData" EntityType="northwind.SalesData"/>
+        <EntitySet Name="SalesData" EntityType="northwind.SalesData" sap:semantics="aggregate"/>
         <EntitySet Name="StockAvailability" EntityType="northwind.StockAvailability"/>
         <EntitySet Name="Suppliers" EntityType="northwind.Suppliers"/>
         <EntitySet Name="VH_Categories" EntityType="northwind.VH_Categories"/>
@@ -948,6 +948,9 @@
       </Annotations>
       <Annotations Target="northwind.VH_Categories/Code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Code"/>
+        <Annotation Term="Common.Text" Path="Text">
+          <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+        </Annotation>
         <Annotation Term="UI.Hidden" Bool="true"/>
       </Annotations>
       <Annotations Target="northwind.VH_Categories/Text" xmlns="http://docs.oasis-open.org/odata/ns/edm">
