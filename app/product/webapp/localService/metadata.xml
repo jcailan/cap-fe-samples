@@ -172,6 +172,7 @@
           <Collection>
             <PropertyPath>ToCategory_Id</PropertyPath>
             <PropertyPath>ToCurrency_Id</PropertyPath>
+            <PropertyPath>StockAvailability</PropertyPath>
           </Collection>
         </Annotation>
       </Annotations>
@@ -225,10 +226,24 @@
         <Annotation Term="Common.Label" String="Category"/>
       </Annotations>
       <Annotations Target="northwind.Products/StockAvailability" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Stock Availability"/>
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="CollectionPath" String="StockAvailability"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="StockAvailability"/>
+                  <PropertyValue Property="ValueListProperty" String="Id"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
         <Annotation Term="Core.Computed" Bool="true"/>
       </Annotations>
       <Annotations Target="northwind.Products/ToCurrency_Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
         <Annotation Term="Common.Label" String="Currency"/>
         <Annotation Term="Common.ValueList">
           <Record Type="Common.ValueListType">

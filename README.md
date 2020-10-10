@@ -17,8 +17,8 @@ This branch is used to breakdown the List Report App into smaller topics that is
 | 7.  | [Add Currency for Price property][commit-7] | ✔️ | ✔️ |
 | 8.  | [Add Image for Product entity][commit-8] | ✔️ | ✔️ |
 | 9.  | [Add Visualization for Rating property][commit-9] | ✔️ |   |
-| 10. | [Add Stock Availability with Status Indicator][commits] | ✔️ | ✔️ |
-| 11. | Add Filter with Fixed Values |   |   |
+| 10. | [Add Stock Availability with Status Indicator][commit-10] | ✔️ | ✔️ |
+| 11. | [Add Selection Field with Fixed Values][commits] | ✔️ |   |
 | 12. | Object Page: Add header information |   |   |
 | 13. | Object Page: Add Technical Data section |   |   |
 | 14. | Object Page: Add Sales Data section |   |   |
@@ -41,3 +41,4 @@ This branch is used to breakdown the List Report App into smaller topics that is
 [commit-7]: ../../commit/d6c2834ebd1d73680890489157d0ccbfb5dcebf1
 [commit-8]: ../../commit/3e7fb97c08dfebf1a1736b7e50d728a0c64f6e59
 [commit-9]: ../../commit/7e2de2a040e5c9b811aa4b16ec705f20567cd038
+[commit-10]: ../../commit/0d9b70d0b430d6bf32f952d4b546330b151d9819

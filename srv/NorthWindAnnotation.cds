@@ -8,7 +8,8 @@ annotate northwind.Products with @(
     UI     : {
         SelectionFields               : [
         ToCategory_Id,
-        ToCurrency_Id
+        ToCurrency_Id,
+        StockAvailability
         ],
         HeaderInfo                    : {
             TypeName       : '{i18n>Product}',
@@ -22,7 +23,7 @@ annotate northwind.Products with @(
         {Value : ReleaseDate},
         {
             Value       : ToStockAvailability.Id,
-            Criticality : ToStockAvailability.Id,
+            Criticality : ToStockAvailability.Id
         },
         {
             $Type  : 'UI.DataFieldForAnnotation',
@@ -38,14 +39,14 @@ annotate northwind.Products with @(
         }
     }
 ) {
-    ImageUrl         @(
+    ImageUrl          @(
         title : '{i18n>Image}',
         UI    : {IsImageURL : true}
     );
-    Id               @title : '{i18n>Id}';
-    Name             @title : '{i18n>Name}';
-    Description      @title : '{i18n>Description}';
-    ToCategory       @(
+    Id                @title : '{i18n>Id}';
+    Name              @title : '{i18n>Name}';
+    Description       @title : '{i18n>Description}';
+    ToCategory        @(
         title  : '{i18n>Category}',
         Common : {
             Text      : {
@@ -70,15 +71,14 @@ annotate northwind.Products with @(
             }
         }
     );
-    ReleaseDate      @title : '{i18n>ReleaseDate}';
-    DiscontinuedDate @title : '{i18n>DiscontinuedDate}';
-    Rating           @title : '{i18n>Rating}';
-    Price            @(
+    ReleaseDate       @title : '{i18n>ReleaseDate}';
+    DiscontinuedDate  @title : '{i18n>DiscontinuedDate}';
+    Rating            @title : '{i18n>Rating}';
+    Price             @(
         title    : '{i18n>Price}',
         Measures : {Unit : ToCurrency_Id}
     );
-    ToCurrency       @(
-        mandatory,
+    ToCurrency        @(
         title  : '{i18n>CurrencyKey}',
         Common : {
             ValueListWithFixedValues : false,
@@ -96,6 +96,20 @@ annotate northwind.Products with @(
                     ValueListProperty : 'Text'
                 }
                 ]
+            }
+        }
+    );
+    StockAvailability @(
+        title  : '{i18n>StockAvailability}',
+        Common : {
+            ValueListWithFixedValues : true,
+            ValueList                : {
+                CollectionPath : 'StockAvailability',
+                Parameters     : [{
+                    $Type             : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : StockAvailability,
+                    ValueListProperty : 'Id'
+                }]
             }
         }
     );
