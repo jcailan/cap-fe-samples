@@ -39,15 +39,25 @@ annotate northwind.Products with @(
         },
         {Value : Price}
         ]},
-        HeaderFacets                  : [{
+        HeaderFacets                  : [
+        {
             $Type  : 'UI.ReferenceFacet',
             Target : '@UI.DataPoint#AverageRatingValue'
-        }],
+        },
+        {
+            $Type  : 'UI.ReferenceFacet',
+            Target : '@UI.DataPoint#Price'
+        }
+        ],
         DataPoint #AverageRatingValue : {
             Value         : Rating,
             Title         : '{i18n>Rating}',
             TargetValue   : 5,
             Visualization : #Rating
+        },
+        DataPoint #Price              : {
+            Value : Price,
+            Title : '{i18n>Price}'
         }
     }
 ) {

@@ -166,10 +166,19 @@
             <PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Rating"/>
           </Record>
         </Annotation>
+        <Annotation Term="UI.DataPoint" Qualifier="Price">
+          <Record Type="UI.DataPointType">
+            <PropertyValue Property="Title" String="Price"/>
+            <PropertyValue Property="Value" Path="Price"/>
+          </Record>
+        </Annotation>
         <Annotation Term="UI.HeaderFacets">
           <Collection>
             <Record Type="UI.ReferenceFacet">
               <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#AverageRatingValue"/>
+            </Record>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#Price"/>
             </Record>
           </Collection>
         </Annotation>

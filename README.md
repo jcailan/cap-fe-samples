@@ -21,15 +21,16 @@ This branch is used to breakdown the List Report App into smaller topics that is
 | 11. | [Add Selection Field with Fixed Values][commit-11] | ✔️ |   |
 | 12. | [Add Quick View using Supplier entity][commit-12] | ✔️ | ✔️ |
 | 13. | [Object Page: Add Basic Header Information][commit-13] | ✔️ |   |
-| 14. | [Object Page: Add Header Facet for Rating property][commits] | ✔️ |   |
-| 15. | Object Page: Add Header Facet for General Information  |   |   |
-| 16. | Object Page: Add Header Facets for Stock Availability |   |   |
-| 17. | Object Page: Add Technical Data section |   |   |
-| 18. | Object Page: Add Sales Data section |   |   |
-| 19. | Object Page: Add Monthly Revenue section |   |   |
-| 20. | Object Page: Add Product Reviews section |   |   |
-| 21. | Object Page 2: Add Header and Section of Product Review |   |   |
-| 22. | Products Entity: Add support for Create and Update |   |   |
+| 14. | [Object Page: Add Header Facet for Rating property][commit-14] | ✔️ |   |
+| 15. | [Object Page: Add Header Facet for Price property][commits] | ✔️ |   |
+| 16. | Object Page: Add Header Facet for Stock Availability |   |   |
+| 17. | Object Page: Add Header Facet for General Information  |   |   |
+| 18. | Object Page: Add Technical Data section |   |   |
+| 19. | Object Page: Add Sales Data section |   |   |
+| 20. | Object Page: Add Monthly Revenue section |   |   |
+| 21. | Object Page: Add Product Reviews section |   |   |
+| 22. | Object Page 2: Add Header and Section of Product Review |   |   |
+| 23. | Products Entity: Add support for Create and Update |   |   |
 
 [commits]: ../../commits/demo-list-report
 [commit-1]: ../../commit/0baeed6310c132f0765c38288003471153eb205e
@@ -45,3 +46,4 @@ This branch is used to breakdown the List Report App into smaller topics that is
 [commit-11]: ../../commit/68fb7d7a362c851013a1bd2e29bb20e2b73bb419
 [commit-12]: ../../commit/71bd15ee2b3558ecbc727aae2696fb0936f26263
 [commit-13]: ../../commit/14642a350d5cc60edbe2f1ab9f73d91c3157b67f
+[commit-14]: ../../commit/0709c6b689ecc5c9a5eb6836d79a1e3c33c43b46
