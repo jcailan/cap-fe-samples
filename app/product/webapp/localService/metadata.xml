@@ -19,6 +19,7 @@
     <Schema Namespace="northwind" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
       <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
         <EntitySet Name="Products" EntityType="northwind.Products"/>
+        <EntitySet Name="StockAvailability" EntityType="northwind.StockAvailability"/>
         <EntitySet Name="VH_Categories" EntityType="northwind.VH_Categories"/>
         <EntitySet Name="VH_Currencies" EntityType="northwind.VH_Currencies"/>
         <AssociationSet Name="Products_ToCurrency" Association="northwind.Products_ToCurrency">
@@ -28,6 +29,14 @@
         <AssociationSet Name="Products_ToCategory" Association="northwind.Products_ToCategory">
           <End Role="Products" EntitySet="Products"/>
           <End Role="VH_Categories" EntitySet="VH_Categories"/>
+        </AssociationSet>
+        <AssociationSet Name="Products_ToStockAvailability" Association="northwind.Products_ToStockAvailability">
+          <End Role="Products" EntitySet="Products"/>
+          <End Role="StockAvailability" EntitySet="StockAvailability"/>
+        </AssociationSet>
+        <AssociationSet Name="StockAvailability_ToProduct" Association="northwind.StockAvailability_ToProduct">
+          <End Role="StockAvailability" EntitySet="StockAvailability"/>
+          <End Role="Products" EntitySet="Products"/>
         </AssociationSet>
       </EntityContainer>
       <EntityType Name="Products">
@@ -42,11 +51,23 @@
         <Property Name="DiscontinuedDate" Type="Edm.DateTimeOffset"/>
         <Property Name="Rating" Type="Edm.Int32"/>
         <Property Name="Price" Type="Edm.Decimal" Scale="2" Precision="16"/>
+        <Property Name="Quantity" Type="Edm.Decimal" Scale="2" Precision="16"/>
+        <Property Name="UnitOfMeasure" Type="Edm.String" MaxLength="2"/>
         <NavigationProperty Name="ToCurrency" Relationship="northwind.Products_ToCurrency" FromRole="Products" ToRole="VH_Currencies"/>
         <NavigationProperty Name="ToCategory" Relationship="northwind.Products_ToCategory" FromRole="Products" ToRole="VH_Categories"/>
         <Property Name="Category" Type="Edm.String"/>
+        <NavigationProperty Name="ToStockAvailability" Relationship="northwind.Products_ToStockAvailability" FromRole="Products" ToRole="StockAvailability"/>
+        <Property Name="StockAvailability" Type="Edm.Int32"/>
         <Property Name="ToCurrency_Id" Type="Edm.String" MaxLength="3"/>
         <Property Name="ToCategory_Id" Type="Edm.String" MaxLength="1"/>
+      </EntityType>
+      <EntityType Name="StockAvailability">
+        <Key>
+          <PropertyRef Name="Id"/>
+        </Key>
+        <Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+        <Property Name="Description" Type="Edm.String"/>
+        <NavigationProperty Name="ToProduct" Relationship="northwind.StockAvailability_ToProduct" FromRole="StockAvailability" ToRole="Products"/>
       </EntityType>
       <EntityType Name="VH_Categories">
         <Key>
@@ -86,6 +107,22 @@
           </Dependent>
         </ReferentialConstraint>
       </Association>
+      <Association Name="Products_ToStockAvailability">
+        <End Role="Products" Type="northwind.Products" Multiplicity="*"/>
+        <End Role="StockAvailability" Type="northwind.StockAvailability" Multiplicity="0..1"/>
+        <ReferentialConstraint>
+          <Principal Role="StockAvailability">
+            <PropertyRef Name="Id"/>
+          </Principal>
+          <Dependent Role="Products">
+            <PropertyRef Name="StockAvailability"/>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="StockAvailability_ToProduct">
+        <End Role="StockAvailability" Type="northwind.StockAvailability" Multiplicity="*"/>
+        <End Role="Products" Type="northwind.Products" Multiplicity="0..1"/>
+      </Association>
       <Annotations Target="northwind.Products" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Products"/>
         <Annotation Term="UI.DataPoint" Qualifier="AverageRatingValue">
@@ -120,7 +157,8 @@
               <PropertyValue Property="Value" Path="ReleaseDate"/>
             </Record>
             <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="DiscontinuedDate"/>
+              <PropertyValue Property="Value" Path="ToStockAvailability/Id"/>
+              <PropertyValue Property="Criticality" Path="ToStockAvailability/Id"/>
             </Record>
             <Record Type="UI.DataFieldForAnnotation">
               <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#AverageRatingValue"/>
@@ -186,6 +224,9 @@
       <Annotations Target="northwind.Products/ToCategory" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Category"/>
       </Annotations>
+      <Annotations Target="northwind.Products/StockAvailability" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
       <Annotations Target="northwind.Products/ToCurrency_Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
         <Annotation Term="Common.Label" String="Currency"/>
@@ -230,6 +271,29 @@
             </PropertyValue>
             <PropertyValue Property="SearchSupported" Bool="true"/>
           </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.EntityContainer/StockAvailability" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.StockAvailability/Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Stock Availability"/>
+        <Annotation Term="Common.Text" Path="Description">
+          <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
         </Annotation>
       </Annotations>
       <Annotations Target="northwind.EntityContainer/VH_Categories" xmlns="http://docs.oasis-open.org/odata/ns/edm">

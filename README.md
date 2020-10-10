@@ -16,14 +16,14 @@ This branch is used to breakdown the List Report App into smaller topics that is
 | 6.  | [Add Header Information for Products Entity][commit-6] | ✔️ |   |
 | 7.  | [Add Currency for Price property][commit-7] | ✔️ | ✔️ |
 | 8.  | [Add Image for Product entity][commit-8] | ✔️ | ✔️ |
-| 9.  | [Add Visualization for Rating property][commits] | ✔️ |   |
-| 10. | Object Page: Add header information |   |   |
-| 11. | Object Page: Add Technical Data section |   |   |
-| 12. | Object Page: Add Sales Data section |   |   |
-| 13. | Object Page: Add Monthly Revenue section |   |   |
-| 14. | Object Page: Add Header Facets |   |   |
-| 15. | Add Stock Availability with Status Indicator |   |   |
-| 16. | Add Filter with Fixed Values |   |   |
+| 9.  | [Add Visualization for Rating property][commit-9] | ✔️ |   |
+| 10. | [Add Stock Availability with Status Indicator][commits] | ✔️ | ✔️ |
+| 11. | Add Filter with Fixed Values |   |   |
+| 12. | Object Page: Add header information |   |   |
+| 13. | Object Page: Add Technical Data section |   |   |
+| 14. | Object Page: Add Sales Data section |   |   |
+| 15. | Object Page: Add Monthly Revenue section |   |   |
+| 16. | Object Page: Add Header Facets |   |   |
 | 17. | Object Page: Add Header Facets for Stock Availability |   |   |
 | 18. | Object Page: Add Header Facet for General Information  |   |   |
 | 19. | Add Supplier Navigation Property as Quick View |   |   |
@@ -40,3 +40,4 @@ This branch is used to breakdown the List Report App into smaller topics that is
 [commit-6]: ../../commit/08d130ed4756a07541e87a4e1096226959b1bf9d
 [commit-7]: ../../commit/d6c2834ebd1d73680890489157d0ccbfb5dcebf1
 [commit-8]: ../../commit/3e7fb97c08dfebf1a1736b7e50d728a0c64f6e59
+[commit-9]: ../../commit/7e2de2a040e5c9b811aa4b16ec705f20567cd038

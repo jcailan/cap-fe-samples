@@ -20,7 +20,10 @@ annotate northwind.Products with @(
         {Value : Description},
         {Value : ToCategory_Id},
         {Value : ReleaseDate},
-        {Value : DiscontinuedDate},
+        {
+            Value       : ToStockAvailability.Id,
+            Criticality : ToStockAvailability.Id,
+        },
         {
             $Type  : 'UI.DataFieldForAnnotation',
             Target : '@UI.DataPoint#AverageRatingValue'
@@ -96,6 +99,19 @@ annotate northwind.Products with @(
             }
         }
     );
+};
+
+/**
+ * Annotations for StockAvailability Entity
+ */
+annotate northwind.StockAvailability with {
+    Id @(
+        title  : '{i18n>StockAvailability}',
+        Common : {Text : {
+            $value                 : Description,
+            ![@UI.TextArrangement] : #TextOnly
+        }}
+    )
 };
 
 /**

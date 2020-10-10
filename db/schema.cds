@@ -12,6 +12,8 @@ context md {
         DiscontinuedDate : DateTime;
         Rating           : Integer;
         Price            : Decimal(16, 2);
+        Quantity         : Decimal(16, 2);
+        ToUnitOfMeasure  : Association to UnitOfMeasures;
         ToCurrency       : Association to Currencies;
         ToCategory       : Association to Categories;
     }
@@ -21,8 +23,46 @@ context md {
             Name : localized String;
     }
 
+    entity StockAvailability {
+        key Id          : Integer;
+            Description : localized String;
+            ToProduct   : Association to view.Products
+                              on ToProduct.StockAvailability = Id;
+    }
+
     entity Currencies {
         key Id          : String(3);
             Description : localized String;
     }
+
+    entity UnitOfMeasures {
+        key Id          : String(2);
+            Description : localized String;
+    }
+
+}
+
+context view {
+    entity Products as
+        select from md.Products
+        mixin {
+            ToStockAvailability : Association to md.StockAvailability
+                                      on ToStockAvailability.Id = $projection.StockAvailability
+        }
+        into {
+            *,
+            case
+                when
+                    Quantity >= 8
+                then
+                    3
+                when
+                    Quantity > 0
+                then
+                    2
+                else
+                    1
+            end as StockAvailability : Integer,
+            ToStockAvailability
+        }
 }
