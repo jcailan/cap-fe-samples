@@ -26,6 +26,7 @@
         <EntitySet Name="Suppliers" EntityType="northwind.Suppliers"/>
         <EntitySet Name="VH_Categories" EntityType="northwind.VH_Categories"/>
         <EntitySet Name="VH_Currencies" EntityType="northwind.VH_Currencies"/>
+        <EntitySet Name="VH_DimensionUnits" EntityType="northwind.VH_DimensionUnits"/>
         <EntitySet Name="VH_UnitOfMeasures" EntityType="northwind.VH_UnitOfMeasures"/>
         <AssociationSet Name="Products_ToUnitOfMeasure" Association="northwind.Products_ToUnitOfMeasure">
           <End Role="Products" EntitySet="Products"/>
@@ -38,6 +39,10 @@
         <AssociationSet Name="Products_ToCategory" Association="northwind.Products_ToCategory">
           <End Role="Products" EntitySet="Products"/>
           <End Role="VH_Categories" EntitySet="VH_Categories"/>
+        </AssociationSet>
+        <AssociationSet Name="Products_ToDimensionUnit" Association="northwind.Products_ToDimensionUnit">
+          <End Role="Products" EntitySet="Products"/>
+          <End Role="VH_DimensionUnits" EntitySet="VH_DimensionUnits"/>
         </AssociationSet>
         <AssociationSet Name="Products_ToStockAvailability" Association="northwind.Products_ToStockAvailability">
           <End Role="Products" EntitySet="Products"/>
@@ -64,17 +69,22 @@
         <Property Name="DiscontinuedDate" Type="Edm.DateTimeOffset"/>
         <Property Name="Rating" Type="Edm.Int32"/>
         <Property Name="Price" Type="Edm.Decimal" Scale="2" Precision="16"/>
+        <Property Name="Height" Type="Edm.Decimal" Scale="2" Precision="16"/>
+        <Property Name="Width" Type="Edm.Decimal" Scale="2" Precision="16"/>
+        <Property Name="Depth" Type="Edm.Decimal" Scale="2" Precision="16"/>
         <Property Name="Quantity" Type="Edm.Decimal" Scale="2" Precision="16"/>
         <NavigationProperty Name="ToUnitOfMeasure" Relationship="northwind.Products_ToUnitOfMeasure" FromRole="Products" ToRole="VH_UnitOfMeasures"/>
         <NavigationProperty Name="ToCurrency" Relationship="northwind.Products_ToCurrency" FromRole="Products" ToRole="VH_Currencies"/>
         <NavigationProperty Name="ToCategory" Relationship="northwind.Products_ToCategory" FromRole="Products" ToRole="VH_Categories"/>
         <Property Name="Category" Type="Edm.String"/>
+        <NavigationProperty Name="ToDimensionUnit" Relationship="northwind.Products_ToDimensionUnit" FromRole="Products" ToRole="VH_DimensionUnits"/>
         <NavigationProperty Name="ToStockAvailability" Relationship="northwind.Products_ToStockAvailability" FromRole="Products" ToRole="StockAvailability"/>
         <Property Name="StockAvailability" Type="Edm.Int32"/>
         <NavigationProperty Name="ToSupplier" Relationship="northwind.Products_ToSupplier" FromRole="Products" ToRole="Suppliers"/>
         <Property Name="ToUnitOfMeasure_Id" Type="Edm.String" MaxLength="2"/>
         <Property Name="ToCurrency_Id" Type="Edm.String" MaxLength="3"/>
         <Property Name="ToCategory_Id" Type="Edm.String" MaxLength="1"/>
+        <Property Name="ToDimensionUnit_Id" Type="Edm.String" MaxLength="2"/>
         <Property Name="ToSupplier_Id" Type="Edm.Guid"/>
       </EntityType>
       <EntityType Name="StockAvailability">
@@ -108,6 +118,13 @@
           <PropertyRef Name="Code"/>
         </Key>
         <Property Name="Code" Type="Edm.String" MaxLength="3" Nullable="false"/>
+        <Property Name="Text" Type="Edm.String"/>
+      </EntityType>
+      <EntityType Name="VH_DimensionUnits">
+        <Key>
+          <PropertyRef Name="Code"/>
+        </Key>
+        <Property Name="Code" Type="Edm.String" MaxLength="2" Nullable="false"/>
         <Property Name="Text" Type="Edm.String"/>
       </EntityType>
       <EntityType Name="VH_UnitOfMeasures">
@@ -150,6 +167,18 @@
           </Principal>
           <Dependent Role="Products">
             <PropertyRef Name="ToCategory_Id"/>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="Products_ToDimensionUnit">
+        <End Role="Products" Type="northwind.Products" Multiplicity="*"/>
+        <End Role="VH_DimensionUnits" Type="northwind.VH_DimensionUnits" Multiplicity="0..1"/>
+        <ReferentialConstraint>
+          <Principal Role="VH_DimensionUnits">
+            <PropertyRef Name="Code"/>
+          </Principal>
+          <Dependent Role="Products">
+            <PropertyRef Name="ToDimensionUnit_Id"/>
           </Dependent>
         </ReferentialConstraint>
       </Association>
@@ -214,6 +243,14 @@
             <PropertyValue Property="Value" Path="ToStockAvailability/Id"/>
           </Record>
         </Annotation>
+        <Annotation Term="UI.Facets">
+          <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#TechnicalData"/>
+              <PropertyValue Property="Label" String="Technical Data "/>
+            </Record>
+          </Collection>
+        </Annotation>
         <Annotation Term="UI.FieldGroup" Qualifier="GeneralInformation">
           <Record Type="UI.FieldGroupType">
             <PropertyValue Property="Data">
@@ -227,6 +264,23 @@
                 <Record Type="UI.DataFieldForAnnotation">
                   <PropertyValue Property="Label" String="Supplier"/>
                   <PropertyValue Property="Target" AnnotationPath="ToSupplier/@Communication.Contact"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.FieldGroup" Qualifier="TechnicalData">
+          <Record Type="UI.FieldGroupType">
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="Height"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="Width"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="Depth"/>
                 </Record>
               </Collection>
             </PropertyValue>
@@ -352,6 +406,18 @@
       <Annotations Target="northwind.Products/Price" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Price"/>
         <Annotation Term="Measures.Unit" Path="ToCurrency_Id"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/Height" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Height"/>
+        <Annotation Term="Measures.Unit" Path="ToDimensionUnit_Id"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/Width" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Width"/>
+        <Annotation Term="Measures.Unit" Path="ToDimensionUnit_Id"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/Depth" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Depth"/>
+        <Annotation Term="Measures.Unit" Path="ToDimensionUnit_Id"/>
       </Annotations>
       <Annotations Target="northwind.Products/Quantity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Quantity"/>
@@ -547,6 +613,23 @@
       <Annotations Target="northwind.VH_Currencies/Text" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Description"/>
         <Annotation Term="UI.HiddenFilter" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.EntityContainer/VH_DimensionUnits" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
       </Annotations>
       <Annotations Target="northwind.EntityContainer/VH_UnitOfMeasures" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Capabilities.DeleteRestrictions">

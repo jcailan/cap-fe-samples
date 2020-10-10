@@ -12,9 +12,13 @@ context md {
         DiscontinuedDate : DateTime;
         Rating           : Integer;
         Price            : Decimal(16, 2);
+        Height           : Decimal(16, 2);
+        Width            : Decimal(16, 2);
+        Depth            : Decimal(16, 2);
         Quantity         : Decimal(16, 2);
         ToUnitOfMeasure  : Association to UnitOfMeasures;
         ToCurrency       : Association to Currencies;
+        ToDimensionUnit  : Association to DimensionUnits;
         ToCategory       : Association to Categories;
         ToSupplier       : Association to Suppliers;
     }
@@ -55,6 +59,10 @@ context md {
             Description : localized String;
     }
 
+    entity DimensionUnits {
+        key Id          : String(2);
+            Description : localized String;
+    }
 }
 
 context view {

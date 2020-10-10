@@ -16,11 +16,15 @@ service northwind {
             DiscontinuedDate,
             Rating,
             Price,
+            Height,
+            Width,
+            Depth,
             Quantity,
             ToUnitOfMeasure,
             ToCurrency,
             ToCategory,
             ToCategory.Name as Category,
+            ToDimensionUnit,
             ToStockAvailability,
             StockAvailability,
             ToSupplier
@@ -62,6 +66,13 @@ service northwind {
     @readonly
     entity VH_UnitOfMeasures as
         select from md.UnitOfMeasures {
+            Id          as Code,
+            Description as Text
+        };
+
+    @readonly
+    entity VH_DimensionUnits as
+        select from md.DimensionUnits {
             Id          as Code,
             Description as Text
         };

@@ -24,11 +24,11 @@ This branch is used to breakdown the List Report App into smaller topics that is
 | 14. | [Object Page: Add Header Facet for Rating property][commit-14] | ✔️ |   |
 | 15. | [Object Page: Add Header Facet for Price property][commit-15] | ✔️ |   |
 | 16. | [Object Page: Add Header Facet for Stock Availability][commit-16] | ✔️ | ✔️ |
-| 17. | [Object Page: Add Header Facet for General Information][commits] | ✔️ |   |
-| 18. | Object Page: Add Technical Data section |   |   |
-| 19. | Object Page: Add Sales Data section |   |   |
-| 20. | Object Page: Add Monthly Revenue section |   |   |
-| 21. | Object Page: Add Product Reviews section |   |   |
+| 17. | [Object Page: Add Header Facet for General Information][commit-17] | ✔️ |   |
+| 18. | [Object Page: Add Facet for Technical Data][commits] | ✔️ | ✔️ |
+| 19. | Object Page: Add Facet for Sales Data |   |   |
+| 20. | Object Page: Add Facet for Monthly Revenue |   |   |
+| 21. | Object Page: Add Facet Product Reviews |   |   |
 | 22. | Object Page 2: Add Header and Section of Product Review |   |   |
 | 23. | Products Entity: Add support for Create and Update |   |   |
 
@@ -49,3 +49,4 @@ This branch is used to breakdown the List Report App into smaller topics that is
 [commit-14]: ../../commit/0709c6b689ecc5c9a5eb6836d79a1e3c33c43b46
 [commit-15]: ../../commit/ccdb924c02d1ece7c31b42cd8b062406055725dc
 [commit-16]: ../../commit/bb6ae95251cc0bba2fcd31bda15c9d29542035f6
+[commit-17]: ../../commit/d4c80aa5a7c33c66c985580e16ab2b2df532a04c

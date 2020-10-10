@@ -62,6 +62,11 @@ annotate northwind.Products with @(
             Target : '@UI.DataPoint#Availability'
         }
         ],
+        Facets                         : [{
+            $Type  : 'UI.ReferenceFacet',
+            Target : '@UI.FieldGroup#TechnicalData',
+            Label  : '{i18n>TechnicalData}'
+        }],
         DataPoint #AverageRatingValue  : {
             Value         : Rating,
             Title         : '{i18n>Rating}',
@@ -93,6 +98,11 @@ annotate northwind.Products with @(
             Label  : '{i18n>Supplier}',
             Target : 'ToSupplier/@Communication.Contact'
         }
+        ]},
+        FieldGroup #TechnicalData      : {Data : [
+        {Value : Height},
+        {Value : Width},
+        {Value : Depth}
         ]}
     }
 ) {
@@ -131,6 +141,18 @@ annotate northwind.Products with @(
     ReleaseDate       @title : '{i18n>ReleaseDate}';
     DiscontinuedDate  @title : '{i18n>DiscontinuedDate}';
     Rating            @title : '{i18n>Rating}';
+    Height            @(
+        title    : '{i18n>Height}',
+        Measures : {Unit : ToDimensionUnit_Id}
+    );
+    Width             @(
+        title    : '{i18n>Width}',
+        Measures : {Unit : ToDimensionUnit_Id}
+    );
+    Depth             @(
+        title    : '{i18n>Depth}',
+        Measures : {Unit : ToDimensionUnit_Id}
+    );
     Price             @(
         title    : '{i18n>Price}',
         Measures : {Unit : ToCurrency_Id}
