@@ -166,6 +166,13 @@
             <PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Rating"/>
           </Record>
         </Annotation>
+        <Annotation Term="UI.HeaderFacets">
+          <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#AverageRatingValue"/>
+            </Record>
+          </Collection>
+        </Annotation>
         <Annotation Term="UI.HeaderInfo">
           <Record Type="UI.HeaderInfoType">
             <PropertyValue Property="Description">

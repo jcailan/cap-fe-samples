@@ -20,13 +20,13 @@ This branch is used to breakdown the List Report App into smaller topics that is
 | 10. | [Add Stock Availability with Status Indicator][commit-10] | ✔️ | ✔️ |
 | 11. | [Add Selection Field with Fixed Values][commit-11] | ✔️ |   |
 | 12. | [Add Quick View using Supplier entity][commit-12] | ✔️ | ✔️ |
-| 13. | [Object Page: Add Basic Header Information][commits] | ✔️ |   |
-| 14. | Object Page: Add Technical Data section |   |   |
-| 15. | Object Page: Add Sales Data section |   |   |
-| 16. | Object Page: Add Monthly Revenue section |   |   |
-| 17. | Object Page: Add Header Facets |   |   |
-| 18. | Object Page: Add Header Facets for Stock Availability |   |   |
-| 19. | Object Page: Add Header Facet for General Information  |   |   |
+| 13. | [Object Page: Add Basic Header Information][commit-13] | ✔️ |   |
+| 14. | [Object Page: Add Header Facet for Rating property][commits] | ✔️ |   |
+| 15. | Object Page: Add Header Facet for General Information  |   |   |
+| 16. | Object Page: Add Header Facets for Stock Availability |   |   |
+| 17. | Object Page: Add Technical Data section |   |   |
+| 18. | Object Page: Add Sales Data section |   |   |
+| 19. | Object Page: Add Monthly Revenue section |   |   |
 | 20. | Object Page: Add Product Reviews section |   |   |
 | 21. | Object Page 2: Add Header and Section of Product Review |   |   |
 | 22. | Products Entity: Add support for Create and Update |   |   |
@@ -44,3 +44,4 @@ This branch is used to breakdown the List Report App into smaller topics that is
 [commit-10]: ../../commit/0d9b70d0b430d6bf32f952d4b546330b151d9819
 [commit-11]: ../../commit/68fb7d7a362c851013a1bd2e29bb20e2b73bb419
 [commit-12]: ../../commit/71bd15ee2b3558ecbc727aae2696fb0936f26263
+[commit-13]: ../../commit/14642a350d5cc60edbe2f1ab9f73d91c3157b67f
