@@ -6,6 +6,9 @@
   <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
     <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
   </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Communication.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Alias="Communication" Namespace="com.sap.vocabularies.Communication.v1"/>
+  </edmx:Reference>
   <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
     <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
   </edmx:Reference>
@@ -20,6 +23,7 @@
       <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
         <EntitySet Name="Products" EntityType="northwind.Products"/>
         <EntitySet Name="StockAvailability" EntityType="northwind.StockAvailability"/>
+        <EntitySet Name="Suppliers" EntityType="northwind.Suppliers"/>
         <EntitySet Name="VH_Categories" EntityType="northwind.VH_Categories"/>
         <EntitySet Name="VH_Currencies" EntityType="northwind.VH_Currencies"/>
         <AssociationSet Name="Products_ToCurrency" Association="northwind.Products_ToCurrency">
@@ -33,6 +37,10 @@
         <AssociationSet Name="Products_ToStockAvailability" Association="northwind.Products_ToStockAvailability">
           <End Role="Products" EntitySet="Products"/>
           <End Role="StockAvailability" EntitySet="StockAvailability"/>
+        </AssociationSet>
+        <AssociationSet Name="Products_ToSupplier" Association="northwind.Products_ToSupplier">
+          <End Role="Products" EntitySet="Products"/>
+          <End Role="Suppliers" EntitySet="Suppliers"/>
         </AssociationSet>
         <AssociationSet Name="StockAvailability_ToProduct" Association="northwind.StockAvailability_ToProduct">
           <End Role="StockAvailability" EntitySet="StockAvailability"/>
@@ -58,8 +66,10 @@
         <Property Name="Category" Type="Edm.String"/>
         <NavigationProperty Name="ToStockAvailability" Relationship="northwind.Products_ToStockAvailability" FromRole="Products" ToRole="StockAvailability"/>
         <Property Name="StockAvailability" Type="Edm.Int32"/>
+        <NavigationProperty Name="ToSupplier" Relationship="northwind.Products_ToSupplier" FromRole="Products" ToRole="Suppliers"/>
         <Property Name="ToCurrency_Id" Type="Edm.String" MaxLength="3"/>
         <Property Name="ToCategory_Id" Type="Edm.String" MaxLength="1"/>
+        <Property Name="ToSupplier_Id" Type="Edm.Guid"/>
       </EntityType>
       <EntityType Name="StockAvailability">
         <Key>
@@ -68,6 +78,17 @@
         <Property Name="Id" Type="Edm.Int32" Nullable="false"/>
         <Property Name="Description" Type="Edm.String"/>
         <NavigationProperty Name="ToProduct" Relationship="northwind.StockAvailability_ToProduct" FromRole="StockAvailability" ToRole="Products"/>
+      </EntityType>
+      <EntityType Name="Suppliers">
+        <Key>
+          <PropertyRef Name="Id"/>
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="Name" Type="Edm.String"/>
+        <Property Name="Email" Type="Edm.String"/>
+        <Property Name="Phone" Type="Edm.String"/>
+        <Property Name="Fax" Type="Edm.String"/>
+        <NavigationProperty Name="ToProduct" Relationship="northwind.Products_ToSupplier" FromRole="Suppliers" ToRole="Products"/>
       </EntityType>
       <EntityType Name="VH_Categories">
         <Key>
@@ -119,6 +140,18 @@
           </Dependent>
         </ReferentialConstraint>
       </Association>
+      <Association Name="Products_ToSupplier">
+        <End Role="Products" Type="northwind.Products" Multiplicity="*"/>
+        <End Role="Suppliers" Type="northwind.Suppliers" Multiplicity="0..1"/>
+        <ReferentialConstraint>
+          <Principal Role="Suppliers">
+            <PropertyRef Name="Id"/>
+          </Principal>
+          <Dependent Role="Products">
+            <PropertyRef Name="ToSupplier_Id"/>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
       <Association Name="StockAvailability_ToProduct">
         <End Role="StockAvailability" Type="northwind.StockAvailability" Multiplicity="*"/>
         <End Role="Products" Type="northwind.Products" Multiplicity="0..1"/>
@@ -152,6 +185,10 @@
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="ToCategory_Id"/>
+            </Record>
+            <Record Type="UI.DataFieldForAnnotation">
+              <PropertyValue Property="Label" String="Supplier"/>
+              <PropertyValue Property="Target" AnnotationPath="ToSupplier/@Communication.Contact"/>
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="ReleaseDate"/>
@@ -309,6 +346,52 @@
         <Annotation Term="Common.Label" String="Stock Availability"/>
         <Annotation Term="Common.Text" Path="Description">
           <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.Suppliers" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Communication.Contact">
+          <Record Type="Communication.ContactType">
+            <PropertyValue Property="email">
+              <Collection>
+                <Record Type="Communication.EmailAddressType">
+                  <PropertyValue Property="type" EnumMember="Communication.ContactInformationType/work"/>
+                  <PropertyValue Property="address" Path="Email"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="fn" Path="Name"/>
+            <PropertyValue Property="photo" String="sap-icon://supplier"/>
+            <PropertyValue Property="role" String="Supplier"/>
+            <PropertyValue Property="tel">
+              <Collection>
+                <Record Type="Communication.PhoneNumberType">
+                  <PropertyValue Property="type" EnumMember="Communication.PhoneType/work"/>
+                  <PropertyValue Property="uri" Path="Phone"/>
+                </Record>
+                <Record Type="Communication.PhoneNumberType">
+                  <PropertyValue Property="type" EnumMember="Communication.PhoneType/fax"/>
+                  <PropertyValue Property="uri" Path="Fax"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.EntityContainer/Suppliers" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
         </Annotation>
       </Annotations>
       <Annotations Target="northwind.EntityContainer/VH_Categories" xmlns="http://docs.oasis-open.org/odata/ns/edm">

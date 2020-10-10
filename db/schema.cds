@@ -16,6 +16,21 @@ context md {
         ToUnitOfMeasure  : Association to UnitOfMeasures;
         ToCurrency       : Association to Currencies;
         ToCategory       : Association to Categories;
+        ToSupplier       : Association to Suppliers;
+    }
+
+    entity Suppliers : cuid, managed {
+        Name       : String;
+        Street     : String;
+        City       : String;
+        State      : String(2);
+        PostalCode : String(5);
+        Country    : String(3);
+        Email      : String;
+        Phone      : String;
+        Fax        : String;
+        ToProduct  : Association to Products
+                         on ToProduct.ToSupplier = $self;
     }
 
     entity Categories {

@@ -22,7 +22,19 @@ service northwind {
             ToCategory,
             ToCategory.Name    as Category,
             ToStockAvailability,
-            StockAvailability
+            StockAvailability,
+            ToSupplier
+        };
+
+    @readonly
+    entity Suppliers         as
+        select from md.Suppliers {
+            Id,
+            Name,
+            Email,
+            Phone,
+            Fax,
+            ToProduct
         };
 
     @readonly

@@ -20,6 +20,11 @@ annotate northwind.Products with @(
         {Value : Name},
         {Value : Description},
         {Value : ToCategory_Id},
+        {
+            $Type  : 'UI.DataFieldForAnnotation',
+            Label  : '{i18n>Supplier}',
+            Target : 'ToSupplier/@Communication.Contact'
+        },
         {Value : ReleaseDate},
         {
             Value       : ToStockAvailability.Id,
@@ -114,6 +119,29 @@ annotate northwind.Products with @(
         }
     );
 };
+
+/**
+ * Annotations for Suppliers Entity
+ */
+annotate northwind.Suppliers with @(Communication : {Contact : {
+    fn    : Name,
+    role  : '{i18n>Supplier}',
+    photo : 'sap-icon://supplier',
+    email : [{
+        type    : #work,
+        address : Email
+    }],
+    tel   : [
+    {
+        type : #work,
+        uri  : Phone
+    },
+    {
+        type : #fax,
+        uri  : Fax
+    }
+    ]
+}});
 
 /**
  * Annotations for StockAvailability Entity
