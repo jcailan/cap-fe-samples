@@ -7,6 +7,7 @@ context md {
     entity Products : cuid, managed {
         Name             : localized String;
         Description      : localized String;
+        ImageUrl         : String;
         ReleaseDate      : DateTime;
         DiscontinuedDate : DateTime;
         Rating           : Integer;

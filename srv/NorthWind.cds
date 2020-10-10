@@ -8,6 +8,7 @@ service northwind {
             Id,
             Name,
             Description,
+            ImageUrl,
             ReleaseDate,
             DiscontinuedDate,
             Rating,

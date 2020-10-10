@@ -37,6 +37,7 @@
         <Property Name="Id" Type="Edm.Guid" Nullable="false"/>
         <Property Name="Name" Type="Edm.String"/>
         <Property Name="Description" Type="Edm.String"/>
+        <Property Name="ImageUrl" Type="Edm.String"/>
         <Property Name="ReleaseDate" Type="Edm.DateTimeOffset"/>
         <Property Name="DiscontinuedDate" Type="Edm.DateTimeOffset"/>
         <Property Name="Rating" Type="Edm.Int32"/>
@@ -96,6 +97,9 @@
         <Annotation Term="UI.LineItem">
           <Collection>
             <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="ImageUrl"/>
+            </Record>
+            <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="Name"/>
             </Record>
             <Record Type="UI.DataField">
@@ -150,6 +154,10 @@
       </Annotations>
       <Annotations Target="northwind.Products/Description" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Description"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/ImageUrl" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Image"/>
+        <Annotation Term="UI.IsImageURL" Bool="true"/>
       </Annotations>
       <Annotations Target="northwind.Products/ReleaseDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Release Date"/>

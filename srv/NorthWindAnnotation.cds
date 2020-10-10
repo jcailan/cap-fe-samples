@@ -15,6 +15,7 @@ annotate northwind.Products with @(
             TypeNamePlural : '{i18n>Products}'
         },
         LineItem        : {$value : [
+        {Value : ImageUrl},
         {Value : Name},
         {Value : Description},
         {Value : ToCategory_Id},
@@ -25,6 +26,10 @@ annotate northwind.Products with @(
         ]}
     }
 ) {
+    ImageUrl         @(
+        title : '{i18n>Image}',
+        UI    : {IsImageURL : true}
+    );
     Id               @title : '{i18n>Id}';
     Name             @title : '{i18n>Name}';
     Description      @title : '{i18n>Description}';
