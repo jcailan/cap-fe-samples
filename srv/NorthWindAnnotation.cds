@@ -6,19 +6,19 @@ using {northwind} from './NorthWind';
 annotate northwind.Products with @(
     Common : {Label : '{i18n>Products}'},
     UI     : {
-        SelectionFields               : [
+        SelectionFields                : [
         ToCategory_Id,
         ToCurrency_Id,
         StockAvailability
         ],
-        HeaderInfo                    : {
+        HeaderInfo                     : {
             TypeName       : '{i18n>Product}',
             TypeNamePlural : '{i18n>Products}',
             ImageUrl       : ImageUrl,
             Title          : {Value : Name},
             Description    : {Value : Description}
         },
-        LineItem                      : {$value : [
+        LineItem                       : {$value : [
         {Value : ImageUrl},
         {Value : Name},
         {Value : Description},
@@ -39,7 +39,12 @@ annotate northwind.Products with @(
         },
         {Value : Price}
         ]},
-        HeaderFacets                  : [
+        HeaderFacets                   : [
+        {
+            $Type  : 'UI.ReferenceFacet',
+            Target : '@UI.FieldGroup#GeneralInformation',
+            Label  : '{i18n>GeneralInformation}'
+        },
         {
             $Type  : 'UI.ReferenceFacet',
             Target : '@UI.DataPoint#AverageRatingValue'
@@ -57,29 +62,38 @@ annotate northwind.Products with @(
             Target : '@UI.DataPoint#Availability'
         }
         ],
-        DataPoint #AverageRatingValue : {
+        DataPoint #AverageRatingValue  : {
             Value         : Rating,
             Title         : '{i18n>Rating}',
             TargetValue   : 5,
             Visualization : #Rating
         },
-        DataPoint #Price              : {
+        DataPoint #Price               : {
             Value : Price,
             Title : '{i18n>Price}'
         },
-        DataPoint #StockAvailability  : {
+        DataPoint #StockAvailability   : {
             Title       : '{i18n>StockAvailability}',
             Value       : ToStockAvailability.Id,
             Criticality : StockAvailability
         },
-        DataPoint #Availability       : {
+        DataPoint #Availability        : {
             Title         : '{i18n>Availability}',
             Description   : '{i18n>StockIndicator}',
             Value         : Quantity,
             TargetValue   : 20,
             Criticality   : StockAvailability,
             Visualization : #Progress
+        },
+        FieldGroup #GeneralInformation : {Data : [
+        {Value : ToCategory_Id},
+        {Value : ReleaseDate},
+        {
+            $Type  : 'UI.DataFieldForAnnotation',
+            Label  : '{i18n>Supplier}',
+            Target : 'ToSupplier/@Communication.Contact'
         }
+        ]}
     }
 ) {
     ImageUrl          @(

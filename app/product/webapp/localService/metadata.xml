@@ -214,8 +214,30 @@
             <PropertyValue Property="Value" Path="ToStockAvailability/Id"/>
           </Record>
         </Annotation>
+        <Annotation Term="UI.FieldGroup" Qualifier="GeneralInformation">
+          <Record Type="UI.FieldGroupType">
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="ToCategory_Id"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="ReleaseDate"/>
+                </Record>
+                <Record Type="UI.DataFieldForAnnotation">
+                  <PropertyValue Property="Label" String="Supplier"/>
+                  <PropertyValue Property="Target" AnnotationPath="ToSupplier/@Communication.Contact"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
         <Annotation Term="UI.HeaderFacets">
           <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneralInformation"/>
+              <PropertyValue Property="Label" String="General Information"/>
+            </Record>
             <Record Type="UI.ReferenceFacet">
               <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#AverageRatingValue"/>
             </Record>
