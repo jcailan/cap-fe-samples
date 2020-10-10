@@ -12,6 +12,7 @@ service northwind {
             DiscontinuedDate,
             Rating,
             Price,
+            ToCurrency,
             ToCategory,
             ToCategory.Name as Category
         };
@@ -21,5 +22,12 @@ service northwind {
         select from md.Categories {
             Id   as Code,
             Name as Text
+        };
+
+    @readonly
+    entity VH_Currencies as
+        select from md.Currencies {
+            Id          as Code,
+            Description as Text
         };
 }

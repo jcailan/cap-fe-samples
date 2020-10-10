@@ -9,6 +9,9 @@
   <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
     <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
   </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Measures.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Alias="Measures" Namespace="Org.OData.Measures.V1"/>
+  </edmx:Reference>
   <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
     <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
   </edmx:Reference>
@@ -17,6 +20,11 @@
       <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
         <EntitySet Name="Products" EntityType="northwind.Products"/>
         <EntitySet Name="VH_Categories" EntityType="northwind.VH_Categories"/>
+        <EntitySet Name="VH_Currencies" EntityType="northwind.VH_Currencies"/>
+        <AssociationSet Name="Products_ToCurrency" Association="northwind.Products_ToCurrency">
+          <End Role="Products" EntitySet="Products"/>
+          <End Role="VH_Currencies" EntitySet="VH_Currencies"/>
+        </AssociationSet>
         <AssociationSet Name="Products_ToCategory" Association="northwind.Products_ToCategory">
           <End Role="Products" EntitySet="Products"/>
           <End Role="VH_Categories" EntitySet="VH_Categories"/>
@@ -32,9 +40,11 @@
         <Property Name="ReleaseDate" Type="Edm.DateTimeOffset"/>
         <Property Name="DiscontinuedDate" Type="Edm.DateTimeOffset"/>
         <Property Name="Rating" Type="Edm.Int32"/>
-        <Property Name="Price" Type="Edm.Double"/>
+        <Property Name="Price" Type="Edm.Decimal" Scale="2" Precision="16"/>
+        <NavigationProperty Name="ToCurrency" Relationship="northwind.Products_ToCurrency" FromRole="Products" ToRole="VH_Currencies"/>
         <NavigationProperty Name="ToCategory" Relationship="northwind.Products_ToCategory" FromRole="Products" ToRole="VH_Categories"/>
         <Property Name="Category" Type="Edm.String"/>
+        <Property Name="ToCurrency_Id" Type="Edm.String" MaxLength="3"/>
         <Property Name="ToCategory_Id" Type="Edm.String" MaxLength="1"/>
       </EntityType>
       <EntityType Name="VH_Categories">
@@ -44,6 +54,25 @@
         <Property Name="Code" Type="Edm.String" MaxLength="1" Nullable="false"/>
         <Property Name="Text" Type="Edm.String"/>
       </EntityType>
+      <EntityType Name="VH_Currencies">
+        <Key>
+          <PropertyRef Name="Code"/>
+        </Key>
+        <Property Name="Code" Type="Edm.String" MaxLength="3" Nullable="false"/>
+        <Property Name="Text" Type="Edm.String"/>
+      </EntityType>
+      <Association Name="Products_ToCurrency">
+        <End Role="Products" Type="northwind.Products" Multiplicity="*"/>
+        <End Role="VH_Currencies" Type="northwind.VH_Currencies" Multiplicity="0..1"/>
+        <ReferentialConstraint>
+          <Principal Role="VH_Currencies">
+            <PropertyRef Name="Code"/>
+          </Principal>
+          <Dependent Role="Products">
+            <PropertyRef Name="ToCurrency_Id"/>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
       <Association Name="Products_ToCategory">
         <End Role="Products" Type="northwind.Products" Multiplicity="*"/>
         <End Role="VH_Categories" Type="northwind.VH_Categories" Multiplicity="0..1"/>
@@ -92,6 +121,7 @@
         <Annotation Term="UI.SelectionFields">
           <Collection>
             <PropertyPath>ToCategory_Id</PropertyPath>
+            <PropertyPath>ToCurrency_Id</PropertyPath>
           </Collection>
         </Annotation>
       </Annotations>
@@ -132,9 +162,35 @@
       </Annotations>
       <Annotations Target="northwind.Products/Price" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Price"/>
+        <Annotation Term="Measures.Unit" Path="ToCurrency_Id"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/ToCurrency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Currency"/>
       </Annotations>
       <Annotations Target="northwind.Products/ToCategory" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Category"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/ToCurrency_Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+        <Annotation Term="Common.Label" String="Currency"/>
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="CollectionPath" String="VH_Currencies"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="ToCurrency_Id"/>
+                  <PropertyValue Property="ValueListProperty" String="Code"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Text"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="SearchSupported" Bool="true"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.ValueListWithFixedValues" Bool="false"/>
       </Annotations>
       <Annotations Target="northwind.Products/ToCategory_Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Category"/>
@@ -186,6 +242,31 @@
       </Annotations>
       <Annotations Target="northwind.VH_Categories/Text" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Category"/>
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.EntityContainer/VH_Currencies" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.VH_Currencies/Code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Currency"/>
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.VH_Currencies/Text" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Description"/>
         <Annotation Term="UI.HiddenFilter" Bool="true"/>
       </Annotations>
     </Schema>

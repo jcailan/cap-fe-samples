@@ -6,7 +6,10 @@ using {northwind} from './NorthWind';
 annotate northwind.Products with @(
     Common : {Label : '{i18n>Products}'},
     UI     : {
-        SelectionFields : [ToCategory_Id],
+        SelectionFields : [
+        ToCategory_Id,
+        ToCurrency_Id
+        ],
         HeaderInfo      : {
             TypeName       : '{i18n>Product}',
             TypeNamePlural : '{i18n>Products}'
@@ -53,7 +56,32 @@ annotate northwind.Products with @(
     ReleaseDate      @title : '{i18n>ReleaseDate}';
     DiscontinuedDate @title : '{i18n>DiscontinuedDate}';
     Rating           @title : '{i18n>Rating}';
-    Price            @title : '{i18n>Price}';
+    Price            @(
+        title    : '{i18n>Price}',
+        Measures : {Unit : ToCurrency_Id}
+    );
+    ToCurrency       @(
+        mandatory,
+        title  : '{i18n>CurrencyKey}',
+        Common : {
+            ValueListWithFixedValues : false,
+            ValueList                : {
+                SearchSupported : true,
+                CollectionPath  : 'VH_Currencies',
+                Parameters      : [
+                {
+                    $Type             : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : ToCurrency_Id,
+                    ValueListProperty : 'Code'
+                },
+                {
+                    $Type             : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'Text'
+                }
+                ]
+            }
+        }
+    );
 };
 
 /**
@@ -70,6 +98,20 @@ annotate northwind.VH_Categories with {
     );
     Text @(
         title : '{i18n>Category}',
+        UI    : {HiddenFilter : true}
+    );
+};
+
+/**
+ * Annotations for VH_Currencies Entity
+ */
+annotate northwind.VH_Currencies with {
+    Code @(
+        title : '{i18n>Currency}',
+        UI    : {HiddenFilter : true}
+    );
+    Text @(
+        title : '{i18n>Description}',
         UI    : {HiddenFilter : true}
     );
 };
