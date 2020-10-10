@@ -22,8 +22,8 @@ This branch is used to breakdown the List Report App into smaller topics that is
 | 12. | [Add Quick View using Supplier entity][commit-12] | ✔️ | ✔️ |
 | 13. | [Object Page: Add Basic Header Information][commit-13] | ✔️ |   |
 | 14. | [Object Page: Add Header Facet for Rating property][commit-14] | ✔️ |   |
-| 15. | [Object Page: Add Header Facet for Price property][commits] | ✔️ |   |
-| 16. | Object Page: Add Header Facet for Stock Availability |   |   |
+| 15. | [Object Page: Add Header Facet for Price property][commit-15] | ✔️ |   |
+| 16. | [Object Page: Add Header Facet for Stock Availability][commits] | ✔️ | ✔️ |
 | 17. | Object Page: Add Header Facet for General Information  |   |   |
 | 18. | Object Page: Add Technical Data section |   |   |
 | 19. | Object Page: Add Sales Data section |   |   |
@@ -47,3 +47,4 @@ This branch is used to breakdown the List Report App into smaller topics that is
 [commit-12]: ../../commit/71bd15ee2b3558ecbc727aae2696fb0936f26263
 [commit-13]: ../../commit/14642a350d5cc60edbe2f1ab9f73d91c3157b67f
 [commit-14]: ../../commit/0709c6b689ecc5c9a5eb6836d79a1e3c33c43b46
+[commit-15]: ../../commit/ccdb924c02d1ece7c31b42cd8b062406055725dc

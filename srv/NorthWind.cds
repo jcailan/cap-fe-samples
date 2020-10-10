@@ -17,10 +17,10 @@ service northwind {
             Rating,
             Price,
             Quantity,
-            ToUnitOfMeasure.Id as UnitOfMeasure,
+            ToUnitOfMeasure,
             ToCurrency,
             ToCategory,
-            ToCategory.Name    as Category,
+            ToCategory.Name as Category,
             ToStockAvailability,
             StockAvailability,
             ToSupplier
@@ -55,6 +55,13 @@ service northwind {
     @readonly
     entity VH_Currencies     as
         select from md.Currencies {
+            Id          as Code,
+            Description as Text
+        };
+
+    @readonly
+    entity VH_UnitOfMeasures as
+        select from md.UnitOfMeasures {
             Id          as Code,
             Description as Text
         };

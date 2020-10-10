@@ -26,6 +26,11 @@
         <EntitySet Name="Suppliers" EntityType="northwind.Suppliers"/>
         <EntitySet Name="VH_Categories" EntityType="northwind.VH_Categories"/>
         <EntitySet Name="VH_Currencies" EntityType="northwind.VH_Currencies"/>
+        <EntitySet Name="VH_UnitOfMeasures" EntityType="northwind.VH_UnitOfMeasures"/>
+        <AssociationSet Name="Products_ToUnitOfMeasure" Association="northwind.Products_ToUnitOfMeasure">
+          <End Role="Products" EntitySet="Products"/>
+          <End Role="VH_UnitOfMeasures" EntitySet="VH_UnitOfMeasures"/>
+        </AssociationSet>
         <AssociationSet Name="Products_ToCurrency" Association="northwind.Products_ToCurrency">
           <End Role="Products" EntitySet="Products"/>
           <End Role="VH_Currencies" EntitySet="VH_Currencies"/>
@@ -60,13 +65,14 @@
         <Property Name="Rating" Type="Edm.Int32"/>
         <Property Name="Price" Type="Edm.Decimal" Scale="2" Precision="16"/>
         <Property Name="Quantity" Type="Edm.Decimal" Scale="2" Precision="16"/>
-        <Property Name="UnitOfMeasure" Type="Edm.String" MaxLength="2"/>
+        <NavigationProperty Name="ToUnitOfMeasure" Relationship="northwind.Products_ToUnitOfMeasure" FromRole="Products" ToRole="VH_UnitOfMeasures"/>
         <NavigationProperty Name="ToCurrency" Relationship="northwind.Products_ToCurrency" FromRole="Products" ToRole="VH_Currencies"/>
         <NavigationProperty Name="ToCategory" Relationship="northwind.Products_ToCategory" FromRole="Products" ToRole="VH_Categories"/>
         <Property Name="Category" Type="Edm.String"/>
         <NavigationProperty Name="ToStockAvailability" Relationship="northwind.Products_ToStockAvailability" FromRole="Products" ToRole="StockAvailability"/>
         <Property Name="StockAvailability" Type="Edm.Int32"/>
         <NavigationProperty Name="ToSupplier" Relationship="northwind.Products_ToSupplier" FromRole="Products" ToRole="Suppliers"/>
+        <Property Name="ToUnitOfMeasure_Id" Type="Edm.String" MaxLength="2"/>
         <Property Name="ToCurrency_Id" Type="Edm.String" MaxLength="3"/>
         <Property Name="ToCategory_Id" Type="Edm.String" MaxLength="1"/>
         <Property Name="ToSupplier_Id" Type="Edm.Guid"/>
@@ -104,6 +110,25 @@
         <Property Name="Code" Type="Edm.String" MaxLength="3" Nullable="false"/>
         <Property Name="Text" Type="Edm.String"/>
       </EntityType>
+      <EntityType Name="VH_UnitOfMeasures">
+        <Key>
+          <PropertyRef Name="Code"/>
+        </Key>
+        <Property Name="Code" Type="Edm.String" MaxLength="2" Nullable="false"/>
+        <Property Name="Text" Type="Edm.String"/>
+      </EntityType>
+      <Association Name="Products_ToUnitOfMeasure">
+        <End Role="Products" Type="northwind.Products" Multiplicity="*"/>
+        <End Role="VH_UnitOfMeasures" Type="northwind.VH_UnitOfMeasures" Multiplicity="0..1"/>
+        <ReferentialConstraint>
+          <Principal Role="VH_UnitOfMeasures">
+            <PropertyRef Name="Code"/>
+          </Principal>
+          <Dependent Role="Products">
+            <PropertyRef Name="ToUnitOfMeasure_Id"/>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
       <Association Name="Products_ToCurrency">
         <End Role="Products" Type="northwind.Products" Multiplicity="*"/>
         <End Role="VH_Currencies" Type="northwind.VH_Currencies" Multiplicity="0..1"/>
@@ -158,6 +183,16 @@
       </Association>
       <Annotations Target="northwind.Products" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Products"/>
+        <Annotation Term="UI.DataPoint" Qualifier="Availability">
+          <Record Type="UI.DataPointType">
+            <PropertyValue Property="Criticality" Path="StockAvailability"/>
+            <PropertyValue Property="Description" String="Stock Availability Indicator"/>
+            <PropertyValue Property="TargetValue" Int="20"/>
+            <PropertyValue Property="Title" String="Availability"/>
+            <PropertyValue Property="Value" Path="Quantity"/>
+            <PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Progress"/>
+          </Record>
+        </Annotation>
         <Annotation Term="UI.DataPoint" Qualifier="AverageRatingValue">
           <Record Type="UI.DataPointType">
             <PropertyValue Property="TargetValue" Int="5"/>
@@ -172,6 +207,13 @@
             <PropertyValue Property="Value" Path="Price"/>
           </Record>
         </Annotation>
+        <Annotation Term="UI.DataPoint" Qualifier="StockAvailability">
+          <Record Type="UI.DataPointType">
+            <PropertyValue Property="Criticality" Path="StockAvailability"/>
+            <PropertyValue Property="Title" String="Stock Availability"/>
+            <PropertyValue Property="Value" Path="ToStockAvailability/Id"/>
+          </Record>
+        </Annotation>
         <Annotation Term="UI.HeaderFacets">
           <Collection>
             <Record Type="UI.ReferenceFacet">
@@ -179,6 +221,12 @@
             </Record>
             <Record Type="UI.ReferenceFacet">
               <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#Price"/>
+            </Record>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#StockAvailability"/>
+            </Record>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#Availability"/>
             </Record>
           </Collection>
         </Annotation>
@@ -282,6 +330,10 @@
       <Annotations Target="northwind.Products/Price" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Price"/>
         <Annotation Term="Measures.Unit" Path="ToCurrency_Id"/>
+      </Annotations>
+      <Annotations Target="northwind.Products/Quantity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Quantity"/>
+        <Annotation Term="Measures.Unit" Path="ToUnitOfMeasure_Id"/>
       </Annotations>
       <Annotations Target="northwind.Products/ToCurrency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Currency"/>
@@ -473,6 +525,23 @@
       <Annotations Target="northwind.VH_Currencies/Text" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Description"/>
         <Annotation Term="UI.HiddenFilter" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.EntityContainer/VH_UnitOfMeasures" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
       </Annotations>
     </Schema>
   </edmx:DataServices>

@@ -47,6 +47,14 @@ annotate northwind.Products with @(
         {
             $Type  : 'UI.ReferenceFacet',
             Target : '@UI.DataPoint#Price'
+        },
+        {
+            $Type  : 'UI.ReferenceFacet',
+            Target : '@UI.DataPoint#StockAvailability'
+        },
+        {
+            $Type  : 'UI.ReferenceFacet',
+            Target : '@UI.DataPoint#Availability'
         }
         ],
         DataPoint #AverageRatingValue : {
@@ -58,6 +66,19 @@ annotate northwind.Products with @(
         DataPoint #Price              : {
             Value : Price,
             Title : '{i18n>Price}'
+        },
+        DataPoint #StockAvailability  : {
+            Title       : '{i18n>StockAvailability}',
+            Value       : ToStockAvailability.Id,
+            Criticality : StockAvailability
+        },
+        DataPoint #Availability       : {
+            Title         : '{i18n>Availability}',
+            Description   : '{i18n>StockIndicator}',
+            Value         : Quantity,
+            TargetValue   : 20,
+            Criticality   : StockAvailability,
+            Visualization : #Progress
         }
     }
 ) {
@@ -120,6 +141,10 @@ annotate northwind.Products with @(
                 ]
             }
         }
+    );
+    Quantity          @(
+        title         : '{i18n>Quantity}',
+        Measures.Unit : ToUnitOfMeasure_Id
     );
     StockAvailability @(
         title  : '{i18n>StockAvailability}',
