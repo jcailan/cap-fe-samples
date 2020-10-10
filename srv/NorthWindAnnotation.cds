@@ -6,24 +6,33 @@ using {northwind} from './NorthWind';
 annotate northwind.Products with @(
     Common : {Label : '{i18n>Products}'},
     UI     : {
-        SelectionFields : [
+        SelectionFields               : [
         ToCategory_Id,
         ToCurrency_Id
         ],
-        HeaderInfo      : {
+        HeaderInfo                    : {
             TypeName       : '{i18n>Product}',
             TypeNamePlural : '{i18n>Products}'
         },
-        LineItem        : {$value : [
+        LineItem                      : {$value : [
         {Value : ImageUrl},
         {Value : Name},
         {Value : Description},
         {Value : ToCategory_Id},
         {Value : ReleaseDate},
         {Value : DiscontinuedDate},
-        {Value : Rating},
+        {
+            $Type  : 'UI.DataFieldForAnnotation',
+            Target : '@UI.DataPoint#AverageRatingValue'
+        },
         {Value : Price}
-        ]}
+        ]},
+        DataPoint #AverageRatingValue : {
+            Value         : Rating,
+            Title         : '{i18n>Rating}',
+            TargetValue   : 5,
+            Visualization : #Rating
+        }
     }
 ) {
     ImageUrl         @(

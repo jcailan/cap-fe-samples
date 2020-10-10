@@ -15,8 +15,8 @@ This branch is used to breakdown the List Report App into smaller topics that is
 | 5.  | [Add Selection Field for Categories (Value Help)][commit-5] | ✔️ | ✔️ |
 | 6.  | [Add Header Information for Products Entity][commit-6] | ✔️ |   |
 | 7.  | [Add Currency for Price property][commit-7] | ✔️ | ✔️ |
-| 8.  | [Add Image for Product entity][commits] | ✔️ | ✔️ |
-| 9.  | Add Rating for Product entity |   |   |
+| 8.  | [Add Image for Product entity][commit-8] | ✔️ | ✔️ |
+| 9.  | [Add Visualization for Rating property][commits] | ✔️ |   |
 | 10. | Object Page: Add header information |   |   |
 | 11. | Object Page: Add Technical Data section |   |   |
 | 12. | Object Page: Add Sales Data section |   |   |
@@ -39,3 +39,4 @@ This branch is used to breakdown the List Report App into smaller topics that is
 [commit-5]: ../../commit/c6c8c3d9c06480a9439e9390551015c2adc3e80e
 [commit-6]: ../../commit/08d130ed4756a07541e87a4e1096226959b1bf9d
 [commit-7]: ../../commit/d6c2834ebd1d73680890489157d0ccbfb5dcebf1
+[commit-8]: ../../commit/3e7fb97c08dfebf1a1736b7e50d728a0c64f6e59

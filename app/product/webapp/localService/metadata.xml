@@ -88,6 +88,14 @@
       </Association>
       <Annotations Target="northwind.Products" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Products"/>
+        <Annotation Term="UI.DataPoint" Qualifier="AverageRatingValue">
+          <Record Type="UI.DataPointType">
+            <PropertyValue Property="TargetValue" Int="5"/>
+            <PropertyValue Property="Title" String="Rating"/>
+            <PropertyValue Property="Value" Path="Rating"/>
+            <PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Rating"/>
+          </Record>
+        </Annotation>
         <Annotation Term="UI.HeaderInfo">
           <Record Type="UI.HeaderInfoType">
             <PropertyValue Property="TypeName" String="Product"/>
@@ -114,8 +122,8 @@
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="DiscontinuedDate"/>
             </Record>
-            <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="Rating"/>
+            <Record Type="UI.DataFieldForAnnotation">
+              <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#AverageRatingValue"/>
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="Price"/>
