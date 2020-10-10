@@ -12,8 +12,8 @@ This branch is used to breakdown the List Report App into smaller topics that is
 | 2.  | [Add OData V2 Proxy Adapter][commit-2] |   | ✔️ |
 | 3.  | [Add SAP Fiori Element - List Report App][commit-3] | ✔️ |   |
 | 4.  | [Add Line Item and Label Annotations][commit-4] | ✔️ | ✔️ |
-| 5.  | [Add Selection Field for Categories (Value Help)][commits] | ✔️ | ✔️ |
-| 6.  | Add Header Information for the Products Entity |   |   |
+| 5.  | [Add Selection Field for Categories (Value Help)][commit-5] | ✔️ | ✔️ |
+| 6.  | [Add Header Information for Products Entity][commits] | ✔️ |   |
 | 7.  | Object Page: Add header information |   |   |
 | 8.  | Add CurrencyKey for Price property |   |   |
 | 9.  | Add Image for Product entity (see #7) |   |   |
@@ -36,3 +36,4 @@ This branch is used to breakdown the List Report App into smaller topics that is
 [commit-2]: ../../commit/e1e066b31adb313bccf2a9e932b30217cf026556
 [commit-3]: ../../commit/b633d7e9177e41710894182d6c6d212d64b31df7
 [commit-4]: ../../commit/4b96d0beaa1775e71a63afc41269957233c60ac4
+[commit-5]: ../../commit/c6c8c3d9c06480a9439e9390551015c2adc3e80e

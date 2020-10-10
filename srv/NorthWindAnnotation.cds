@@ -7,6 +7,10 @@ annotate northwind.Products with @(
     Common : {Label : '{i18n>Products}'},
     UI     : {
         SelectionFields : [ToCategory_Id],
+        HeaderInfo      : {
+            TypeName       : '{i18n>Product}',
+            TypeNamePlural : '{i18n>Products}'
+        },
         LineItem        : {$value : [
         {Value : Name},
         {Value : Description},
