@@ -22,6 +22,7 @@
     <Schema Namespace="northwind" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
       <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
         <EntitySet Name="Products" EntityType="northwind.Products"/>
+        <EntitySet Name="SalesData" EntityType="northwind.SalesData"/>
         <EntitySet Name="StockAvailability" EntityType="northwind.StockAvailability"/>
         <EntitySet Name="Suppliers" EntityType="northwind.Suppliers"/>
         <EntitySet Name="VH_Categories" EntityType="northwind.VH_Categories"/>
@@ -52,6 +53,10 @@
           <End Role="Products" EntitySet="Products"/>
           <End Role="Suppliers" EntitySet="Suppliers"/>
         </AssociationSet>
+        <AssociationSet Name="SalesData_ToProduct" Association="northwind.SalesData_ToProduct">
+          <End Role="SalesData" EntitySet="SalesData"/>
+          <End Role="Products" EntitySet="Products"/>
+        </AssociationSet>
         <AssociationSet Name="StockAvailability_ToProduct" Association="northwind.StockAvailability_ToProduct">
           <End Role="StockAvailability" EntitySet="StockAvailability"/>
           <End Role="Products" EntitySet="Products"/>
@@ -78,6 +83,7 @@
         <NavigationProperty Name="ToCategory" Relationship="northwind.Products_ToCategory" FromRole="Products" ToRole="VH_Categories"/>
         <Property Name="Category" Type="Edm.String"/>
         <NavigationProperty Name="ToDimensionUnit" Relationship="northwind.Products_ToDimensionUnit" FromRole="Products" ToRole="VH_DimensionUnits"/>
+        <NavigationProperty Name="ToSalesData" Relationship="northwind.SalesData_ToProduct" FromRole="Products" ToRole="SalesData"/>
         <NavigationProperty Name="ToStockAvailability" Relationship="northwind.Products_ToStockAvailability" FromRole="Products" ToRole="StockAvailability"/>
         <Property Name="StockAvailability" Type="Edm.Int32"/>
         <NavigationProperty Name="ToSupplier" Relationship="northwind.Products_ToSupplier" FromRole="Products" ToRole="Suppliers"/>
@@ -86,6 +92,19 @@
         <Property Name="ToCategory_Id" Type="Edm.String" MaxLength="1"/>
         <Property Name="ToDimensionUnit_Id" Type="Edm.String" MaxLength="2"/>
         <Property Name="ToSupplier_Id" Type="Edm.Guid"/>
+      </EntityType>
+      <EntityType Name="SalesData">
+        <Key>
+          <PropertyRef Name="Id"/>
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="DeliveryDate" Type="Edm.DateTimeOffset"/>
+        <Property Name="Revenue" Type="Edm.Decimal" Scale="2" Precision="16"/>
+        <Property Name="CurrencyKey" Type="Edm.String" MaxLength="3"/>
+        <Property Name="DeliveryMonthId" Type="Edm.String" MaxLength="2"/>
+        <Property Name="DeliveryMonth" Type="Edm.String"/>
+        <NavigationProperty Name="ToProduct" Relationship="northwind.SalesData_ToProduct" FromRole="SalesData" ToRole="Products"/>
+        <Property Name="ToProduct_Id" Type="Edm.Guid"/>
       </EntityType>
       <EntityType Name="StockAvailability">
         <Key>
@@ -206,6 +225,18 @@
           </Dependent>
         </ReferentialConstraint>
       </Association>
+      <Association Name="SalesData_ToProduct">
+        <End Role="SalesData" Type="northwind.SalesData" Multiplicity="*"/>
+        <End Role="Products" Type="northwind.Products" Multiplicity="0..1"/>
+        <ReferentialConstraint>
+          <Principal Role="Products">
+            <PropertyRef Name="Id"/>
+          </Principal>
+          <Dependent Role="SalesData">
+            <PropertyRef Name="ToProduct_Id"/>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
       <Association Name="StockAvailability_ToProduct">
         <End Role="StockAvailability" Type="northwind.StockAvailability" Multiplicity="*"/>
         <End Role="Products" Type="northwind.Products" Multiplicity="0..1"/>
@@ -248,6 +279,10 @@
             <Record Type="UI.ReferenceFacet">
               <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#TechnicalData"/>
               <PropertyValue Property="Label" String="Technical Data "/>
+            </Record>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="ToSalesData/@UI.LineItem"/>
+              <PropertyValue Property="Label" String="Sales Data"/>
             </Record>
           </Collection>
         </Annotation>
@@ -491,6 +526,89 @@
             <PropertyValue Property="SearchSupported" Bool="true"/>
           </Record>
         </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.SalesData" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.HeaderInfo">
+          <Record Type="UI.HeaderInfoType">
+            <PropertyValue Property="TypeName" String="Sales Order"/>
+            <PropertyValue Property="TypeNamePlural" String="Sales Orders"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="DeliveryMonthId"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="Revenue"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="DeliveryDate"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.PresentationVariant">
+          <Record Type="UI.PresentationVariantType">
+            <PropertyValue Property="SortOrder">
+              <Collection>
+                <Record Type="Common.SortOrderType">
+                  <PropertyValue Property="Property" PropertyPath="DeliveryMonthId"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="Visualizations">
+              <Collection>
+                <AnnotationPath>@UI.LineItem</AnnotationPath>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.EntityContainer/SalesData" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.SalesData/Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.SalesData/DeliveryDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Delivery Date"/>
+      </Annotations>
+      <Annotations Target="northwind.SalesData/Revenue" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Revenue"/>
+        <Annotation Term="Measures.Unit" Path="CurrencyKey"/>
+      </Annotations>
+      <Annotations Target="northwind.SalesData/CurrencyKey" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.SalesData/DeliveryMonthId" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Month"/>
+        <Annotation Term="Common.Text" Path="DeliveryMonth">
+          <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.SalesData/DeliveryMonth" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Delivery Month"/>
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.SalesData/ToProduct" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.SalesData/ToProduct_Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.Hidden" Bool="true"/>
       </Annotations>
       <Annotations Target="northwind.EntityContainer/StockAvailability" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Capabilities.DeleteRestrictions">

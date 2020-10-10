@@ -1,5 +1,6 @@
 using {
     md,
+    td,
     view
 } from '../db/schema';
 
@@ -25,6 +26,7 @@ service northwind {
             ToCategory,
             ToCategory.Name as Category,
             ToDimensionUnit,
+            ToSalesData,
             ToStockAvailability,
             StockAvailability,
             ToSupplier
@@ -38,6 +40,18 @@ service northwind {
             Email,
             Phone,
             Fax,
+            ToProduct
+        };
+
+    @readonly
+    entity SalesData         as
+        select from td.SalesData {
+            Id,
+            DeliveryDate,
+            Revenue,
+            ToCurrency.Id               as CurrencyKey,
+            ToDeliveryMonth.Id          as DeliveryMonthId,
+            ToDeliveryMonth.Description as DeliveryMonth,
             ToProduct
         };
 

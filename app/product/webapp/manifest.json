@@ -130,7 +130,18 @@
                     "ObjectPage|Products": {
                         "entitySet": "Products",
                         "component": {
-                            "name": "sap.suite.ui.generic.template.ObjectPage"
+                            "name": "sap.suite.ui.generic.template.ObjectPage",
+                            "settings": {
+                                "sections": {
+                                    "ToSalesData::com.sap.vocabularies.UI.v1.LineItem": {
+                                        "navigationProperty": "ToSalesData",
+                                        "entitySet": "SalesData",
+                                        "tableSettings": {
+                                            "type": "GridTable"
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }

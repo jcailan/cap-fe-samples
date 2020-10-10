@@ -62,11 +62,18 @@ annotate northwind.Products with @(
             Target : '@UI.DataPoint#Availability'
         }
         ],
-        Facets                         : [{
+        Facets                         : [
+        {
             $Type  : 'UI.ReferenceFacet',
             Target : '@UI.FieldGroup#TechnicalData',
             Label  : '{i18n>TechnicalData}'
-        }],
+        },
+        {
+            $Type  : 'UI.ReferenceFacet',
+            Target : 'ToSalesData/@UI.LineItem',
+            Label  : '{i18n>SalesData}'
+        }
+        ],
         DataPoint #AverageRatingValue  : {
             Value         : Rating,
             Title         : '{i18n>Rating}',
@@ -220,6 +227,45 @@ annotate northwind.Suppliers with @(Communication : {Contact : {
     }
     ]
 }});
+
+/**
+ * Annotations for SalesData Entity
+ */
+annotate northwind.SalesData with @(UI : {
+    PresentationVariant : {
+        SortOrder      : [{Property : DeliveryMonthId}],
+        Visualizations : ['@UI.LineItem']
+    },
+    HeaderInfo          : {
+        TypeName       : '{i18n>SalesOrder}',
+        TypeNamePlural : '{i18n>SalesOrders}'
+    },
+    LineItem            : [
+    {Value : DeliveryMonthId},
+    {Value : Revenue},
+    {Value : DeliveryDate}
+    ]
+}) {
+    Id              @(UI : {Hidden : true});
+    DeliveryMonthId @(
+        title  : '{i18n>DeliveryMonthId}',
+        Common : {Text : {
+            $value                 : DeliveryMonth,
+            ![@UI.TextArrangement] : #TextOnly
+        }}
+    );
+    DeliveryMonth   @(
+        title : '{i18n>DeliveryMonth}',
+        UI    : {Hidden : true}
+    );
+    Revenue         @(
+        title    : '{i18n>Revenue}',
+        Measures : {Unit : CurrencyKey}
+    );
+    DeliveryDate    @(title : '{i18n>DeliveryDate}');
+    CurrencyKey     @(UI : {Hidden : true});
+    ToProduct       @(UI : {Hidden : true});
+};
 
 /**
  * Annotations for StockAvailability Entity

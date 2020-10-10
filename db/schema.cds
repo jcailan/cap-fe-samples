@@ -19,6 +19,8 @@ context md {
         ToUnitOfMeasure  : Association to UnitOfMeasures;
         ToCurrency       : Association to Currencies;
         ToDimensionUnit  : Association to DimensionUnits;
+        ToSalesData      : Association to many td.SalesData
+                               on ToSalesData.ToProduct = $self;
         ToCategory       : Association to Categories;
         ToSupplier       : Association to Suppliers;
     }
@@ -62,6 +64,22 @@ context md {
     entity DimensionUnits {
         key Id          : String(2);
             Description : localized String;
+    }
+
+    entity Months {
+        key Id               : String(2);
+            Description      : localized String;
+            ShortDescription : localized String(3);
+    }
+}
+
+context td {
+    entity SalesData : cuid {
+        DeliveryDate    : DateTime;
+        Revenue         : Decimal(16, 2);
+        ToProduct       : Association to md.Products;
+        ToCurrency      : Association to md.Currencies;
+        ToDeliveryMonth : Association to md.Months;
     }
 }
 
