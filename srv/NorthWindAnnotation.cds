@@ -13,7 +13,10 @@ annotate northwind.Products with @(
         ],
         HeaderInfo                    : {
             TypeName       : '{i18n>Product}',
-            TypeNamePlural : '{i18n>Products}'
+            TypeNamePlural : '{i18n>Products}',
+            ImageUrl       : ImageUrl,
+            Title          : {Value : Name},
+            Description    : {Value : Description}
         },
         LineItem                      : {$value : [
         {Value : ImageUrl},

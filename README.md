@@ -19,8 +19,8 @@ This branch is used to breakdown the List Report App into smaller topics that is
 | 9.  | [Add Visualization for Rating property][commit-9] | ✔️ |   |
 | 10. | [Add Stock Availability with Status Indicator][commit-10] | ✔️ | ✔️ |
 | 11. | [Add Selection Field with Fixed Values][commit-11] | ✔️ |   |
-| 12. | [Add Quick View using Supplier entity][commits] | ✔️ | ✔️ |
-| 13. | Object Page: Add Header Information |   |   |
+| 12. | [Add Quick View using Supplier entity][commit-12] | ✔️ | ✔️ |
+| 13. | [Object Page: Add Basic Header Information][commits] | ✔️ |   |
 | 14. | Object Page: Add Technical Data section |   |   |
 | 15. | Object Page: Add Sales Data section |   |   |
 | 16. | Object Page: Add Monthly Revenue section |   |   |
@@ -43,3 +43,4 @@ This branch is used to breakdown the List Report App into smaller topics that is
 [commit-9]: ../../commit/7e2de2a040e5c9b811aa4b16ec705f20567cd038
 [commit-10]: ../../commit/0d9b70d0b430d6bf32f952d4b546330b151d9819
 [commit-11]: ../../commit/68fb7d7a362c851013a1bd2e29bb20e2b73bb419
+[commit-12]: ../../commit/71bd15ee2b3558ecbc727aae2696fb0936f26263
