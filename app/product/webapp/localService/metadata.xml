@@ -93,18 +93,18 @@
         <Property Name="ToDimensionUnit_Id" Type="Edm.String" MaxLength="2"/>
         <Property Name="ToSupplier_Id" Type="Edm.Guid"/>
       </EntityType>
-      <EntityType Name="SalesData">
+      <EntityType Name="SalesData" sap:semantics="aggregate">
         <Key>
           <PropertyRef Name="Id"/>
         </Key>
-        <Property Name="Id" Type="Edm.Guid" Nullable="false"/>
-        <Property Name="DeliveryDate" Type="Edm.DateTimeOffset"/>
-        <Property Name="Revenue" Type="Edm.Decimal" Scale="2" Precision="16"/>
-        <Property Name="CurrencyKey" Type="Edm.String" MaxLength="3"/>
-        <Property Name="DeliveryMonthId" Type="Edm.String" MaxLength="2"/>
-        <Property Name="DeliveryMonth" Type="Edm.String"/>
-        <NavigationProperty Name="ToProduct" Relationship="northwind.SalesData_ToProduct" FromRole="SalesData" ToRole="Products"/>
-        <Property Name="ToProduct_Id" Type="Edm.Guid"/>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:aggregation-role="dimension"/>
+        <Property Name="DeliveryDate" Type="Edm.DateTimeOffset" sap:aggregation-role="dimension"/>
+        <Property Name="Revenue" Type="Edm.Decimal" Scale="2" Precision="16" sap:aggregation-role="measure"/>
+        <Property Name="CurrencyKey" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension"/>
+        <Property Name="DeliveryMonthId" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension"/>
+        <Property Name="DeliveryMonth" Type="Edm.String" sap:aggregation-role="dimension"/>
+        <NavigationProperty Name="ToProduct" Relationship="northwind.SalesData_ToProduct" FromRole="SalesData" ToRole="Products" sap:aggregation-role="dimension"/>
+        <Property Name="ToProduct_Id" Type="Edm.Guid" sap:aggregation-role="dimension"/>
       </EntityType>
       <EntityType Name="StockAvailability">
         <Key>
@@ -278,7 +278,11 @@
           <Collection>
             <Record Type="UI.ReferenceFacet">
               <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#TechnicalData"/>
-              <PropertyValue Property="Label" String="Technical Data "/>
+              <PropertyValue Property="Label" String="Technical Data"/>
+            </Record>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="ToSalesData/@UI.Chart"/>
+              <PropertyValue Property="Label" String="Monthly Revenue"/>
             </Record>
             <Record Type="UI.ReferenceFacet">
               <PropertyValue Property="Target" AnnotationPath="ToSalesData/@UI.LineItem"/>
@@ -528,6 +532,38 @@
         </Annotation>
       </Annotations>
       <Annotations Target="northwind.SalesData" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.Chart">
+          <Record Type="UI.ChartDefinitionType">
+            <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Column"/>
+            <PropertyValue Property="DimensionAttributes">
+              <Collection>
+                <Record Type="UI.ChartDimensionAttributeType">
+                  <PropertyValue Property="Dimension" PropertyPath="DeliveryMonthId"/>
+                  <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="Dimensions">
+              <Collection>
+                <PropertyPath>DeliveryMonthId</PropertyPath>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="MeasureAttributes">
+              <Collection>
+                <Record Type="UI.ChartMeasureAttributeType">
+                  <PropertyValue Property="Measure" PropertyPath="Revenue"/>
+                  <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="Measures">
+              <Collection>
+                <PropertyPath>Revenue</PropertyPath>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="Title" String="Revenue History"/>
+          </Record>
+        </Annotation>
         <Annotation Term="UI.HeaderInfo">
           <Record Type="UI.HeaderInfoType">
             <PropertyValue Property="TypeName" String="Sales Order"/>
