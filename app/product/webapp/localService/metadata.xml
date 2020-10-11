@@ -22,6 +22,7 @@
     <Schema Namespace="northwind" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
       <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
         <EntitySet Name="Products" EntityType="northwind.Products"/>
+        <EntitySet Name="Reviews" EntityType="northwind.Reviews"/>
         <EntitySet Name="SalesData" EntityType="northwind.SalesData"/>
         <EntitySet Name="StockAvailability" EntityType="northwind.StockAvailability"/>
         <EntitySet Name="Suppliers" EntityType="northwind.Suppliers"/>
@@ -53,6 +54,10 @@
           <End Role="Products" EntitySet="Products"/>
           <End Role="Suppliers" EntitySet="Suppliers"/>
         </AssociationSet>
+        <AssociationSet Name="Reviews_ToProduct" Association="northwind.Reviews_ToProduct">
+          <End Role="Reviews" EntitySet="Reviews"/>
+          <End Role="Products" EntitySet="Products"/>
+        </AssociationSet>
         <AssociationSet Name="SalesData_ToProduct" Association="northwind.SalesData_ToProduct">
           <End Role="SalesData" EntitySet="SalesData"/>
           <End Role="Products" EntitySet="Products"/>
@@ -72,7 +77,7 @@
         <Property Name="ImageUrl" Type="Edm.String"/>
         <Property Name="ReleaseDate" Type="Edm.DateTimeOffset"/>
         <Property Name="DiscontinuedDate" Type="Edm.DateTimeOffset"/>
-        <Property Name="Rating" Type="Edm.Int32"/>
+        <Property Name="Rating" Type="Edm.Decimal" Scale="2" Precision="16"/>
         <Property Name="Price" Type="Edm.Decimal" Scale="2" Precision="16"/>
         <Property Name="Height" Type="Edm.Decimal" Scale="2" Precision="16"/>
         <Property Name="Width" Type="Edm.Decimal" Scale="2" Precision="16"/>
@@ -87,11 +92,24 @@
         <NavigationProperty Name="ToStockAvailability" Relationship="northwind.Products_ToStockAvailability" FromRole="Products" ToRole="StockAvailability"/>
         <Property Name="StockAvailability" Type="Edm.Int32"/>
         <NavigationProperty Name="ToSupplier" Relationship="northwind.Products_ToSupplier" FromRole="Products" ToRole="Suppliers"/>
+        <NavigationProperty Name="ToReviews" Relationship="northwind.Reviews_ToProduct" FromRole="Products" ToRole="Reviews"/>
         <Property Name="ToUnitOfMeasure_Id" Type="Edm.String" MaxLength="2"/>
         <Property Name="ToCurrency_Id" Type="Edm.String" MaxLength="3"/>
         <Property Name="ToCategory_Id" Type="Edm.String" MaxLength="1"/>
         <Property Name="ToDimensionUnit_Id" Type="Edm.String" MaxLength="2"/>
         <Property Name="ToSupplier_Id" Type="Edm.Guid"/>
+      </EntityType>
+      <EntityType Name="Reviews">
+        <Key>
+          <PropertyRef Name="Id"/>
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="Name" Type="Edm.String"/>
+        <Property Name="Rating" Type="Edm.Int32"/>
+        <Property Name="Comment" Type="Edm.String"/>
+        <Property Name="CreatedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <NavigationProperty Name="ToProduct" Relationship="northwind.Reviews_ToProduct" FromRole="Reviews" ToRole="Products"/>
+        <Property Name="ToProduct_Id" Type="Edm.Guid"/>
       </EntityType>
       <EntityType Name="SalesData" sap:semantics="aggregate">
         <Key>
@@ -225,6 +243,18 @@
           </Dependent>
         </ReferentialConstraint>
       </Association>
+      <Association Name="Reviews_ToProduct">
+        <End Role="Reviews" Type="northwind.Reviews" Multiplicity="*"/>
+        <End Role="Products" Type="northwind.Products" Multiplicity="0..1"/>
+        <ReferentialConstraint>
+          <Principal Role="Products">
+            <PropertyRef Name="Id"/>
+          </Principal>
+          <Dependent Role="Reviews">
+            <PropertyRef Name="ToProduct_Id"/>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
       <Association Name="SalesData_ToProduct">
         <End Role="SalesData" Type="northwind.SalesData" Multiplicity="*"/>
         <End Role="Products" Type="northwind.Products" Multiplicity="0..1"/>
@@ -279,6 +309,10 @@
             <Record Type="UI.ReferenceFacet">
               <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#TechnicalData"/>
               <PropertyValue Property="Label" String="Technical Data"/>
+            </Record>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="ToReviews/@UI.LineItem"/>
+              <PropertyValue Property="Label" String="Product Reviews"/>
             </Record>
             <Record Type="UI.ReferenceFacet">
               <PropertyValue Property="Target" AnnotationPath="ToSalesData/@UI.Chart"/>
@@ -441,6 +475,7 @@
       </Annotations>
       <Annotations Target="northwind.Products/Rating" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Rating"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
       </Annotations>
       <Annotations Target="northwind.Products/Price" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.Label" String="Price"/>
@@ -530,6 +565,80 @@
             <PropertyValue Property="SearchSupported" Bool="true"/>
           </Record>
         </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.Reviews" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.DataPoint" Qualifier="Rating">
+          <Record Type="UI.DataPointType">
+            <PropertyValue Property="TargetValue" Int="5"/>
+            <PropertyValue Property="Title" String="Rating"/>
+            <PropertyValue Property="Value" Path="Rating"/>
+            <PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Rating"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.HeaderInfo">
+          <Record Type="UI.HeaderInfoType">
+            <PropertyValue Property="TypeName" String="Review"/>
+            <PropertyValue Property="TypeNamePlural" String="Reviews"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="Name"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="CreatedAt"/>
+            </Record>
+            <Record Type="UI.DataFieldForAnnotation">
+              <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#Rating"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="Comment"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.EntityContainer/Reviews" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="northwind.Reviews/Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.Reviews/Name" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Name"/>
+      </Annotations>
+      <Annotations Target="northwind.Reviews/Rating" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Rating"/>
+      </Annotations>
+      <Annotations Target="northwind.Reviews/Comment" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Comment"/>
+        <Annotation Term="UI.MultiLineText" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.Reviews/CreatedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Created On"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.Reviews/ToProduct" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="northwind.Reviews/ToProduct_Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.Hidden" Bool="true"/>
       </Annotations>
       <Annotations Target="northwind.SalesData" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="UI.Chart">
