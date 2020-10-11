@@ -219,11 +219,13 @@ annotate northwind.Products with @(
  * Annotations for Reviews Entity
  */
 annotate northwind.Reviews with @(UI : {
-    HeaderInfo        : {
+    HeaderInfo          : {
         TypeName       : '{i18n>Review}',
-        TypeNamePlural : '{i18n>Reviews}'
+        TypeNamePlural : '{i18n>Reviews}',
+        Title          : {Value : Name},
+        Description    : {Value : CreatedAt}
     },
-    LineItem          : [
+    LineItem            : [
     {Value : Name},
     {Value : CreatedAt},
     {
@@ -232,12 +234,22 @@ annotate northwind.Reviews with @(UI : {
     },
     {Value : Comment}
     ],
-    DataPoint #Rating : {
+    HeaderFacets        : [{
+        $Type  : 'UI.ReferenceFacet',
+        Target : '@UI.DataPoint#Rating'
+    }],
+    Facets              : [{
+        $Type  : 'UI.ReferenceFacet',
+        Target : '@UI.FieldGroup#Comment',
+        Label  : '{i18n>Review}'
+    }],
+    DataPoint #Rating   : {
         Value         : Rating,
         Title         : '{i18n>Rating}',
         TargetValue   : 5,
         Visualization : #Rating
-    }
+    },
+    FieldGroup #Comment : {Data : [{Value : Comment}]}
 }) {
     Id        @(UI : {Hidden : true});
     ToProduct @(UI : {Hidden : true});

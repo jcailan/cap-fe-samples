@@ -142,6 +142,14 @@
                                     }
                                 }
                             }
+                        },
+                        "pages": {
+                            "ObjectPage|Reviews": {
+                                "entitySet": "Reviews",
+                                "component": {
+                                    "name": "sap.suite.ui.generic.template.ObjectPage"
+                                }
+                            }
                         }
                     }
                 }
