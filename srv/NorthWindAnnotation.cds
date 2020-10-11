@@ -70,6 +70,11 @@ annotate northwind.Products with @(
         },
         {
             $Type  : 'UI.ReferenceFacet',
+            Target : 'ToReviews/@UI.LineItem',
+            Label  : '{i18n>ProductReviews}'
+        },
+        {
+            $Type  : 'UI.ReferenceFacet',
             Target : 'ToSalesData/@UI.Chart',
             Label  : '{i18n>MonthlyRevenue}'
         },
@@ -207,6 +212,41 @@ annotate northwind.Products with @(
                 }]
             }
         }
+    );
+};
+
+/**
+ * Annotations for Reviews Entity
+ */
+annotate northwind.Reviews with @(UI : {
+    HeaderInfo        : {
+        TypeName       : '{i18n>Review}',
+        TypeNamePlural : '{i18n>Reviews}'
+    },
+    LineItem          : [
+    {Value : Name},
+    {Value : CreatedAt},
+    {
+        $Type  : 'UI.DataFieldForAnnotation',
+        Target : '@UI.DataPoint#Rating'
+    },
+    {Value : Comment}
+    ],
+    DataPoint #Rating : {
+        Value         : Rating,
+        Title         : '{i18n>Rating}',
+        TargetValue   : 5,
+        Visualization : #Rating
+    }
+}) {
+    Id        @(UI : {Hidden : true});
+    ToProduct @(UI : {Hidden : true});
+    Name      @(title : '{i18n>Name}');
+    Rating    @(title : '{i18n>Rating}');
+    CreatedAt @(title : '{i18n>CreatedOn}');
+    Comment   @(
+        title : '{i18n>Comment}',
+        UI    : {MultiLineText : true}
     );
 };
 

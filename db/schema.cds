@@ -10,7 +10,6 @@ context md {
         ImageUrl         : String;
         ReleaseDate      : DateTime;
         DiscontinuedDate : DateTime;
-        Rating           : Integer;
         Price            : Decimal(16, 2);
         Height           : Decimal(16, 2);
         Width            : Decimal(16, 2);
@@ -23,6 +22,8 @@ context md {
                                on ToSalesData.ToProduct = $self;
         ToCategory       : Association to Categories;
         ToSupplier       : Association to Suppliers;
+        ToReviews        : Association to many td.ProductReviews
+                               on ToReviews.ToProduct = $self;
     }
 
     entity Suppliers : cuid, managed {
@@ -74,6 +75,13 @@ context md {
 }
 
 context td {
+    entity ProductReviews : cuid, managed {
+        Name      : String;
+        Rating    : Integer;
+        Comment   : String;
+        ToProduct : Association to md.Products;
+    }
+
     entity SalesData : cuid {
         DeliveryDate    : DateTime;
         Revenue         : Decimal(16, 2);
@@ -84,14 +92,27 @@ context td {
 }
 
 context view {
-    entity Products as
+    entity AverageRating as
+        select from td.ProductReviews {
+            ToProduct.Id as ProductId,
+            avg(
+                Rating
+            )            as AverageRating : Decimal(16, 2)
+        }
+        group by
+            ToProduct.Id;
+
+    entity Products      as
         select from md.Products
         mixin {
             ToStockAvailability : Association to md.StockAvailability
-                                      on ToStockAvailability.Id = $projection.StockAvailability
+                                      on ToStockAvailability.Id = $projection.StockAvailability;
+            ToAverageRating     : Association to AverageRating
+                                      on ToAverageRating.ProductId = Id;
         }
         into {
             *,
+            ToAverageRating.AverageRating as Rating,
             case
                 when
                     Quantity >= 8
@@ -103,7 +124,7 @@ context view {
                     2
                 else
                     1
-            end as StockAvailability : Integer,
+            end                           as StockAvailability : Integer,
             ToStockAvailability
-        }
+        };
 }

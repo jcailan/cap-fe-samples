@@ -29,7 +29,8 @@ service northwind {
             ToSalesData,
             ToStockAvailability,
             StockAvailability,
-            ToSupplier
+            ToSupplier,
+            ToReviews
         };
 
     @readonly
@@ -40,6 +41,17 @@ service northwind {
             Email,
             Phone,
             Fax,
+            ToProduct
+        };
+
+    @readonly
+    entity Reviews           as
+        select from td.ProductReviews {
+            Id,
+            Name,
+            Rating,
+            Comment,
+            CreatedAt,
             ToProduct
         };
 

@@ -6,14 +6,23 @@
     "license": "MIT",
     "private": false,
     "dependencies": {
-        "@sap/cds": "^4",
+        "@sap/cds": "^3",
         "@sap/cds-odata-v2-adapter-proxy": "^1.4.46",
-        "express": "^4"
+        "express": "^4",
+        "@sap/hana-client": "~2.5.54"
     },
     "devDependencies": {
-        "sqlite3": "^5"
+        "@sap/hana-client": "^2.6.54",
+        "sqlite3": "^5.0.0"
     },
     "scripts": {
         "start": "npx cds run"
+    },
+    "cds": {
+        "requires": {
+            "db": {
+                "kind": "hana"
+            }
+        }
     }
 }
