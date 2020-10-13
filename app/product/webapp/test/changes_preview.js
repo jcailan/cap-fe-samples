@@ -180,7 +180,7 @@ if (parseInt(version[0]) <= 1 && parseInt(version[1]) < 78) {
                                             oResult.changes = aProcessedChanges;
                                             var oLrepChange = {
                                                 changes: oResult,
-                                                componentClassName: 'com.northwind.product'
+                                                componentClassName: 'com.demo.product'
                                             };
                                             resolve(oLrepChange);
                                         });
@@ -191,7 +191,7 @@ if (parseInt(version[0]) <= 1 && parseInt(version[1]) < 78) {
                                         oResult.changes = aProcessedChanges;
                                         var oLrepChange = {
                                             changes: oResult,
-                                            componentClassName: 'com.northwind.product'
+                                            componentClassName: 'com.demo.product'
                                         };
                                         resolve(oLrepChange);
                                     }

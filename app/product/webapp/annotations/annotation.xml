@@ -12,7 +12,7 @@
         <edmx:Include Namespace="northwind"/>
     </edmx:Reference>
     <edmx:DataServices>
-        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="com.northwind">
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="com.demo">
         </Schema>
     </edmx:DataServices>
 </edmx:Edmx>

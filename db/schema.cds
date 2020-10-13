@@ -16,11 +16,11 @@ context md {
         Depth            : Decimal(16, 2);
         Quantity         : Decimal(16, 2);
         ToUnitOfMeasure  : Association to UnitOfMeasures;
-        ToCategory       : Association to Categories;
         ToCurrency       : Association to Currencies;
         ToDimensionUnit  : Association to DimensionUnits;
         ToSalesData      : Association to many td.SalesData
                                on ToSalesData.ToProduct = $self;
+        ToCategory       : Association to Categories;
         ToSupplier       : Association to Suppliers;
         ToReviews        : Association to many td.ProductReviews
                                on ToReviews.ToProduct = $self;
@@ -92,17 +92,27 @@ context td {
 }
 
 context view {
-    entity Products as
+    entity AverageRating as
+        select from td.ProductReviews {
+            ToProduct.Id as ProductId,
+            avg(
+                Rating
+            )            as AverageRating : Decimal(16, 2)
+        }
+        group by
+            ToProduct.Id;
+
+    entity Products      as
         select from md.Products
         mixin {
             ToStockAvailability : Association to md.StockAvailability
-                                      on ToStockAvailability.Id = $projection.StockAvailability
+                                      on ToStockAvailability.Id = $projection.StockAvailability;
+            ToAverageRating     : Association to AverageRating
+                                      on ToAverageRating.ProductId = Id;
         }
         into {
             *,
-            avg(
-                ToReviews.Rating
-            )   as Rating            : Decimal(16, 2),
+            ToAverageRating.AverageRating as Rating,
             case
                 when
                     Quantity >= 8
@@ -114,9 +124,7 @@ context view {
                     2
                 else
                     1
-            end as StockAvailability : Integer,
+            end                           as StockAvailability : Integer,
             ToStockAvailability
-        }
-        group by
-            Id;
+        };
 }

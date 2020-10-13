@@ -1,13 +1,13 @@
-/*
-* Aspect for entities with canonical universal IDs.
-*/
+/**
+ * Aspect for entities with canonical universal IDs.
+ */
 abstract entity cuid {
     key Id : UUID; //> automatically filled in
 }
 
-/*
-* Aspect to capture changes by user and name.
-*/
+/**
+ * Aspect to capture changes by user and name.
+ */
 aspect managed {
     CreatedAt  : Timestamp @cds.on.insert : $now;
     CreatedBy  : User      @cds.on.insert : $user;

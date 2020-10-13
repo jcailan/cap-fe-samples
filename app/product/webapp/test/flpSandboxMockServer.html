@@ -45,8 +45,8 @@
 			applications: {
 				"masterDetail-display": {
 					title: "Manage Products",
-					description: "A Fiori elements application.",
-					additionalInformation: "SAPUI5.Component=com.northwind.product",
+					description: "Fiori Element: List Report - Demo Application",
+					additionalInformation: "SAPUI5.Component=com.demo.product",
 					applicationType: "URL",
 					url: "../"
 				}
@@ -62,15 +62,15 @@
 			data-sap-ui-libs="sap.m, sap.ushell, sap.ui.core, sap.f, sap.ui.comp, sap.ui.table, sap.suite.ui.generic.template, sap.ui.generic.app"
 			data-sap-ui-theme="sap_fiori_3"
 			data-sap-ui-compatVersion="edge"
-			data-sap-ui-flexibilityServices='[{"applyConnector":"com/northwind/product/test/changes_loader", "custom":true}]'
+			data-sap-ui-flexibilityServices='[{"applyConnector":"com/demo/product/test/changes_loader", "custom":true}]'
 			data-sap-ui-language="en"
-			data-sap-ui-resourceroots='{"com.northwind.product": "../"}'
+			data-sap-ui-resourceroots='{"com.demo.product": "../"}'
 			data-sap-ui-frameOptions="allow"> // NON-SECURE setting for testing environment
 	</script>
 
 	<script type="text/javascript">
 		sap.ui.getCore().attachInit(function() {
-			sap.ui.require(["com/northwind/product/localService/mockserver"],
+			sap.ui.require(["com/demo/product/localService/mockserver"],
 				function(server) {
 					// set up test service for local testing
 					server.init();

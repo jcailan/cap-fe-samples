@@ -23,7 +23,7 @@
       <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
         <EntitySet Name="Products" EntityType="northwind.Products"/>
         <EntitySet Name="Reviews" EntityType="northwind.Reviews"/>
-        <EntitySet Name="SalesData" EntityType="northwind.SalesData" sap:semantics="aggregate"/>
+        <EntitySet Name="SalesData" EntityType="northwind.SalesData"/>
         <EntitySet Name="StockAvailability" EntityType="northwind.StockAvailability"/>
         <EntitySet Name="Suppliers" EntityType="northwind.Suppliers"/>
         <EntitySet Name="VH_Categories" EntityType="northwind.VH_Categories"/>
@@ -89,8 +89,8 @@
         <Property Name="Category" Type="Edm.String"/>
         <NavigationProperty Name="ToDimensionUnit" Relationship="northwind.Products_ToDimensionUnit" FromRole="Products" ToRole="VH_DimensionUnits"/>
         <NavigationProperty Name="ToSalesData" Relationship="northwind.SalesData_ToProduct" FromRole="Products" ToRole="SalesData"/>
-        <Property Name="StockAvailability" Type="Edm.Int32"/>
         <NavigationProperty Name="ToStockAvailability" Relationship="northwind.Products_ToStockAvailability" FromRole="Products" ToRole="StockAvailability"/>
+        <Property Name="StockAvailability" Type="Edm.Int32"/>
         <NavigationProperty Name="ToSupplier" Relationship="northwind.Products_ToSupplier" FromRole="Products" ToRole="Suppliers"/>
         <NavigationProperty Name="ToReviews" Relationship="northwind.Reviews_ToProduct" FromRole="Products" ToRole="Reviews"/>
         <Property Name="ToUnitOfMeasure_Id" Type="Edm.String" MaxLength="2"/>
@@ -330,16 +330,13 @@
               <Collection>
                 <Record Type="UI.DataField">
                   <PropertyValue Property="Value" Path="ToCategory_Id"/>
-                  <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
                 </Record>
                 <Record Type="UI.DataField">
                   <PropertyValue Property="Value" Path="ReleaseDate"/>
-                  <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Low"/>
                 </Record>
                 <Record Type="UI.DataFieldForAnnotation">
                   <PropertyValue Property="Label" String="Supplier"/>
                   <PropertyValue Property="Target" AnnotationPath="ToSupplier/@Communication.Contact"/>
-                  <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
                 </Record>
               </Collection>
             </PropertyValue>
@@ -351,15 +348,12 @@
               <Collection>
                 <Record Type="UI.DataField">
                   <PropertyValue Property="Value" Path="Height"/>
-                  <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
                 </Record>
                 <Record Type="UI.DataField">
                   <PropertyValue Property="Value" Path="Width"/>
-                  <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
                 </Record>
                 <Record Type="UI.DataField">
                   <PropertyValue Property="Value" Path="Depth"/>
-                  <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
                 </Record>
               </Collection>
             </PropertyValue>
@@ -406,41 +400,32 @@
           <Collection>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="ImageUrl"/>
-              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="Name"/>
-              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="Description"/>
-              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="ToCategory_Id"/>
-              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
             </Record>
             <Record Type="UI.DataFieldForAnnotation">
               <PropertyValue Property="Label" String="Supplier"/>
               <PropertyValue Property="Target" AnnotationPath="ToSupplier/@Communication.Contact"/>
-              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="ReleaseDate"/>
-              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="ToStockAvailability/Id"/>
               <PropertyValue Property="Criticality" Path="ToStockAvailability/Id"/>
-              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
             </Record>
             <Record Type="UI.DataFieldForAnnotation">
               <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#AverageRatingValue"/>
-              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="Price"/>
-              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
             </Record>
           </Collection>
         </Annotation>
@@ -598,7 +583,8 @@
                   <PropertyValue Property="LocalDataProperty" PropertyPath="ToCategory_Id"/>
                   <PropertyValue Property="ValueListProperty" String="Code"/>
                 </Record>
-                <Record Type="Common.ValueListParameterDisplayOnly">
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="Category"/>
                   <PropertyValue Property="ValueListProperty" String="Text"/>
                 </Record>
               </Collection>
@@ -683,19 +669,15 @@
           <Collection>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="Name"/>
-              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="CreatedAt"/>
-              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
             </Record>
             <Record Type="UI.DataFieldForAnnotation">
               <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#Rating"/>
-              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="Comment"/>
-              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
             </Record>
           </Collection>
         </Annotation>
@@ -785,15 +767,12 @@
           <Collection>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="DeliveryMonthId"/>
-              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="Revenue"/>
-              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="DeliveryDate"/>
-              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
             </Record>
           </Collection>
         </Annotation>

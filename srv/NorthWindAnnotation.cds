@@ -19,48 +19,27 @@ annotate northwind.Products with @(
             Title          : {Value : Name},
             Description    : {Value : Description}
         },
-        LineItem                       : [
+        LineItem                       : {$value : [
+        {Value : ImageUrl},
+        {Value : Name},
+        {Value : Description},
+        {Value : ToCategory_Id},
         {
-            Value             : ImageUrl,
-            ![@UI.Importance] : #High
+            $Type  : 'UI.DataFieldForAnnotation',
+            Label  : '{i18n>Supplier}',
+            Target : 'ToSupplier/@Communication.Contact'
+        },
+        {Value : ReleaseDate},
+        {
+            Value       : ToStockAvailability.Id,
+            Criticality : ToStockAvailability.Id
         },
         {
-            Value             : Name,
-            ![@UI.Importance] : #High
+            $Type  : 'UI.DataFieldForAnnotation',
+            Target : '@UI.DataPoint#AverageRatingValue'
         },
-        {
-            Value             : Description,
-            ![@UI.Importance] : #High
-        },
-        {
-            Value             : ToCategory_Id,
-            ![@UI.Importance] : #High
-        },
-        {
-            $Type             : 'UI.DataFieldForAnnotation',
-            Label             : '{i18n>Supplier}',
-            Target            : 'ToSupplier/@Communication.Contact',
-            ![@UI.Importance] : #High
-        },
-        {
-            Value             : ReleaseDate,
-            ![@UI.Importance] : #High
-        },
-        {
-            Value             : ToStockAvailability.Id,
-            Criticality       : ToStockAvailability.Id,
-            ![@UI.Importance] : #High
-        },
-        {
-            $Type             : 'UI.DataFieldForAnnotation',
-            Target            : '@UI.DataPoint#AverageRatingValue',
-            ![@UI.Importance] : #High
-        },
-        {
-            Value             : Price,
-            ![@UI.Importance] : #High
-        }
-        ],
+        {Value : Price}
+        ]},
         HeaderFacets                   : [
         {
             $Type  : 'UI.ReferenceFacet',
@@ -106,6 +85,16 @@ annotate northwind.Products with @(
             Label  : '{i18n>SalesData}'
         }
         ],
+        DataPoint #AverageRatingValue  : {
+            Value         : Rating,
+            Title         : '{i18n>Rating}',
+            TargetValue   : 5,
+            Visualization : #Rating
+        },
+        DataPoint #Price               : {
+            Value : Price,
+            Title : '{i18n>Price}'
+        },
         DataPoint #StockAvailability   : {
             Title       : '{i18n>StockAvailability}',
             Value       : ToStockAvailability.Id,
@@ -119,45 +108,19 @@ annotate northwind.Products with @(
             Criticality   : StockAvailability,
             Visualization : #Progress
         },
-        DataPoint #AverageRatingValue  : {
-            Value         : Rating,
-            Title         : '{i18n>Rating}',
-            TargetValue   : 5,
-            Visualization : #Rating
-        },
-        DataPoint #Price               : {
-            Value : Price,
-            Title : '{i18n>Price}'
-        },
         FieldGroup #GeneralInformation : {Data : [
+        {Value : ToCategory_Id},
+        {Value : ReleaseDate},
         {
-            Value             : ToCategory_Id,
-            ![@UI.Importance] : #High
-        },
-        {
-            Value             : ReleaseDate,
-            ![@UI.Importance] : #Low
-        },
-        {
-            $Type             : 'UI.DataFieldForAnnotation',
-            Label             : '{i18n>Supplier}',
-            Target            : 'ToSupplier/@Communication.Contact',
-            ![@UI.Importance] : #High
+            $Type  : 'UI.DataFieldForAnnotation',
+            Label  : '{i18n>Supplier}',
+            Target : 'ToSupplier/@Communication.Contact'
         }
         ]},
         FieldGroup #TechnicalData      : {Data : [
-        {
-            Value             : Height,
-            ![@UI.Importance] : #Medium
-        },
-        {
-            Value             : Width,
-            ![@UI.Importance] : #Medium
-        },
-        {
-            Value             : Depth,
-            ![@UI.Importance] : #Medium
-        }
+        {Value : Height},
+        {Value : Width},
+        {Value : Depth}
         ]}
     }
 ) {
@@ -166,17 +129,9 @@ annotate northwind.Products with @(
         UI    : {IsImageURL : true}
     );
     Id                @title : '{i18n>Id}';
-    Name              @(
-        mandatory,
-        title : '{i18n>Name}'
-    );
-    Description       @(
-        mandatory,
-        title : '{i18n>Description}'
-    );
-    Category          @readonly;
+    Name              @title : '{i18n>Name}';
+    Description       @title : '{i18n>Description}';
     ToCategory        @(
-        mandatory,
         title  : '{i18n>Category}',
         Common : {
             Text      : {
@@ -193,7 +148,8 @@ annotate northwind.Products with @(
                     ValueListProperty : 'Code'
                 },
                 {
-                    $Type             : 'Common.ValueListParameterDisplayOnly',
+                    $Type             : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : Category,
                     ValueListProperty : 'Text'
                 }
                 ]
@@ -237,12 +193,10 @@ annotate northwind.Products with @(
         }
     );
     Price             @(
-        mandatory,
         title    : '{i18n>Price}',
         Measures : {Unit : ToCurrency_Id}
     );
     ToCurrency        @(
-        mandatory,
         title  : '{i18n>CurrencyKey}',
         Common : {
             ValueListWithFixedValues : false,
@@ -264,16 +218,10 @@ annotate northwind.Products with @(
         }
     );
     Quantity          @(
-        mandatory,
-        assert.range : [
-        0.00,
-        20.00
-        ],
-        title        : '{i18n>Quantity}',
-        Measures     : {Unit : ToUnitOfMeasure_Id}
+        title         : '{i18n>Quantity}',
+        Measures.Unit : ToUnitOfMeasure_Id
     );
     ToUnitOfMeasure   @(
-        mandatory,
         title  : '{i18n>UnitOfMeasure}',
         Common : {
             ValueListWithFixedValues : false,
@@ -311,29 +259,6 @@ annotate northwind.Products with @(
 };
 
 /**
- * Annotations for Suppliers Entity
- */
-annotate northwind.Suppliers with @(Communication : {Contact : {
-    fn    : Name,
-    role  : '{i18n>Supplier}',
-    photo : 'sap-icon://supplier',
-    email : [{
-        type    : #work,
-        address : Email
-    }],
-    tel   : [
-    {
-        type : #work,
-        uri  : Phone
-    },
-    {
-        type : #fax,
-        uri  : Fax
-    }
-    ]
-}});
-
-/**
  * Annotations for Reviews Entity
  */
 annotate northwind.Reviews with @(UI : {
@@ -344,23 +269,13 @@ annotate northwind.Reviews with @(UI : {
         Description    : {Value : CreatedAt}
     },
     LineItem            : [
+    {Value : Name},
+    {Value : CreatedAt},
     {
-        Value             : Name,
-        ![@UI.Importance] : #High
+        $Type  : 'UI.DataFieldForAnnotation',
+        Target : '@UI.DataPoint#Rating'
     },
-    {
-        Value             : CreatedAt,
-        ![@UI.Importance] : #High
-    },
-    {
-        $Type             : 'UI.DataFieldForAnnotation',
-        Target            : '@UI.DataPoint#Rating',
-        ![@UI.Importance] : #High
-    },
-    {
-        Value             : Comment,
-        ![@UI.Importance] : #High
-    }
+    {Value : Comment}
     ],
     HeaderFacets        : [{
         $Type  : 'UI.ReferenceFacet',
@@ -391,6 +306,29 @@ annotate northwind.Reviews with @(UI : {
 };
 
 /**
+ * Annotations for Suppliers Entity
+ */
+annotate northwind.Suppliers with @(Communication : {Contact : {
+    fn    : Name,
+    role  : '{i18n>Supplier}',
+    photo : 'sap-icon://supplier',
+    email : [{
+        type    : #work,
+        address : Email
+    }],
+    tel   : [
+    {
+        type : #work,
+        uri  : Phone
+    },
+    {
+        type : #fax,
+        uri  : Fax
+    }
+    ]
+}});
+
+/**
  * Annotations for SalesData Entity
  */
 annotate northwind.SalesData with @(
@@ -405,21 +343,9 @@ annotate northwind.SalesData with @(
             TypeNamePlural : '{i18n>SalesOrders}'
         },
         LineItem            : [
-        {
-            $Type             : 'UI.DataField',
-            Value             : DeliveryMonthId,
-            ![@UI.Importance] : #High
-        },
-        {
-            $Type             : 'UI.DataField',
-            Value             : Revenue,
-            ![@UI.Importance] : #High
-        },
-        {
-            $Type             : 'UI.DataField',
-            Value             : DeliveryDate,
-            ![@UI.Importance] : #High
-        }
+        {Value : DeliveryMonthId},
+        {Value : Revenue},
+        {Value : DeliveryDate}
         ],
         Chart               : {
             Title               : '{i18n>RevenueHistory}',
