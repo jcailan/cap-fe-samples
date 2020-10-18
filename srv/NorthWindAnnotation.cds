@@ -4,8 +4,9 @@ using {northwind} from './NorthWind';
  * Annotations for Products Entity
  */
 annotate northwind.Products with @(
-    Common : {Label : '{i18n>Products}'},
-    UI     : {
+    Capabilities : {DeleteRestrictions : {Deletable : false}},
+    Common       : {Label : '{i18n>Products}'},
+    UI           : {
         SelectionFields                : [
         ToCategory_Id,
         ToCurrency_Id,
@@ -170,6 +171,27 @@ annotate northwind.Products with @(
         title    : '{i18n>Depth}',
         Measures : {Unit : ToDimensionUnit_Id}
     );
+    ToDimensionUnit   @(
+        title  : '{i18n>DimensionUnit}',
+        Common : {
+            ValueListWithFixedValues : false,
+            ValueList                : {
+                SearchSupported : true,
+                CollectionPath  : 'VH_DimensionUnits',
+                Parameters      : [
+                {
+                    $Type             : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : ToDimensionUnit_Id,
+                    ValueListProperty : 'Code'
+                },
+                {
+                    $Type             : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'Text'
+                }
+                ]
+            }
+        }
+    );
     Price             @(
         title    : '{i18n>Price}',
         Measures : {Unit : ToCurrency_Id}
@@ -198,6 +220,27 @@ annotate northwind.Products with @(
     Quantity          @(
         title         : '{i18n>Quantity}',
         Measures.Unit : ToUnitOfMeasure_Id
+    );
+    ToUnitOfMeasure   @(
+        title  : '{i18n>UnitOfMeasure}',
+        Common : {
+            ValueListWithFixedValues : false,
+            ValueList                : {
+                SearchSupported : true,
+                CollectionPath  : 'VH_UnitOfMeasures',
+                Parameters      : [
+                {
+                    $Type             : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : ToUnitOfMeasure_Id,
+                    ValueListProperty : 'Code'
+                },
+                {
+                    $Type             : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'Text'
+                }
+                ]
+            }
+        }
     );
     StockAvailability @(
         title  : '{i18n>StockAvailability}',
@@ -393,6 +436,34 @@ annotate northwind.VH_Categories with {
 annotate northwind.VH_Currencies with {
     Code @(
         title : '{i18n>Currency}',
+        UI    : {HiddenFilter : true}
+    );
+    Text @(
+        title : '{i18n>Description}',
+        UI    : {HiddenFilter : true}
+    );
+};
+
+/**
+ * Annotations for VH_UnitOfMeasures Entity
+ */
+annotate northwind.VH_UnitOfMeasures with {
+    Code @(
+        title : '{i18n>Code}',
+        UI    : {HiddenFilter : true}
+    );
+    Text @(
+        title : '{i18n>Description}',
+        UI    : {HiddenFilter : true}
+    );
+};
+
+/**
+ * Annotations for VH_DimensionUnits Entity
+ */
+annotate northwind.VH_DimensionUnits with {
+    Code @(
+        title : '{i18n>Code}',
         UI    : {HiddenFilter : true}
     );
     Text @(

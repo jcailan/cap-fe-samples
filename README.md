@@ -29,8 +29,8 @@ This branch is used to breakdown the List Report App into smaller topics that is
 | 19. | [Object Page: Add Facet for Sales Data][commit-19] | ✔️ | ✔️ |
 | 20. | [Object Page: Add Facet for Monthly Revenue][commit-20] | ✔️ |   |
 | 21. | [Object Page: Add Facet for Product Reviews][commit-21] | ✔️ | ✔️ |
-| 22. | [2nd Object Page: Add Header and Section for Product Review][commits] | ✔️ |   |
-| 23. | Products Entity: Add support for Create and Update |   |   |
+| 22. | [2nd Object Page: Add Header and Section for Product Review][commit-22] | ✔️ |   |
+| 23. | [Products Entity: Add support for Create and Update operations][commits] | ✔️ | ✔️ |
 
 [commits]: ../../commits/demo-list-report
 [commit-1]: ../../commit/0baeed6310c132f0765c38288003471153eb205e
@@ -54,3 +54,4 @@ This branch is used to breakdown the List Report App into smaller topics that is
 [commit-19]: ../../commit/99bfa2831b51153ecd97d99bd5b89f311c6bdb06
 [commit-20]: ../../commit/f8062a8622ab996420c23f461db1c4fe0c73aff3
 [commit-21]: ../../commit/63a05043cbf3a3ca9cb5e9491d5ea4925aac5e04
+[commit-22]: ../../commit/1814dc2aaec910f44ca3bcaa0769f1a2960dee40

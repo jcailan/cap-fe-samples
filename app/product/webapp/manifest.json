@@ -132,6 +132,7 @@
                         "component": {
                             "name": "sap.suite.ui.generic.template.ObjectPage",
                             "settings": {
+                                "editableHeaderContent": true,
                                 "sections": {
                                     "ToSalesData::com.sap.vocabularies.UI.v1.LineItem": {
                                         "navigationProperty": "ToSalesData",

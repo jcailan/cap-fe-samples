@@ -6,25 +6,30 @@ using {
 
 service northwind {
 
-    @readonly
     entity Products          as
         select from view.Products {
             Id,
-            Name,
-            Description,
+            Name                        @mandatory,
+            Description                 @mandatory,
             ImageUrl,
             ReleaseDate,
             DiscontinuedDate,
             Rating,
-            Price,
+            Price                       @mandatory,
             Height,
             Width,
             Depth,
-            Quantity,
-            ToUnitOfMeasure,
-            ToCurrency,
-            ToCategory,
-            ToCategory.Name as Category,
+            Quantity                    @(
+                mandatory,
+                assert.range : [
+                0.00,
+                20.00
+                ]
+            ),
+            ToUnitOfMeasure             @mandatory,
+            ToCurrency                  @mandatory,
+            ToCategory                  @mandatory,
+            ToCategory.Name as Category @readonly,
             ToDimensionUnit,
             ToSalesData,
             ToStockAvailability,
