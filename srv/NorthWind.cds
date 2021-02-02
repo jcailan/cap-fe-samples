@@ -6,6 +6,7 @@ using {
 
 service northwind {
 
+    @odata.draft.enabled
     entity Products          as
         select from view.Products {
             Id,
@@ -16,6 +17,14 @@ service northwind {
             DiscontinuedDate,
             Rating,
             Price                       @mandatory,
+            case
+                when
+                    Price >= 10.00
+                then
+                    3
+                else
+                    1
+            end             as IsReleaseDateEnabled : Integer,
             Height,
             Width,
             Depth,

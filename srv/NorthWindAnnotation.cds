@@ -5,7 +5,16 @@ using {northwind} from './NorthWind';
  */
 annotate northwind.Products with @(
     Capabilities : {DeleteRestrictions : {Deletable : false}},
-    Common       : {Label : '{i18n>Products}'},
+    Common       : {
+        Label                     : '{i18n>Products}',
+        SideEffects #PriceChanged : {
+            SourceProperties : [Price],
+            TargetProperties : [
+            'IsReleaseDateEnabled',
+            'Price'
+            ]
+        }
+    },
     UI           : {
         SelectionFields                : [
         ToCategory_Id,
@@ -156,7 +165,10 @@ annotate northwind.Products with @(
             }
         }
     );
-    ReleaseDate       @title : '{i18n>ReleaseDate}';
+    ReleaseDate       @(
+        title  : '{i18n>ReleaseDate}',
+        Common : {FieldControl : IsReleaseDateEnabled}
+    );
     DiscontinuedDate  @title : '{i18n>DiscontinuedDate}';
     Rating            @title : '{i18n>Rating}';
     Height            @(
