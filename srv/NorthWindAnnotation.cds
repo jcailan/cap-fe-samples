@@ -275,7 +275,11 @@ annotate northwind.Reviews with @(UI : {
         $Type  : 'UI.DataFieldForAnnotation',
         Target : '@UI.DataPoint#Rating'
     },
-    {Value : Comment}
+    {Value : Comment},
+    {
+        Value         : CommentEditable,
+        ![@UI.Hidden] : true
+    }
     ],
     HeaderFacets        : [{
         $Type  : 'UI.ReferenceFacet',
@@ -292,14 +296,18 @@ annotate northwind.Reviews with @(UI : {
         TargetValue   : 5,
         Visualization : #Rating
     },
-    FieldGroup #Comment : {Data : [{Value : Comment}]}
+    FieldGroup #Comment : {Data : [{Value : CommentEditable}]}
 }) {
-    Id        @(UI : {Hidden : true});
-    ToProduct @(UI : {Hidden : true});
-    Name      @(title : '{i18n>Name}');
-    Rating    @(title : '{i18n>Rating}');
-    CreatedAt @(title : '{i18n>CreatedOn}');
-    Comment   @(
+    Id              @(UI : {Hidden : true});
+    ToProduct       @(UI : {Hidden : true});
+    Name            @(title : '{i18n>Name}');
+    Rating          @(title : '{i18n>Rating}');
+    CreatedAt       @(title : '{i18n>CreatedOn}');
+    Comment         @(
+        title : '{i18n>Comment}',
+        UI    : {MultiLineText : true}
+    );
+    CommentEditable @(
         title : '{i18n>Comment}',
         UI    : {MultiLineText : true}
     );

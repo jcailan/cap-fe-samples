@@ -49,13 +49,13 @@ service northwind {
             ToProduct
         };
 
-    @readonly
     entity Reviews           as
         select from td.ProductReviews {
             Id,
             Name,
             Rating,
-            Comment,
+            Comment @readonly,
+            Comment as CommentEditable,
             CreatedAt,
             ToProduct
         };
