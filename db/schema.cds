@@ -75,6 +75,10 @@ context md {
 }
 
 context td {
+    @assert.unique : {Name : [
+        ToProduct,
+        Name
+    ]}
     entity ProductReviews : cuid, managed {
         Name      : String;
         Rating    : Integer;

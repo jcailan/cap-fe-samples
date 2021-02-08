@@ -6,7 +6,6 @@ using {
 
 service northwind {
 
-    @odata.draft.enabled
     entity Products          as
         select from view.Products {
             Id,
@@ -31,8 +30,8 @@ service northwind {
             Quantity                    @(
                 mandatory,
                 assert.range : [
-                0.00,
-                20.00
+                    0.00,
+                    20.00
                 ]
             ),
             ToUnitOfMeasure             @mandatory,
@@ -58,13 +57,12 @@ service northwind {
             ToProduct
         };
 
-    @readonly
     entity Reviews           as
         select from td.ProductReviews {
             Id,
-            Name,
+            Name    @mandatory,
             Rating,
-            Comment,
+            Comment @mandatory,
             CreatedAt,
             ToProduct
         };
