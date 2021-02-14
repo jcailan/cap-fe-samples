@@ -1,3 +1,4 @@
 {
-    "editor.formatOnSave": true
+	"editor.formatOnSave": true,
+	"cds.compiler.markMissingI18nDefault": true
 }

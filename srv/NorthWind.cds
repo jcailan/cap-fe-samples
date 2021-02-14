@@ -7,7 +7,7 @@ using {
 service northwind {
 
     entity Products          as
-        select from view.Products {
+        SELECT FROM view.Products {
             Id,
             Name                        @mandatory,
             Description                 @mandatory,
@@ -22,14 +22,14 @@ service northwind {
             Quantity                    @(
                 mandatory,
                 assert.range : [
-                0.00,
-                20.00
+                    0.00,
+                    20.00
                 ]
             ),
             ToUnitOfMeasure             @mandatory,
             ToCurrency                  @mandatory,
             ToCategory                  @mandatory,
-            ToCategory.Name as Category @readonly,
+            ToCategory.Name AS Category @readonly,
             ToDimensionUnit,
             ToSalesData,
             ToStockAvailability,
@@ -40,7 +40,7 @@ service northwind {
 
     @readonly
     entity Suppliers         as
-        select from md.Suppliers {
+        SELECT FROM md.Suppliers {
             Id,
             Name,
             Email,
@@ -51,7 +51,7 @@ service northwind {
 
     @readonly
     entity Reviews           as
-        select from td.ProductReviews {
+        SELECT FROM td.ProductReviews {
             Id,
             Name,
             Rating,
@@ -62,19 +62,19 @@ service northwind {
 
     @readonly
     entity SalesData         as
-        select from td.SalesData {
+        SELECT FROM td.SalesData {
             Id,
             DeliveryDate,
             Revenue,
-            ToCurrency.Id               as CurrencyKey,
-            ToDeliveryMonth.Id          as DeliveryMonthId,
-            ToDeliveryMonth.Description as DeliveryMonth,
+            ToCurrency.Id               AS CurrencyKey,
+            ToDeliveryMonth.Id          AS DeliveryMonthId,
+            ToDeliveryMonth.Description AS DeliveryMonth,
             ToProduct
         };
 
     @readonly
     entity StockAvailability as
-        select from md.StockAvailability {
+        SELECT FROM md.StockAvailability {
             Id,
             Description,
             ToProduct
@@ -82,29 +82,29 @@ service northwind {
 
     @readonly
     entity VH_Categories     as
-        select from md.Categories {
-            Id   as Code,
-            Name as Text
+        SELECT FROM md.Categories {
+            Id   AS Code,
+            Name AS Text
         };
 
     @readonly
     entity VH_Currencies     as
-        select from md.Currencies {
-            Id          as Code,
-            Description as Text
+        SELECT FROM md.Currencies {
+            Id          AS Code,
+            Description AS Text
         };
 
     @readonly
     entity VH_UnitOfMeasures as
-        select from md.UnitOfMeasures {
-            Id          as Code,
-            Description as Text
+        SELECT FROM md.UnitOfMeasures {
+            Id          AS Code,
+            Description AS Text
         };
 
     @readonly
     entity VH_DimensionUnits as
-        select from md.DimensionUnits {
-            Id          as Code,
-            Description as Text
+        SELECT FROM md.DimensionUnits {
+            Id          AS Code,
+            Description AS Text
         };
 }

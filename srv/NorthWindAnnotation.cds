@@ -8,9 +8,9 @@ annotate northwind.Products with @(
     Common       : {Label : '{i18n>Products}'},
     UI           : {
         SelectionFields                : [
-        ToCategory_Id,
-        ToCurrency_Id,
-        StockAvailability
+            ToCategory_Id,
+            ToCurrency_Id,
+            StockAvailability
         ],
         HeaderInfo                     : {
             TypeName       : '{i18n>Product}',
@@ -20,70 +20,70 @@ annotate northwind.Products with @(
             Description    : {Value : Description}
         },
         LineItem                       : {$value : [
-        {Value : ImageUrl},
-        {Value : Name},
-        {Value : Description},
-        {Value : ToCategory_Id},
-        {
-            $Type  : 'UI.DataFieldForAnnotation',
-            Label  : '{i18n>Supplier}',
-            Target : 'ToSupplier/@Communication.Contact'
-        },
-        {Value : ReleaseDate},
-        {
-            Value       : ToStockAvailability.Id,
-            Criticality : ToStockAvailability.Id
-        },
-        {
-            $Type  : 'UI.DataFieldForAnnotation',
-            Target : '@UI.DataPoint#AverageRatingValue'
-        },
-        {Value : Price}
+            {Value : ImageUrl},
+            {Value : Name},
+            {Value : Description},
+            {Value : ToCategory_Id},
+            {
+                $Type  : 'UI.DataFieldForAnnotation',
+                Label  : '{i18n>Supplier}',
+                Target : 'ToSupplier/@Communication.Contact'
+            },
+            {Value : ReleaseDate},
+            {
+                Value       : ToStockAvailability.Id,
+                Criticality : ToStockAvailability.Id
+            },
+            {
+                $Type  : 'UI.DataFieldForAnnotation',
+                Target : '@UI.DataPoint#AverageRatingValue'
+            },
+            {Value : Price}
         ]},
         HeaderFacets                   : [
-        {
-            $Type  : 'UI.ReferenceFacet',
-            Target : '@UI.FieldGroup#GeneralInformation',
-            Label  : '{i18n>GeneralInformation}'
-        },
-        {
-            $Type  : 'UI.ReferenceFacet',
-            Target : '@UI.DataPoint#AverageRatingValue'
-        },
-        {
-            $Type  : 'UI.ReferenceFacet',
-            Target : '@UI.DataPoint#Price'
-        },
-        {
-            $Type  : 'UI.ReferenceFacet',
-            Target : '@UI.DataPoint#StockAvailability'
-        },
-        {
-            $Type  : 'UI.ReferenceFacet',
-            Target : '@UI.DataPoint#Availability'
-        }
+            {
+                $Type  : 'UI.ReferenceFacet',
+                Target : '@UI.FieldGroup#GeneralInformation',
+                Label  : '{i18n>GeneralInformation}'
+            },
+            {
+                $Type  : 'UI.ReferenceFacet',
+                Target : '@UI.DataPoint#AverageRatingValue'
+            },
+            {
+                $Type  : 'UI.ReferenceFacet',
+                Target : '@UI.DataPoint#Price'
+            },
+            {
+                $Type  : 'UI.ReferenceFacet',
+                Target : '@UI.DataPoint#StockAvailability'
+            },
+            {
+                $Type  : 'UI.ReferenceFacet',
+                Target : '@UI.DataPoint#Availability'
+            }
         ],
         Facets                         : [
-        {
-            $Type  : 'UI.ReferenceFacet',
-            Target : '@UI.FieldGroup#TechnicalData',
-            Label  : '{i18n>TechnicalData}'
-        },
-        {
-            $Type  : 'UI.ReferenceFacet',
-            Target : 'ToReviews/@UI.LineItem',
-            Label  : '{i18n>ProductReviews}'
-        },
-        {
-            $Type  : 'UI.ReferenceFacet',
-            Target : 'ToSalesData/@UI.Chart',
-            Label  : '{i18n>MonthlyRevenue}'
-        },
-        {
-            $Type  : 'UI.ReferenceFacet',
-            Target : 'ToSalesData/@UI.LineItem',
-            Label  : '{i18n>SalesData}'
-        }
+            {
+                $Type  : 'UI.ReferenceFacet',
+                Target : '@UI.FieldGroup#TechnicalData',
+                Label  : '{i18n>TechnicalData}'
+            },
+            {
+                $Type  : 'UI.ReferenceFacet',
+                Target : 'ToReviews/@UI.LineItem',
+                Label  : '{i18n>ProductReviews}'
+            },
+            {
+                $Type  : 'UI.ReferenceFacet',
+                Target : 'ToSalesData/@UI.Chart',
+                Label  : '{i18n>MonthlyRevenue}'
+            },
+            {
+                $Type  : 'UI.ReferenceFacet',
+                Target : 'ToSalesData/@UI.LineItem',
+                Label  : '{i18n>SalesData}'
+            }
         ],
         DataPoint #AverageRatingValue  : {
             Value         : Rating,
@@ -109,18 +109,18 @@ annotate northwind.Products with @(
             Visualization : #Progress
         },
         FieldGroup #GeneralInformation : {Data : [
-        {Value : ToCategory_Id},
-        {Value : ReleaseDate},
-        {
-            $Type  : 'UI.DataFieldForAnnotation',
-            Label  : '{i18n>Supplier}',
-            Target : 'ToSupplier/@Communication.Contact'
-        }
+            {Value : ToCategory_Id},
+            {Value : ReleaseDate},
+            {
+                $Type  : 'UI.DataFieldForAnnotation',
+                Label  : '{i18n>Supplier}',
+                Target : 'ToSupplier/@Communication.Contact'
+            }
         ]},
         FieldGroup #TechnicalData      : {Data : [
-        {Value : Height},
-        {Value : Width},
-        {Value : Depth}
+            {Value : Height},
+            {Value : Width},
+            {Value : Depth}
         ]}
     }
 ) {
@@ -142,16 +142,16 @@ annotate northwind.Products with @(
                 SearchSupported : true,
                 CollectionPath  : 'VH_Categories',
                 Parameters      : [
-                {
-                    $Type             : 'Common.ValueListParameterInOut',
-                    LocalDataProperty : ToCategory_Id,
-                    ValueListProperty : 'Code'
-                },
-                {
-                    $Type             : 'Common.ValueListParameterInOut',
-                    LocalDataProperty : Category,
-                    ValueListProperty : 'Text'
-                }
+                    {
+                        $Type             : 'Common.ValueListParameterInOut',
+                        LocalDataProperty : ToCategory_Id,
+                        ValueListProperty : 'Code'
+                    },
+                    {
+                        $Type             : 'Common.ValueListParameterInOut',
+                        LocalDataProperty : Category,
+                        ValueListProperty : 'Text'
+                    }
                 ]
             }
         }
@@ -179,15 +179,15 @@ annotate northwind.Products with @(
                 SearchSupported : true,
                 CollectionPath  : 'VH_DimensionUnits',
                 Parameters      : [
-                {
-                    $Type             : 'Common.ValueListParameterInOut',
-                    LocalDataProperty : ToDimensionUnit_Id,
-                    ValueListProperty : 'Code'
-                },
-                {
-                    $Type             : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty : 'Text'
-                }
+                    {
+                        $Type             : 'Common.ValueListParameterInOut',
+                        LocalDataProperty : ToDimensionUnit_Id,
+                        ValueListProperty : 'Code'
+                    },
+                    {
+                        $Type             : 'Common.ValueListParameterDisplayOnly',
+                        ValueListProperty : 'Text'
+                    }
                 ]
             }
         }
@@ -204,15 +204,15 @@ annotate northwind.Products with @(
                 SearchSupported : true,
                 CollectionPath  : 'VH_Currencies',
                 Parameters      : [
-                {
-                    $Type             : 'Common.ValueListParameterInOut',
-                    LocalDataProperty : ToCurrency_Id,
-                    ValueListProperty : 'Code'
-                },
-                {
-                    $Type             : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty : 'Text'
-                }
+                    {
+                        $Type             : 'Common.ValueListParameterInOut',
+                        LocalDataProperty : ToCurrency_Id,
+                        ValueListProperty : 'Code'
+                    },
+                    {
+                        $Type             : 'Common.ValueListParameterDisplayOnly',
+                        ValueListProperty : 'Text'
+                    }
                 ]
             }
         }
@@ -229,15 +229,15 @@ annotate northwind.Products with @(
                 SearchSupported : true,
                 CollectionPath  : 'VH_UnitOfMeasures',
                 Parameters      : [
-                {
-                    $Type             : 'Common.ValueListParameterInOut',
-                    LocalDataProperty : ToUnitOfMeasure_Id,
-                    ValueListProperty : 'Code'
-                },
-                {
-                    $Type             : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty : 'Text'
-                }
+                    {
+                        $Type             : 'Common.ValueListParameterInOut',
+                        LocalDataProperty : ToUnitOfMeasure_Id,
+                        ValueListProperty : 'Code'
+                    },
+                    {
+                        $Type             : 'Common.ValueListParameterDisplayOnly',
+                        ValueListProperty : 'Text'
+                    }
                 ]
             }
         }
@@ -269,13 +269,13 @@ annotate northwind.Reviews with @(UI : {
         Description    : {Value : CreatedAt}
     },
     LineItem            : [
-    {Value : Name},
-    {Value : CreatedAt},
-    {
-        $Type  : 'UI.DataFieldForAnnotation',
-        Target : '@UI.DataPoint#Rating'
-    },
-    {Value : Comment}
+        {Value : Name},
+        {Value : CreatedAt},
+        {
+            $Type  : 'UI.DataFieldForAnnotation',
+            Target : '@UI.DataPoint#Rating'
+        },
+        {Value : Comment}
     ],
     HeaderFacets        : [{
         $Type  : 'UI.ReferenceFacet',
@@ -317,14 +317,14 @@ annotate northwind.Suppliers with @(Communication : {Contact : {
         address : Email
     }],
     tel   : [
-    {
-        type : #work,
-        uri  : Phone
-    },
-    {
-        type : #fax,
-        uri  : Fax
-    }
+        {
+            type : #work,
+            uri  : Phone
+        },
+        {
+            type : #fax,
+            uri  : Fax
+        }
     ]
 }});
 
@@ -343,9 +343,9 @@ annotate northwind.SalesData with @(
             TypeNamePlural : '{i18n>SalesOrders}'
         },
         LineItem            : [
-        {Value : DeliveryMonthId},
-        {Value : Revenue},
-        {Value : DeliveryDate}
+            {Value : DeliveryMonthId},
+            {Value : Revenue},
+            {Value : DeliveryDate}
         ],
         Chart               : {
             Title               : '{i18n>RevenueHistory}',
