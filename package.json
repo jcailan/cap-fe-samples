@@ -1,19 +1,19 @@
 {
-    "name": "cap-fe-samples",
-    "version": "1.0.0",
-    "description": "SAP Fiori Element and CAP Model - Demo Project",
-    "repository": "https://github.com/jcailan/cap-fe-samples",
-    "license": "MIT",
-    "private": false,
-    "dependencies": {
-        "@sap/cds": "^3",
-        "@sap/cds-odata-v2-adapter-proxy": "^1.4.46",
-        "express": "^4"
-    },
-    "devDependencies": {
-        "sqlite3": "^5"
-    },
-    "scripts": {
-        "start": "npx cds run"
-    }
+	"name": "cap-fe-samples",
+	"version": "1.0.0",
+	"description": "SAP Fiori Element and CAP Model - Demo Project",
+	"repository": "https://github.com/jcailan/cap-fe-samples",
+	"license": "MIT",
+	"private": false,
+	"dependencies": {
+		"@sap/cds": "^4",
+		"@sap/cds-odata-v2-adapter-proxy": "^1.4.46",
+		"express": "^4"
+	},
+	"devDependencies": {
+		"sqlite3": "^5"
+	},
+	"scripts": {
+		"start": "npx cds run"
+	}
 }
