@@ -1,27 +1,31 @@
 {
-	"name": "cap-fe-samples",
-	"version": "1.0.0",
-	"description": "SAP Fiori Element and CAP Model - Demo Project",
-	"repository": "https://github.com/jcailan/cap-fe-samples",
-	"license": "MIT",
-	"private": false,
-	"dependencies": {
-		"@sap/cds": "^4",
-		"@sap/cds-odata-v2-adapter-proxy": "^1.4.46",
-		"@sap/textbundle": "^4.0.0",
-		"express": "^4"
-	},
-	"devDependencies": {
-		"sqlite3": "^5"
-	},
-	"scripts": {
-		"start": "npx cds run"
-	},
-	"cds": {
-		"requires": {
-			"db": {
-				"kind": "sql"
-			}
-		}
-	}
+  "name": "cap-fe-samples",
+  "version": "1.0.0",
+  "description": "SAP Fiori Element and CAP Model - Demo Project",
+  "repository": "https://github.com/jcailan/cap-fe-samples",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "@sap/cds": "^4",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.4.46",
+    "@sap/textbundle": "^4.0.0",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@sap/ux-specification": "^1.84.2",
+    "sqlite3": "^5"
+  },
+  "scripts": {
+    "start": "npx cds run"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sql"
+      }
+    }
+  },
+  "sapux": [
+    "app/productv4"
+  ]
 }
