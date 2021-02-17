@@ -100,7 +100,30 @@
 			}
 		},
 		"extends": {
-			"extensions": {}
+			"extensions": {
+				"sap.ui.controllerExtensions": {
+					"sap.suite.ui.generic.template.ObjectPage.view.Details": {
+						"controllerName": "com.demo.product.ext.controller.DetailsExtension",
+						"sap.ui.generic.app": {
+							"Products": {
+								"EntitySet": "Products",
+								"Sections": {
+									"ToSalesData::com.sap.vocabularies.UI.v1.LineItem": {
+										"id": "ToSalesData::com.sap.vocabularies.UI.v1.LineItem",
+										"Actions": {
+											"SearchOrder": {
+												"id": "SearchOrder",
+												"text": "Search Order",
+												"press": "onPressSearchOrder"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		},
 		"contentDensities": {
 			"compact": true,
