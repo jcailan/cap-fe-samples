@@ -5,7 +5,6 @@ connection.properties
 default-*.json
 gen/
 node_modules/
-package-lock.json
 target/
 
 # Web IDE, App Studio
