@@ -37,6 +37,20 @@
 		"sourceTemplate": {
 			"id": "ui5template.smartTemplate",
 			"version": "1.40.12"
+		},
+		"crossNavigation": {
+			"inbounds": {
+				"ProductDisplay": {
+					"semanticObject": "Product",
+					"action": "display"
+				}
+			},
+			"outbounds": {
+				"ExampleNavigationTarget": {
+					"semanticObject": "Product",
+					"action": "display"
+				}
+			}
 		}
 	},
 	"sap.ui": {
@@ -152,6 +166,12 @@
 				"pages": {
 					"ObjectPage|Products": {
 						"entitySet": "Products",
+						"navigation": {
+							"display": {
+								"path": "sap.apps.crossNavigation.outbounds",
+								"target": "ExampleNavigationTarget"
+							}
+						},
 						"component": {
 							"name": "sap.suite.ui.generic.template.ObjectPage",
 							"settings": {

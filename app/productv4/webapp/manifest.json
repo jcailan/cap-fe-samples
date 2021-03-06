@@ -23,6 +23,38 @@
 		"sourceTemplate": {
 			"id": "ui5template.fiorielements.v4.lrop",
 			"version": "1.0.0"
+		},
+		"crossNavigation": {
+			"inbounds": {
+				"ProductDisplay": {
+					"semanticObject": "Product",
+					"action": "display",
+					"signature": {
+						"parameters": {
+							"DeliveryMonth": {
+								"required": true
+							}
+						},
+						"additionalParameters": "ignored"
+					}
+				}
+			},
+			"outbounds": {
+				"ProductDisplay": {
+					"semanticObject": "Product",
+					"action": "display",
+					"additionalParameters": "ignored",
+					"parameters": {
+						"DeliveryMonth": {
+							"value": {
+								"value": "DeliveryMonth",
+								"format": "plain"
+							},
+							"required": true
+						}
+					}
+				}
+			}
 		}
 	},
 	"sap.ui": {
@@ -117,6 +149,11 @@
 								"ToReviews": {
 									"detail": {
 										"route": "ReviewsObjectPage"
+									}
+								},
+								"ToSalesData": {
+									"detail": {
+										"outbound": "ProductDisplay"
 									}
 								}
 							},
