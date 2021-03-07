@@ -22,10 +22,13 @@ modules:
     # ------------------------------------------------------------
     type: nodejs
     path: gen/srv
+    properties:
+      SAP_JWT_TRUST_ACL: '[{"clientid":"*","identityzone":"*"}]'
     requires:
       # Resources extracted from CAP configuration
       - name: cap-fe-samples-db
       - name: cap-fe-samples-uaa
+      - name: cap-fe-samples-jobscheduler
     provides:
       - name: srv-api # required by consumers of CAP services (e.g. approuter)
         properties:
@@ -81,3 +84,9 @@ resources:
       config:
         xsappname: cap-fe-samples-${space} #  name + space dependency
         tenant-mode: dedicated
+
+  - name: cap-fe-samples-jobscheduler
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: jobscheduler
+      service-plan: lite # lite is for trial only, change to standard for production mode
