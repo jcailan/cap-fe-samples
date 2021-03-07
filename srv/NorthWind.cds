@@ -4,6 +4,7 @@ using {
     view
 } from '../db/schema';
 
+@requires : 'authenticated-user'
 service northwind {
 
     entity Products          as
@@ -22,8 +23,8 @@ service northwind {
             Quantity                    @(
                 mandatory,
                 assert.range : [
-                    0.00,
-                    20.00
+                0.00,
+                20.00
                 ]
             ),
             ToUnitOfMeasure             @mandatory,

@@ -2,56 +2,82 @@
 ## appName = cap-fe-samples
 ## language=nodejs; multiTenant=false
 ## approuter=
-_schema-version: '3.1'
+_schema-version: "3.1"
 ID: cap-fe-samples
 version: 1.0.0
 description: "SAP Fiori Element and CAP Model - Demo Project"
 parameters:
   enable-parallel-deployments: true
-   
+
 build-parameters:
   before-all:
-   - builder: custom
-     commands:
-      - npm install --production
-      - npx -p @sap/cds-dk cds build --production
+    - builder: custom
+      commands:
+        - npm install --production
+        - npx -p @sap/cds-dk cds build --production
 
 modules:
- # --------------------- SERVER MODULE ------------------------
- - name: cap-fe-samples-srv
- # ------------------------------------------------------------
-   type: nodejs
-   path: gen/srv
-   requires:
-    # Resources extracted from CAP configuration
-    - name: cap-fe-samples-db
-   provides:
-    - name: srv-api      # required by consumers of CAP services (e.g. approuter)
-      properties:
-        srv-url: ${default-url}
+  # --------------------- SERVER MODULE ------------------------
+  - name: cap-fe-samples-srv
+    # ------------------------------------------------------------
+    type: nodejs
+    path: gen/srv
+    requires:
+      # Resources extracted from CAP configuration
+      - name: cap-fe-samples-db
+      - name: cap-fe-samples-uaa
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
 
- # -------------------- SIDECAR MODULE ------------------------
- - name: cap-fe-samples-db-deployer
- # ------------------------------------------------------------
-   type: hdb
-   path: gen/db  
-   parameters:
-     buildpack: nodejs_buildpack
-   requires:
-    # 'hana' and 'xsuaa' resources extracted from CAP configuration
-    - name: cap-fe-samples-db
+  # -------------------- SIDECAR MODULE ------------------------
+  - name: cap-fe-samples-db-deployer
+    # ------------------------------------------------------------
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      # 'hana' and 'xsuaa' resources extracted from CAP configuration
+      - name: cap-fe-samples-db
 
+  # -------------------- APP ROUTER ------------------------
+  - name: cap-fe-samples-app-router
+    type: approuter.nodejs
+    path: app-router
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: cap-fe-samples-uaa
+      - name: srv-api
+        group: destinations
+        properties:
+          forwardAuthToken: true
+          name: srv-api
+          url: ~{srv-url}
 
 resources:
- # services extracted from CAP configuration
- # 'service-plan' can be configured via 'cds.requires.<name>.vcap.plan'
-# ------------------------------------------------------------
- - name: cap-fe-samples-db
-# ------------------------------------------------------------
-   type: com.sap.xs.hdi-container
-   parameters:
-     service: hana  # or 'hanatrial' on trial landscapes
-     service-plan: hdi-shared
-   properties:
-     hdi-service-name: ${service-name}
+  # services extracted from CAP configuration
+  # 'service-plan' can be configured via 'cds.requires.<name>.vcap.plan'
+  # ------------------------------------------------------------
+  - name: cap-fe-samples-db
+    # ------------------------------------------------------------
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana # or 'hanatrial' on trial landscapes
+      service-plan: hdi-shared
+    properties:
+      hdi-service-name: ${service-name}
 
+  - name: cap-fe-samples-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      ##### Path to xs-security.json to add roles and scopes   ####
+      path: ./xs-security.json
+      service: xsuaa
+      service-plan: application
+      config:
+        xsappname: cap-fe-samples-${space} #  name + space dependency
+        tenant-mode: dedicated
