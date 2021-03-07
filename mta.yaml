@@ -1,0 +1,57 @@
+## Generated mta.yaml based on template version 0.4.0
+## appName = cap-fe-samples
+## language=nodejs; multiTenant=false
+## approuter=
+_schema-version: '3.1'
+ID: cap-fe-samples
+version: 1.0.0
+description: "SAP Fiori Element and CAP Model - Demo Project"
+parameters:
+  enable-parallel-deployments: true
+   
+build-parameters:
+  before-all:
+   - builder: custom
+     commands:
+      - npm install --production
+      - npx -p @sap/cds-dk cds build --production
+
+modules:
+ # --------------------- SERVER MODULE ------------------------
+ - name: cap-fe-samples-srv
+ # ------------------------------------------------------------
+   type: nodejs
+   path: gen/srv
+   requires:
+    # Resources extracted from CAP configuration
+    - name: cap-fe-samples-db
+   provides:
+    - name: srv-api      # required by consumers of CAP services (e.g. approuter)
+      properties:
+        srv-url: ${default-url}
+
+ # -------------------- SIDECAR MODULE ------------------------
+ - name: cap-fe-samples-db-deployer
+ # ------------------------------------------------------------
+   type: hdb
+   path: gen/db  
+   parameters:
+     buildpack: nodejs_buildpack
+   requires:
+    # 'hana' and 'xsuaa' resources extracted from CAP configuration
+    - name: cap-fe-samples-db
+
+
+resources:
+ # services extracted from CAP configuration
+ # 'service-plan' can be configured via 'cds.requires.<name>.vcap.plan'
+# ------------------------------------------------------------
+ - name: cap-fe-samples-db
+# ------------------------------------------------------------
+   type: com.sap.xs.hdi-container
+   parameters:
+     service: hana  # or 'hanatrial' on trial landscapes
+     service-plan: hdi-shared
+   properties:
+     hdi-service-name: ${service-name}
+
