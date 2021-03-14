@@ -18,15 +18,17 @@ This is the main and the default branch where the core demo application is locat
 - SAP CAP Project - [root](../../tree/master) folder
 - SAP Fiori Element - [app/product](./app/product) folder
 
-### multi-master branches
+### Demo branches
 
-These are the branches that may be a copy of the main master branch or can be a branch on their own. The branches in this category serves a particular purpose and act like a mini master branches.
+These are the branches that may be a copy of the main master branch or can be a branch on their own. The branches in this category serves a particular purpose.
 
 | No. | Branch | Purpose |
 | ---:|:------ |:------- |
-| 1.  | [demo-list-report][branch-1] | Serves as the step by step guide for replicating the List Report App
+| 1.  | [demo-list-report][branch-1] | Serves as the step by step guide for replicating the List Report App |
+| 2.  | [demo-job-scheduler][branch-2] | Serves as a demo of using Job Scheduling Service with CAP endpoint |
 
 [branch-1]: ../../tree/demo-list-report
+[branch-2]: ../../tree/demo-job-scheduler
 
 ## GETTING STARTED
 
