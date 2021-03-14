@@ -1,15 +1,15 @@
 {
-    "xsappname": "cap-fe-samples",
-    "tenant-mode": "dedicated",
-    "scopes": [
-        {
-            "name": "$XSAPPNAME.JOBSCHEDULER",
-            "description": "Job Scheduler Scope",
-            "grant-as-authority-to-apps": [
-                "jobscheduler"
-            ]
-        }
-    ],
-    "attributes": [],
-    "role-templates": []
+	"xsappname": "cap-fe-samples",
+	"tenant-mode": "dedicated",
+	"scopes": [
+		{
+			"name": "$XSAPPNAME.JOBSCHEDULER",
+			"description": "Job Scheduler Scope",
+			"grant-as-authority-to-apps": [
+				"$XSSERVICENAME(cap-fe-samples-jobscheduler)"
+			]
+		}
+	],
+	"attributes": [],
+	"role-templates": []
 }

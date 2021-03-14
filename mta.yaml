@@ -62,17 +62,30 @@ modules:
           url: ~{srv-url}
 
 resources:
+  # ---------------------------------------------------------------------
   # services extracted from CAP configuration
   # 'service-plan' can be configured via 'cds.requires.<name>.vcap.plan'
-  # ------------------------------------------------------------
+  # ---------------------------------------------------------------------
   - name: cap-fe-samples-db
-    # ------------------------------------------------------------
     type: com.sap.xs.hdi-container
     parameters:
       service: hana # or 'hanatrial' on trial landscapes
       service-plan: hdi-shared
     properties:
       hdi-service-name: ${service-name}
+
+  # ---------------------------------------------------------------------
+  # Sequence of instance creation is important!!!
+  # Job Scheduler needs to be created first before UAA instance
+  # in order for grant-as-authority-to-apps to take effect.
+  # ---------------------------------------------------------------------
+  - name: cap-fe-samples-jobscheduler
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: jobscheduler
+      service-plan: standard
+      config:
+        enable-xsuaa-support: true # mandatory for jobs using REST endpoints
 
   - name: cap-fe-samples-uaa
     type: org.cloudfoundry.managed-service
@@ -84,9 +97,3 @@ resources:
       config:
         xsappname: cap-fe-samples-${space} #  name + space dependency
         tenant-mode: dedicated
-
-  - name: cap-fe-samples-jobscheduler
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: jobscheduler
-      service-plan: lite # lite is for trial only, change to standard for production mode
