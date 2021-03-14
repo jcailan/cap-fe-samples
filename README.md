@@ -1,58 +1,66 @@
-# SAP Fiori Element and CAP Model - Demo Project
+# Job Scheduling Service Demo
 
-This is a demo of SAP Fiori Element List Report App using SAP Cloud Application Programming Model (CAP) backend service.
+This branch hosts the demo project for SAP Job Scheduling Service of SAP Business Technology Platform (BTP).
 
-The demo project is patterned after the SAP Developer Tutorial called [Create a List Report Object Page App with SAP Fiori Tools](https://developers.sap.com/group.fiori-tools-lrop.html) while the Data Model is based on [North Wind OData Service](https://services.odata.org/Experimental/OData/(S(5n1vtnh00l13aqltnijnoldh))/OData.svc/$metadata).
+## Prerequisites
 
-## RELATED BLOG POSTS
+- SAP BTP for the Cloud Foundry Environment
+- Job Scheduling Service
+- SAP HANA Cloud
+- Authorization and Trust Management (UAA)
 
-For more information see blog posts below:
+## Deployment to Cloud Foundry
 
-- [SAP Fiori Element using CAP Model – Introduction](https://blogs.sap.com/2020/09/29/sap-fiori-element-using-cap-model-introduction/)
-- [SAP Fiori Element using CAP Model – List Report App](https://blogs.sap.com/2020/10/19/sap-fiori-element-using-cap-model-list-report-app/)
-
-## REPOSITORY
-
-### [master](../../tree/master) branch
-This is the main and the default branch where the core demo application is located. This is a mono-repo demo project that contains 2 project set up:
-- SAP CAP Project - [root](../../tree/master) folder
-- SAP Fiori Element - [app/product](./app/product) folder
-
-### multi-master branches
-
-These are the branches that may be a copy of the main master branch or can be a branch on their own. The branches in this category serves a particular purpose and act like a mini master branches.
-
-| No. | Branch | Purpose |
-| ---:|:------ |:------- |
-| 1.  | [demo-list-report][branch-1] | Serves as the step by step guide for replicating the List Report App
-
-[branch-1]: ../../tree/demo-list-report
-
-## GETTING STARTED
-
-#### 1. SAP CAP Project
-
-- From [root](../../tree/master) folder, install node modules _(one-time step)_
+- Build the MTA Project
 ```swift
-> npm install
+> mbt build
 ```
-- Launch the CAP service
+- Deploy the MTA Project
 ```swift
-> cds watch
+> cf deploy mta_archives/cap-fe-samples_1.0.0.mtar
 ```
 
-#### 2. SAP Fiori Element Project
-- From [app/product](./app/product) folder, install node modules _(one-time step)_
-```swift
-> npm install
-```
-- Launch the Fiori Element App
-```swift
-> npm start
+## Create a new Job Schedule
+- From SAP BTP Cockpit > Services > Instances > Job Scheduling Service `cap-fe-samples-jobscheduler` > Select the action `View Dashboard`
+
+![](image/job-scheduler-instance.png)
+
+- From the Job Scheduling Service Dashboard, create a new job
+
+![](image/create-job.png)
+
+**Sample Action**
+
+```shell
+https://<organization>-<space>-cap-fe-samples-srv.cfapps.us10.hana.ondemand.com/northwind/VH_Categories
 ```
 
-## APPENDIX
+- From the newly created job, create a new schedule
 
-- [Change Log](CHANGELOG.md)
-- [MIT License](LICENSE)
-- [How To Contribute?](CONTRIBUTING.md)
+![](image/create-schedule.png)
+
+- Check the run logs
+
+![](image/schedule-run-log.png)
+
+**Expected Response**
+
+```javascript
+{
+	"@odata.context": "$metadata#VH_Categories",
+	"value": [
+		{
+			"Code": "B",
+			"Text": "Beverages"
+		},
+		{
+			"Code": "E",
+			"Text": "Electronics"
+		},
+		{
+			"Code": "F",
+			"Text": "Food"
+		}
+	]
+}
+```
