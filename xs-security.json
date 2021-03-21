@@ -1,6 +1,7 @@
 {
 	"xsappname": "cap-fe-samples",
 	"tenant-mode": "dedicated",
+	"description": "Security profile of called application",
 	"scopes": [
 		{
 			"name": "$XSAPPNAME.JOBSCHEDULER",
@@ -11,5 +12,13 @@
 		}
 	],
 	"attributes": [],
-	"role-templates": []
+	"role-templates": [
+		{
+			"name": "Token_Exchange",
+			"description": "UAA",
+			"scope-references": [
+				"uaa.user"
+			]
+		}
+	]
 }

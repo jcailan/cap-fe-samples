@@ -1,9 +1,20 @@
 {
-    "authenticationMethod": "route",
-    "routes": [
-        {
-            "source": "^(/.*)",
-            "destination": "srv-api"
-        }
-    ]
+	"welcomeFile": "/cp.portal",
+	"authenticationMethod": "route",
+	"routes": [
+		{
+			"source": "^/v2/(.*)$",
+			"destination": "srv-api"
+		},
+		{
+			"source": "^/northwind/(.*)$",
+			"destination": "srv-api"
+		},
+		{
+			"source": "^(/.*)",
+			"target": "$1",
+			"service": "html5-apps-repo-rt",
+			"authenticationType": "xsuaa"
+		}
+	]
 }

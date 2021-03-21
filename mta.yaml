@@ -1,58 +1,39 @@
-## Generated mta.yaml based on template version 0.4.0
-## appName = cap-fe-samples
-## language=nodejs; multiTenant=false
-## approuter=
 _schema-version: "3.1"
 ID: cap-fe-samples
+description: SAP Fiori Element and CAP Model - Demo Project
 version: 1.0.0
-description: "SAP Fiori Element and CAP Model - Demo Project"
-parameters:
-  enable-parallel-deployments: true
-
-build-parameters:
-  before-all:
-    - builder: custom
-      commands:
-        - npm install --production
-        - npx -p @sap/cds-dk cds build --production
-
 modules:
-  # --------------------- SERVER MODULE ------------------------
   - name: cap-fe-samples-srv
-    # ------------------------------------------------------------
     type: nodejs
     path: gen/srv
     properties:
       SAP_JWT_TRUST_ACL: '[{"clientid":"*","identityzone":"*"}]'
     requires:
-      # Resources extracted from CAP configuration
       - name: cap-fe-samples-db
       - name: cap-fe-samples-uaa
       - name: cap-fe-samples-jobscheduler
     provides:
-      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+      - name: srv-api
         properties:
           srv-url: ${default-url}
-
-  # -------------------- SIDECAR MODULE ------------------------
-  - name: cap-fe-samples-db-deployer
-    # ------------------------------------------------------------
-    type: hdb
-    path: gen/db
-    parameters:
-      buildpack: nodejs_buildpack
-    requires:
-      # 'hana' and 'xsuaa' resources extracted from CAP configuration
-      - name: cap-fe-samples-db
-
-  # -------------------- APP ROUTER ------------------------
-  - name: cap-fe-samples-app-router
-    type: approuter.nodejs
-    path: app-router
     parameters:
       disk-quota: 256M
       memory: 256M
+  - name: cap-fe-samples-db-deployer
+    type: hdb
+    path: gen/db
     requires:
+      - name: cap-fe-samples-db
+    parameters:
+      buildpack: nodejs_buildpack
+      disk-quota: 256M
+      memory: 256M
+  - name: cap-fe-samples-app-router
+    type: approuter.nodejs
+    path: app-router
+    requires:
+      - name: cap-fe-samples-html5-repo-runtime
+      - name: cap-fe-samples-portal-resources
       - name: cap-fe-samples-uaa
       - name: srv-api
         group: destinations
@@ -60,40 +41,118 @@ modules:
           forwardAuthToken: true
           name: srv-api
           url: ~{srv-url}
-
+      - name: ui5-service
+        group: destinations
+        properties:
+          forwardAuthToken: false
+          name: ui5
+          url: ~{srv-url}
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+  - name: cap-fe-samples-portal
+    type: com.sap.portal.content
+    path: portal
+    requires:
+      - name: cap-fe-samples-portal-resources
+      - name: cap-fe-samples-html5-repo-host
+      - name: cap-fe-samples-uaa
+    parameters:
+      buildpack: https://github.com/cloudfoundry/nodejs-buildpack/releases/download/v1.6.39/nodejs-buildpack-cflinuxfs3-v1.6.39.zip
+      memory: 128M
+      stack: cflinuxfs3
+  # - name: cap-fe-samples-ui-deployer
+  #   type: com.sap.html5.application-content
+  #   path: ui-deployer
+  #   requires:
+  #     - name: cap-fe-samples-html5-repo-host
+  #   build-parameters:
+  #     requires:
+  #       - artifacts:
+  #           - ./*
+  #         name: app-product
+  #         target-path: resources/app-product
+  # - name: app-product
+  #   type: html5
+  #   path: app/product
+  #   build-parameters:
+  #     build-result: dist
+  #     builder: custom
+  #     commands:
+  #       - npm install
+  #       - npm run build
+  #     supported-platforms: []
+  - name: cap-fe-samples-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: cap-fe-samples-html5-repo-host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - artifacts:
+            - comdemoproduct.zip
+          name: comdemoproduct
+          target-path: resources/
+  - name: comdemoproduct
+    type: html5
+    path: app/product
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      supported-platforms: []
 resources:
-  # ---------------------------------------------------------------------
-  # services extracted from CAP configuration
-  # 'service-plan' can be configured via 'cds.requires.<name>.vcap.plan'
-  # ---------------------------------------------------------------------
   - name: cap-fe-samples-db
     type: com.sap.xs.hdi-container
     parameters:
-      service: hana # or 'hanatrial' on trial landscapes
+      service: hana
       service-plan: hdi-shared
     properties:
       hdi-service-name: ${service-name}
-
-  # ---------------------------------------------------------------------
-  # Sequence of instance creation is important!!!
-  # Job Scheduler needs to be created first before UAA instance
-  # in order for grant-as-authority-to-apps to take effect.
-  # ---------------------------------------------------------------------
   - name: cap-fe-samples-jobscheduler
     type: org.cloudfoundry.managed-service
     parameters:
+      config:
+        enable-xsuaa-support: true
       service: jobscheduler
       service-plan: standard
-      config:
-        enable-xsuaa-support: true # mandatory for jobs using REST endpoints
-
   - name: cap-fe-samples-uaa
     type: org.cloudfoundry.managed-service
     parameters:
-      ##### Path to xs-security.json to add roles and scopes   ####
+      config:
+        tenant-mode: dedicated
+        xsappname: cap-fe-samples-${space}
       path: ./xs-security.json
       service: xsuaa
       service-plan: application
-      config:
-        xsappname: cap-fe-samples-${space} #  name + space dependency
-        tenant-mode: dedicated
+  - name: cap-fe-samples-html5-repo-runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-runtime
+  - name: cap-fe-samples-html5-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+  - name: cap-fe-samples-portal-resources
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: portal
+      service-plan: standard
+  - name: ui5-service
+    properties:
+      srv-url: https://ui5.sap.com
+parameters:
+  deploy_mode: html5-repo
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm install --production
+        - npx -p @sap/cds-dk cds build --production
