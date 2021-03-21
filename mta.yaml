@@ -22,6 +22,9 @@ modules:
     # ------------------------------------------------------------
     type: nodejs
     path: gen/srv
+    parameters:
+      disk-quota: 256M
+      memory: 256M
     properties:
       SAP_JWT_TRUST_ACL: '[{"clientid":"*","identityzone":"*"}]'
     requires:
@@ -53,6 +56,8 @@ modules:
       disk-quota: 256M
       memory: 256M
     requires:
+      - name: cap-fe-samples-html5-repo-runtime
+      - name: cap-fe-samples-portal-resources
       - name: cap-fe-samples-uaa
       - name: srv-api
         group: destinations
@@ -60,6 +65,46 @@ modules:
           forwardAuthToken: true
           name: srv-api
           url: ~{srv-url}
+
+  # -------------------- UI DEPLOYER ------------------------
+  - name: cap-fe-samples-ui-deployer
+    type: com.sap.html5.application-content
+    path: ui-deployer
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: cap-fe-samples-html5-repo-host
+    build-parameters:
+      requires:
+        - name: app-product
+          artifacts:
+            - "./*"
+          target-path: resources/product
+
+  - name: app-product
+    type: html5
+    path: app/product
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      supported-platforms: []
+      build-result: dist
+
+    # -------------------- PORTAL ------------------------
+  - name: cap-fe-samples-portal
+    type: com.sap.portal.content
+    path: portal
+    parameters:
+      stack: cflinuxfs3
+      memory: 128M
+      buildpack: "https://github.com/cloudfoundry/nodejs-buildpack/releases/download/v1.6.39/nodejs-buildpack-cflinuxfs3-v1.6.39.zip"
+    requires:
+      - name: cap-fe-samples-portal-resources
+      - name: cap-fe-samples-html5-repo-host
+      - name: cap-fe-samples-uaa
 
 resources:
   # ---------------------------------------------------------------------
@@ -94,6 +139,24 @@ resources:
       path: ./xs-security.json
       service: xsuaa
       service-plan: application
-      config:
-        xsappname: cap-fe-samples-${space} #  name + space dependency
-        tenant-mode: dedicated
+      # config:
+      #   xsappname: cap-fe-samples-${space} #  name + space dependency
+      #   tenant-mode: dedicated
+
+  - name: cap-fe-samples-html5-repo-runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo
+
+  - name: cap-fe-samples-html5-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: app-host
+      service: html5-apps-repo
+
+  - name: cap-fe-samples-portal-resources
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: standard
+      service: portal
