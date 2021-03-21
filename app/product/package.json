@@ -15,6 +15,7 @@
 		"start": "fiori run --open test/flpSandbox.html#masterDetail-display",
 		"start-mock": "fiori run --open test/flpSandboxMockServer.html#masterDetail-display",
 		"start-local": "",
+		"start-router": "node node_modules/@sap/html5-repo-mock/index.js --flp",
 		"build": "rimraf dist && ui5 build -a --include-task=generateManifestBundle generateCachebusterInfo",
 		"build:cf": "ui5 build --clean-dest --config ui5-deploy.yaml --include-task=generateManifestBundle generateCachebusterInfo",
 		"deploy": "fiori add deploy-config"
@@ -25,6 +26,8 @@
 		]
 	},
 	"devDependencies": {
+		"@sap/approuter": "^10.1.0",
+		"@sap/html5-repo-mock": "2.0.1",
 		"@sap/ui5-builder-webide-extension": "1.0.x",
 		"@sap/ux-specification": "^1.84.6",
 		"@sap/ux-ui5-tooling": "^1.1.5",
