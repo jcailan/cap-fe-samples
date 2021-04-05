@@ -114,4 +114,25 @@ service northwind {
             Id          as Code,
             Description as Text
         };
+
+    type Parameter {
+        KeyName : String;
+    }
+
+    type Action {
+        Id                 : String;
+        Name               : String;
+        Config             : {
+            SemanticObject : String;
+            Action         : String;
+            Parameters     : array of Parameter;
+        };
+    }
+
+    type ConfigData {
+        Id      : String;
+        Actions : array of Action;
+    }
+
+    function GetData() returns ConfigData;
 }

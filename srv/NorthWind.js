@@ -16,4 +16,21 @@ module.exports = cds.service.impl(async function() {
 	this.before("UPDATE", Reviews, async request => {
 		await util.validate(request);
 	});
+
+	this.on("GetData", context => {
+		return {
+			Id: "1001",
+			Actions: [{
+				Id: "10",
+				Name: "Create Work Order",
+				Config: {
+					SemanticObject: "WorkOrder",
+					Action: "create",
+					Parameters: [{
+						KeyName: "WorkOrder"
+					}]
+				}
+			}]
+		};
+	});
 });
