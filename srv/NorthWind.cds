@@ -6,6 +6,7 @@ using {
 
 service northwind {
 
+    @odata.draft.enabled
     entity Products          as
         SELECT FROM view.Products {
             Id,
@@ -49,7 +50,7 @@ service northwind {
             ToProduct
         };
 
-    @readonly
+    @odata.draft.enabled
     entity Reviews           as
         SELECT FROM td.ProductReviews {
             Id,

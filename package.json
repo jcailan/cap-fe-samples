@@ -6,15 +6,27 @@
 	"license": "MIT",
 	"private": false,
 	"dependencies": {
-		"@sap/cds": "^4",
+		"@sap/cds": "^5",
 		"@sap/cds-odata-v2-adapter-proxy": "^1.4.46",
-		"express": "^4"
+		"express": "^4",
+		"hdb": "^0.18.3"
 	},
 	"devDependencies": {
+		"@sap/hdi-deploy": "^4.0.5",
 		"sqlite3": "^5"
 	},
 	"scripts": {
 		"version": "cds --version > .cdsversion",
 		"start": "npx cds run"
+	},
+	"cds": {
+		"hana": {
+			"deploy-format": "hdbtable"
+		},
+		"requires": {
+			"db": {
+				"kind": "hana"
+			}
+		}
 	}
 }
