@@ -1,0 +1,62 @@
+--batch_f436-a151-adc8
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+GET Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=true)/ToReviews?$skip=0&$top=10&$orderby=HasActiveEntity%20asc&$select=Name%2cCreatedAt%2cRating%2cComment%2cId%2cIsActiveEntity%2cHasDraftEntity%2cHasActiveEntity&$inlinecount=allpages HTTP/1.1
+sap-cancel-on-close: true
+sap-contextid-accept: header
+Accept: application/json
+Accept-Language: en
+DataServiceVersion: 2.0
+MaxDataServiceVersion: 2.0
+
+
+--batch_f436-a151-adc8--
+
+
+
+--batch_f436-a151-adc8
+content-type: application/http
+content-transfer-encoding: binary
+
+HTTP/1.1 200 OK
+content-type: application/json
+dataserviceversion: 2.0
+
+{
+	"d": {
+		"results": [
+			{
+				"Name": "Jhodel Cailan",
+				"CreatedAt": "/Date(1623061580556)/",
+				"Rating": null,
+				"Comment": null,
+				"Id": "43176d01-a9c5-47a7-ab14-7525bd06d772",
+				"IsActiveEntity": true,
+				"HasActiveEntity": false,
+				"HasDraftEntity": false,
+				"ToProduct": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Reviews(Id=guid'43176d01-a9c5-47a7-ab14-7525bd06d772',IsActiveEntity=true)/ToProduct"
+					}
+				},
+				"DraftAdministrativeData": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Reviews(Id=guid'43176d01-a9c5-47a7-ab14-7525bd06d772',IsActiveEntity=true)/DraftAdministrativeData"
+					}
+				},
+				"SiblingEntity": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Reviews(Id=guid'43176d01-a9c5-47a7-ab14-7525bd06d772',IsActiveEntity=true)/SiblingEntity"
+					}
+				},
+				"__metadata": {
+					"uri": "http://localhost:4004/v2/northwind/Reviews(Id=guid'43176d01-a9c5-47a7-ab14-7525bd06d772',IsActiveEntity=true)",
+					"type": "northwind.Reviews"
+				}
+			}
+		],
+		"__count": "1"
+	}
+}
+--batch_f436-a151-adc8--

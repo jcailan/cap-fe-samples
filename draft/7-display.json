@@ -1,0 +1,110 @@
+--batch_489a-5686-f922
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+GET Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=true)?$expand=ToSupplier%2cToStockAvailability HTTP/1.1
+sap-cancel-on-close: true
+sap-contextid-accept: header
+Accept: application/json
+Accept-Language: en
+DataServiceVersion: 2.0
+MaxDataServiceVersion: 2.0
+
+
+--batch_489a-5686-f922--
+
+
+
+--batch_489a-5686-f922
+content-type: application/http
+content-transfer-encoding: binary
+
+HTTP/1.1 200 OK
+content-type: application/json
+dataserviceversion: 2.0
+
+{
+	"d": {
+		"Id": "1b6dd815-fa4d-4836-b060-5a3ab497c13c",
+		"Name": "Test 7",
+		"Description": "description",
+		"ImageUrl": null,
+		"ReleaseDate": null,
+		"DiscontinuedDate": null,
+		"Rating": null,
+		"Price": "10",
+		"Height": null,
+		"Width": null,
+		"Depth": null,
+		"Quantity": "20",
+		"ToUnitOfMeasure_Id": "PC",
+		"ToCurrency_Id": "USD",
+		"ToCategory_Id": "B",
+		"Category": "Beverages",
+		"ToDimensionUnit_Id": null,
+		"StockAvailability": 3,
+		"ToSupplier_Id": null,
+		"ToStockAvailability": {
+			"Id": 3,
+			"Description": "In Stock",
+			"ToProduct": {
+				"__deferred": {
+					"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)/ToProduct"
+				}
+			},
+			"__metadata": {
+				"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)",
+				"type": "northwind.StockAvailability"
+			}
+		},
+		"ToSupplier": null,
+		"IsActiveEntity": true,
+		"HasActiveEntity": false,
+		"HasDraftEntity": false,
+		"ToUnitOfMeasure": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=true)/ToUnitOfMeasure"
+			}
+		},
+		"ToCurrency": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=true)/ToCurrency"
+			}
+		},
+		"ToCategory": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=true)/ToCategory"
+			}
+		},
+		"ToDimensionUnit": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=true)/ToDimensionUnit"
+			}
+		},
+		"ToSalesData": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=true)/ToSalesData"
+			}
+		},
+		"ToReviews": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=true)/ToReviews"
+			}
+		},
+		"DraftAdministrativeData": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=true)/DraftAdministrativeData"
+			}
+		},
+		"SiblingEntity": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=true)/SiblingEntity"
+			}
+		},
+		"__metadata": {
+			"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=true)",
+			"type": "northwind.Products"
+		}
+	}
+}
+--batch_489a-5686-f922--

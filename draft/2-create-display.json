@@ -1,0 +1,98 @@
+--batch_d977-5de6-5d96
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+GET Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=false)?$expand=ToSupplier%2cToStockAvailability HTTP/1.1
+sap-cancel-on-close: true
+sap-contextid-accept: header
+Accept: application/json
+Accept-Language: en
+DataServiceVersion: 2.0
+MaxDataServiceVersion: 2.0
+
+
+--batch_d977-5de6-5d96--
+
+
+
+--batch_d977-5de6-5d96
+content-type: application/http
+content-transfer-encoding: binary
+
+HTTP/1.1 200 OK
+content-type: application/json
+dataserviceversion: 2.0
+
+{
+	"d": {
+		"Id": "1b6dd815-fa4d-4836-b060-5a3ab497c13c",
+		"Name": null,
+		"Description": null,
+		"ImageUrl": null,
+		"ReleaseDate": null,
+		"DiscontinuedDate": null,
+		"Rating": null,
+		"Price": null,
+		"Height": null,
+		"Width": null,
+		"Depth": null,
+		"Quantity": null,
+		"ToUnitOfMeasure_Id": null,
+		"ToCurrency_Id": null,
+		"ToCategory_Id": null,
+		"Category": null,
+		"ToDimensionUnit_Id": null,
+		"StockAvailability": null,
+		"ToSupplier_Id": null,
+		"ToStockAvailability": null,
+		"ToSupplier": null,
+		"IsActiveEntity": false,
+		"HasActiveEntity": false,
+		"HasDraftEntity": false,
+		"ToUnitOfMeasure": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=false)/ToUnitOfMeasure"
+			}
+		},
+		"ToCurrency": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=false)/ToCurrency"
+			}
+		},
+		"ToCategory": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=false)/ToCategory"
+			}
+		},
+		"ToDimensionUnit": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=false)/ToDimensionUnit"
+			}
+		},
+		"ToSalesData": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=false)/ToSalesData"
+			}
+		},
+		"ToReviews": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=false)/ToReviews"
+			}
+		},
+		"DraftAdministrativeData": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=false)/DraftAdministrativeData"
+			}
+		},
+		"SiblingEntity": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=false)/SiblingEntity"
+			}
+		},
+		"__metadata": {
+			"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=false)",
+			"type": "northwind.Products"
+		}
+	}
+}
+--batch_d977-5de6-5d96--
