@@ -139,6 +139,9 @@
 							"settings": {
 								"editableHeaderContent": true,
 								"sections": {
+									"ToReviews::com.sap.vocabularies.UI.v1.LineItem": {
+										"createMode": "inline"
+									},
 									"ToSalesData::com.sap.vocabularies.UI.v1.LineItem": {
 										"navigationProperty": "ToSalesData",
 										"entitySet": "SalesData",
