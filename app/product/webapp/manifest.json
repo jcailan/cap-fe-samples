@@ -113,7 +113,11 @@
 		"settings": {
 			"forceGlobalRefresh": false,
 			"objectPageHeaderType": "Dynamic",
-			"showDraftToggle": false
+			"showDraftToggle": false,
+			"useColumnLayoutForSmartForm": false,
+			"flexibleColumnLayout": {
+				"defaultTwoColumnLayoutType": "TwoColumnsMidExpanded"
+			}
 		},
 		"pages": {
 			"ListReport|Products": {
