@@ -73,16 +73,16 @@ annotate northwind.Products with @(
                 $Type  : 'UI.ReferenceFacet',
                 Target : 'ToReviews/@UI.LineItem',
                 Label  : '{i18n>ProductReviews}'
-            },
-            {
-                $Type  : 'UI.ReferenceFacet',
-                Target : 'ToSalesData/@UI.Chart',
-                Label  : '{i18n>MonthlyRevenue}'
-            },
-            {
-                $Type  : 'UI.ReferenceFacet',
-                Target : 'ToSalesData/@UI.LineItem',
-                Label  : '{i18n>SalesData}'
+            // },
+            // {
+            //     $Type  : 'UI.ReferenceFacet',
+            //     Target : 'ToSalesData/@UI.Chart',
+            //     Label  : '{i18n>MonthlyRevenue}'
+            // },
+            // {
+            //     $Type  : 'UI.ReferenceFacet',
+            //     Target : 'ToSalesData/@UI.LineItem',
+            //     Label  : '{i18n>SalesData}'
             }
         ],
         DataPoint #AverageRatingValue  : {

@@ -50,7 +50,6 @@ service northwind {
             ToProduct
         };
 
-    @odata.draft.enabled
     entity Reviews           as
         SELECT FROM td.ProductReviews {
             Id,

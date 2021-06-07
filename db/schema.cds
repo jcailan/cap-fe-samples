@@ -22,7 +22,7 @@ context md {
                                on ToSalesData.ToProduct = $self;
         ToCategory       : Association to Categories;
         ToSupplier       : Association to Suppliers;
-        ToReviews        : Association to many td.ProductReviews
+        ToReviews        : Composition of many td.ProductReviews
                                on ToReviews.ToProduct = $self;
     }
 
@@ -93,38 +93,38 @@ context td {
 
 context view {
     entity AverageRating as
-        select from td.ProductReviews {
-            ToProduct.Id as ProductId,
+        SELECT FROM td.ProductReviews {
+            ToProduct.Id AS ProductId,
             avg(
                 Rating
-            )            as AverageRating : Decimal(16, 2)
+            )            AS AverageRating : Decimal(16, 2)
         }
-        group by
+        GROUP BY
             ToProduct.Id;
 
     entity Products      as
-        select from md.Products
-        mixin {
-            ToStockAvailability : Association to md.StockAvailability
-                                      on ToStockAvailability.Id = $projection.StockAvailability;
-            ToAverageRating     : Association to AverageRating
-                                      on ToAverageRating.ProductId = Id;
+        SELECT FROM md.Products
+        MIXIN {
+            ToStockAvailability : Association TO md.StockAvailability
+                                      ON ToStockAvailability.Id = $projection.StockAvailability;
+            ToAverageRating     : Association TO AverageRating
+                                      ON ToAverageRating.ProductId = Id;
         }
-        into {
+        INTO {
             *,
-            ToAverageRating.AverageRating as Rating,
-            case
-                when
+            ToAverageRating.AverageRating AS Rating,
+            CASE
+                WHEN
                     Quantity >= 8
-                then
+                THEN
                     3
-                when
+                WHEN
                     Quantity > 0
-                then
+                THEN
                     2
-                else
+                ELSE
                     1
-            end                           as StockAvailability : Integer,
+            END                           AS StockAvailability : Integer,
             ToStockAvailability
         };
 }
