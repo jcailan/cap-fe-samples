@@ -1,0 +1,117 @@
+--batch_194c-7cdf-c5ad
+Content-Type: multipart/mixed; boundary=changeset_78e6-5521-833f
+
+--changeset_78e6-5521-833f
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+POST Products_draftEdit?PreserveChanges=true&Id=guid'06f86ef1-1525-4932-b1ce-d40661464c66'&IsActiveEntity=true HTTP/1.1
+sap-contextid-accept: header
+Accept: application/json
+Accept-Language: en
+DataServiceVersion: 2.0
+MaxDataServiceVersion: 2.0
+Content-Type: application/json
+
+
+--changeset_78e6-5521-833f--
+
+--batch_194c-7cdf-c5ad--
+
+
+
+--batch_194c-7cdf-c5ad
+content-type: multipart/mixed; boundary=changeset_78e6-5521-833f
+
+--changeset_78e6-5521-833f
+content-type: application/http
+content-transfer-encoding: binary
+content-id: 1623470964526
+
+HTTP/1.1 201 Created
+content-type: application/json
+location: http: //localhost:4004/v2/northwind/Products(Id=guid'06f86ef1-1525-4932-b1ce-d40661464c66',IsActiveEntity=false)
+dataserviceversion: 2.0
+
+{
+	"d": {
+		"Id": "06f86ef1-1525-4932-b1ce-d40661464c66",
+		"Name": "Pink Lemonade",
+		"Description": "36 Ounce Cans (Pack of 3)",
+		"ImageUrl": "/assets/pink-lemonade.jpg",
+		"ReleaseDate": "/Date(1162684800000)/",
+		"DiscontinuedDate": null,
+		"Rating": "4.25",
+		"Price": "18.8",
+		"Height": "5",
+		"Width": "10",
+		"Depth": "8",
+		"Quantity": "6",
+		"ToUnitOfMeasure_Id": "PC",
+		"ToCurrency_Id": "USD",
+		"ToCategory_Id": "B",
+		"Category": "Beverages",
+		"ToDimensionUnit_Id": "CM",
+		"StockAvailability": 2,
+		"ToSupplier_Id": "aead11fd-e35b-4f6f-a37a-e4a860aaaad7",
+		"HasDraftEntity": false,
+		"HasActiveEntity": true,
+		"IsActiveEntity": false,
+		"ToUnitOfMeasure": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'06f86ef1-1525-4932-b1ce-d40661464c66',IsActiveEntity=false)/ToUnitOfMeasure"
+			}
+		},
+		"ToCurrency": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'06f86ef1-1525-4932-b1ce-d40661464c66',IsActiveEntity=false)/ToCurrency"
+			}
+		},
+		"ToCategory": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'06f86ef1-1525-4932-b1ce-d40661464c66',IsActiveEntity=false)/ToCategory"
+			}
+		},
+		"ToDimensionUnit": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'06f86ef1-1525-4932-b1ce-d40661464c66',IsActiveEntity=false)/ToDimensionUnit"
+			}
+		},
+		"ToSalesData": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'06f86ef1-1525-4932-b1ce-d40661464c66',IsActiveEntity=false)/ToSalesData"
+			}
+		},
+		"ToStockAvailability": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'06f86ef1-1525-4932-b1ce-d40661464c66',IsActiveEntity=false)/ToStockAvailability"
+			}
+		},
+		"ToSupplier": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'06f86ef1-1525-4932-b1ce-d40661464c66',IsActiveEntity=false)/ToSupplier"
+			}
+		},
+		"ToReviews": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'06f86ef1-1525-4932-b1ce-d40661464c66',IsActiveEntity=false)/ToReviews"
+			}
+		},
+		"DraftAdministrativeData": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'06f86ef1-1525-4932-b1ce-d40661464c66',IsActiveEntity=false)/DraftAdministrativeData"
+			}
+		},
+		"SiblingEntity": {
+			"__deferred": {
+				"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'06f86ef1-1525-4932-b1ce-d40661464c66',IsActiveEntity=false)/SiblingEntity"
+			}
+		},
+		"__metadata": {
+			"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'06f86ef1-1525-4932-b1ce-d40661464c66',IsActiveEntity=false)",
+			"type": "northwind.Products"
+		}
+	}
+}
+--changeset_78e6-5521-833f--
+--batch_194c-7cdf-c5ad--

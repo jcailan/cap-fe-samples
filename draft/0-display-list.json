@@ -1,0 +1,1490 @@
+--batch_f8e0-1658-dc67
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+GET Products?$skip=0&$top=20&$filter=IsActiveEntity%20eq%20false%20or%20SiblingEntity/IsActiveEntity%20eq%20null&$select=ImageUrl%2cName%2cDescription%2cToCategory_Id%2cCategory%2cToSupplier%2fName%2cToSupplier%2cReleaseDate%2cToStockAvailability%2fId%2cToStockAvailability%2fDescription%2cRating%2cPrice%2cToCurrency_Id%2cId%2cIsActiveEntity%2cHasDraftEntity%2cHasActiveEntity%2cDraftAdministrativeData&$expand=ToSupplier%2cToStockAvailability%2cDraftAdministrativeData&$inlinecount=allpages HTTP/1.1
+sap-cancel-on-close: true
+sap-contextid-accept: header
+Accept: application/json
+Accept-Language: en
+DataServiceVersion: 2.0
+MaxDataServiceVersion: 2.0
+
+
+--batch_f8e0-1658-dc67--
+
+
+
+--batch_f8e0-1658-dc67
+content-type: application/http
+content-transfer-encoding: binary
+
+HTTP/1.1 200 OK
+content-type: application/json
+dataserviceversion: 2.0
+
+{
+	"d": {
+		"results": [
+			{
+				"ImageUrl": "/assets/pink-lemonade.jpg",
+				"Name": "Pink Lemonade",
+				"Description": "36 Ounce Cans (Pack of 3)",
+				"ToCategory_Id": "B",
+				"Category": "Beverages",
+				"ReleaseDate": "/Date(1162684800000)/",
+				"Rating": "4.25",
+				"Price": "18.8",
+				"ToCurrency_Id": "USD",
+				"Id": "06f86ef1-1525-4932-b1ce-d40661464c66",
+				"ToStockAvailability": {
+					"Id": 2,
+					"Description": "Limited Stock",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/StockAvailability(2)/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/StockAvailability(2)",
+						"type": "northwind.StockAvailability"
+					}
+				},
+				"ToSupplier": {
+					"Id": "aead11fd-e35b-4f6f-a37a-e4a860aaaad7",
+					"Name": "Exotic Liquids",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/Suppliers(guid'aead11fd-e35b-4f6f-a37a-e4a860aaaad7')/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/Suppliers(guid'aead11fd-e35b-4f6f-a37a-e4a860aaaad7')",
+						"type": "northwind.Suppliers"
+					}
+				},
+				"DraftAdministrativeData": {
+					"DraftUUID": "507b583b-89f3-4bad-a55d-065dc677d3fe",
+					"CreationDateTime": "/Date(1622868231178)/",
+					"CreatedByUser": "anonymous",
+					"DraftIsCreatedByMe": true,
+					"LastChangeDateTime": "/Date(1622868231178)/",
+					"LastChangedByUser": "anonymous",
+					"InProcessByUser": "",
+					"DraftIsProcessedByMe": false,
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/DraftAdministrativeData(guid'507b583b-89f3-4bad-a55d-065dc677d3fe')",
+						"type": "northwind.DraftAdministrativeData"
+					}
+				},
+				"IsActiveEntity": false,
+				"HasActiveEntity": true,
+				"HasDraftEntity": false,
+				"ToUnitOfMeasure": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'06f86ef1-1525-4932-b1ce-d40661464c66',IsActiveEntity=false)/ToUnitOfMeasure"
+					}
+				},
+				"ToCurrency": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'06f86ef1-1525-4932-b1ce-d40661464c66',IsActiveEntity=false)/ToCurrency"
+					}
+				},
+				"ToCategory": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'06f86ef1-1525-4932-b1ce-d40661464c66',IsActiveEntity=false)/ToCategory"
+					}
+				},
+				"ToDimensionUnit": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'06f86ef1-1525-4932-b1ce-d40661464c66',IsActiveEntity=false)/ToDimensionUnit"
+					}
+				},
+				"ToSalesData": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'06f86ef1-1525-4932-b1ce-d40661464c66',IsActiveEntity=false)/ToSalesData"
+					}
+				},
+				"ToReviews": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'06f86ef1-1525-4932-b1ce-d40661464c66',IsActiveEntity=false)/ToReviews"
+					}
+				},
+				"SiblingEntity": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'06f86ef1-1525-4932-b1ce-d40661464c66',IsActiveEntity=false)/SiblingEntity"
+					}
+				},
+				"__metadata": {
+					"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'06f86ef1-1525-4932-b1ce-d40661464c66',IsActiveEntity=false)",
+					"type": "northwind.Products"
+				}
+			},
+			{
+				"ImageUrl": "/assets/bread.jpg",
+				"Name": "Bread",
+				"Description": "Whole grain bread",
+				"ToCategory_Id": "F",
+				"Category": "Food",
+				"ReleaseDate": "/Date(694224000000)/",
+				"Rating": "4",
+				"Price": "2.5",
+				"ToCurrency_Id": "USD",
+				"Id": "08c142fa-01b0-441d-b01d-eeaa3291f6f0",
+				"ToStockAvailability": {
+					"Id": 3,
+					"Description": "In Stock",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)",
+						"type": "northwind.StockAvailability"
+					}
+				},
+				"ToSupplier": {
+					"Id": "aead11fd-e35b-4f6f-a37a-e4a860aaaad7",
+					"Name": "Exotic Liquids",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/Suppliers(guid'aead11fd-e35b-4f6f-a37a-e4a860aaaad7')/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/Suppliers(guid'aead11fd-e35b-4f6f-a37a-e4a860aaaad7')",
+						"type": "northwind.Suppliers"
+					}
+				},
+				"DraftAdministrativeData": null,
+				"IsActiveEntity": true,
+				"HasActiveEntity": false,
+				"HasDraftEntity": false,
+				"ToUnitOfMeasure": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'08c142fa-01b0-441d-b01d-eeaa3291f6f0',IsActiveEntity=true)/ToUnitOfMeasure"
+					}
+				},
+				"ToCurrency": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'08c142fa-01b0-441d-b01d-eeaa3291f6f0',IsActiveEntity=true)/ToCurrency"
+					}
+				},
+				"ToCategory": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'08c142fa-01b0-441d-b01d-eeaa3291f6f0',IsActiveEntity=true)/ToCategory"
+					}
+				},
+				"ToDimensionUnit": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'08c142fa-01b0-441d-b01d-eeaa3291f6f0',IsActiveEntity=true)/ToDimensionUnit"
+					}
+				},
+				"ToSalesData": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'08c142fa-01b0-441d-b01d-eeaa3291f6f0',IsActiveEntity=true)/ToSalesData"
+					}
+				},
+				"ToReviews": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'08c142fa-01b0-441d-b01d-eeaa3291f6f0',IsActiveEntity=true)/ToReviews"
+					}
+				},
+				"SiblingEntity": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'08c142fa-01b0-441d-b01d-eeaa3291f6f0',IsActiveEntity=true)/SiblingEntity"
+					}
+				},
+				"__metadata": {
+					"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'08c142fa-01b0-441d-b01d-eeaa3291f6f0',IsActiveEntity=true)",
+					"type": "northwind.Products"
+				}
+			},
+			{
+				"ImageUrl": null,
+				"Name": "Test 7",
+				"Description": "description",
+				"ToCategory_Id": "B",
+				"Category": "Beverages",
+				"ReleaseDate": null,
+				"Rating": null,
+				"Price": "10",
+				"ToCurrency_Id": "USD",
+				"Id": "1b6dd815-fa4d-4836-b060-5a3ab497c13c",
+				"ToStockAvailability": {
+					"Id": 3,
+					"Description": "In Stock",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)",
+						"type": "northwind.StockAvailability"
+					}
+				},
+				"ToSupplier": null,
+				"DraftAdministrativeData": null,
+				"IsActiveEntity": true,
+				"HasActiveEntity": false,
+				"HasDraftEntity": false,
+				"ToUnitOfMeasure": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=true)/ToUnitOfMeasure"
+					}
+				},
+				"ToCurrency": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=true)/ToCurrency"
+					}
+				},
+				"ToCategory": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=true)/ToCategory"
+					}
+				},
+				"ToDimensionUnit": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=true)/ToDimensionUnit"
+					}
+				},
+				"ToSalesData": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=true)/ToSalesData"
+					}
+				},
+				"ToReviews": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=true)/ToReviews"
+					}
+				},
+				"SiblingEntity": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=true)/SiblingEntity"
+					}
+				},
+				"__metadata": {
+					"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1b6dd815-fa4d-4836-b060-5a3ab497c13c',IsActiveEntity=true)",
+					"type": "northwind.Products"
+				}
+			},
+			{
+				"ImageUrl": null,
+				"Name": "Test 2",
+				"Description": "description",
+				"ToCategory_Id": "B",
+				"Category": "Beverages",
+				"ReleaseDate": null,
+				"Rating": null,
+				"Price": "10",
+				"ToCurrency_Id": "USD",
+				"Id": "1bec522b-2926-4a75-8db6-aa364a297787",
+				"ToStockAvailability": {
+					"Id": 3,
+					"Description": "In Stock",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)",
+						"type": "northwind.StockAvailability"
+					}
+				},
+				"ToSupplier": null,
+				"DraftAdministrativeData": null,
+				"IsActiveEntity": true,
+				"HasActiveEntity": false,
+				"HasDraftEntity": true,
+				"ToUnitOfMeasure": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1bec522b-2926-4a75-8db6-aa364a297787',IsActiveEntity=true)/ToUnitOfMeasure"
+					}
+				},
+				"ToCurrency": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1bec522b-2926-4a75-8db6-aa364a297787',IsActiveEntity=true)/ToCurrency"
+					}
+				},
+				"ToCategory": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1bec522b-2926-4a75-8db6-aa364a297787',IsActiveEntity=true)/ToCategory"
+					}
+				},
+				"ToDimensionUnit": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1bec522b-2926-4a75-8db6-aa364a297787',IsActiveEntity=true)/ToDimensionUnit"
+					}
+				},
+				"ToSalesData": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1bec522b-2926-4a75-8db6-aa364a297787',IsActiveEntity=true)/ToSalesData"
+					}
+				},
+				"ToReviews": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1bec522b-2926-4a75-8db6-aa364a297787',IsActiveEntity=true)/ToReviews"
+					}
+				},
+				"SiblingEntity": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1bec522b-2926-4a75-8db6-aa364a297787',IsActiveEntity=true)/SiblingEntity"
+					}
+				},
+				"__metadata": {
+					"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'1bec522b-2926-4a75-8db6-aa364a297787',IsActiveEntity=true)",
+					"type": "northwind.Products"
+				}
+			},
+			{
+				"ImageUrl": "/assets/lcd-hdtv.jpg",
+				"Name": "LCD HDTV",
+				"Description": "42 inch 1080p LCD with Built-in Blu-ray Disc Player",
+				"ToCategory_Id": "E",
+				"Category": "Electronics",
+				"ReleaseDate": "/Date(1210204800000)/",
+				"Rating": "3",
+				"Price": "1088.8",
+				"ToCurrency_Id": "AUD",
+				"Id": "58a8c519-2aa6-4289-84c3-d79de5a67dd0",
+				"ToStockAvailability": {
+					"Id": 1,
+					"Description": "Out of Stock",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/StockAvailability(1)/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/StockAvailability(1)",
+						"type": "northwind.StockAvailability"
+					}
+				},
+				"ToSupplier": {
+					"Id": "6967edb4-cd83-4c8b-90ae-6894a71b398f",
+					"Name": "Tokyo Traders",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/Suppliers(guid'6967edb4-cd83-4c8b-90ae-6894a71b398f')/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/Suppliers(guid'6967edb4-cd83-4c8b-90ae-6894a71b398f')",
+						"type": "northwind.Suppliers"
+					}
+				},
+				"DraftAdministrativeData": null,
+				"IsActiveEntity": true,
+				"HasActiveEntity": false,
+				"HasDraftEntity": false,
+				"ToUnitOfMeasure": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'58a8c519-2aa6-4289-84c3-d79de5a67dd0',IsActiveEntity=true)/ToUnitOfMeasure"
+					}
+				},
+				"ToCurrency": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'58a8c519-2aa6-4289-84c3-d79de5a67dd0',IsActiveEntity=true)/ToCurrency"
+					}
+				},
+				"ToCategory": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'58a8c519-2aa6-4289-84c3-d79de5a67dd0',IsActiveEntity=true)/ToCategory"
+					}
+				},
+				"ToDimensionUnit": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'58a8c519-2aa6-4289-84c3-d79de5a67dd0',IsActiveEntity=true)/ToDimensionUnit"
+					}
+				},
+				"ToSalesData": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'58a8c519-2aa6-4289-84c3-d79de5a67dd0',IsActiveEntity=true)/ToSalesData"
+					}
+				},
+				"ToReviews": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'58a8c519-2aa6-4289-84c3-d79de5a67dd0',IsActiveEntity=true)/ToReviews"
+					}
+				},
+				"SiblingEntity": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'58a8c519-2aa6-4289-84c3-d79de5a67dd0',IsActiveEntity=true)/SiblingEntity"
+					}
+				},
+				"__metadata": {
+					"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'58a8c519-2aa6-4289-84c3-d79de5a67dd0',IsActiveEntity=true)",
+					"type": "northwind.Products"
+				}
+			},
+			{
+				"ImageUrl": "/assets/dvd-player.jpg",
+				"Name": "DVD Player",
+				"Description": "1080P Upconversion DVD Player",
+				"ToCategory_Id": "E",
+				"Category": "Electronics",
+				"ReleaseDate": "/Date(1163548800000)/",
+				"Rating": "5",
+				"Price": "35.88",
+				"ToCurrency_Id": "AUD",
+				"Id": "5ee16f77-171c-4f1e-b455-221a1530b242",
+				"ToStockAvailability": {
+					"Id": 1,
+					"Description": "Out of Stock",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/StockAvailability(1)/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/StockAvailability(1)",
+						"type": "northwind.StockAvailability"
+					}
+				},
+				"ToSupplier": {
+					"Id": "6967edb4-cd83-4c8b-90ae-6894a71b398f",
+					"Name": "Tokyo Traders",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/Suppliers(guid'6967edb4-cd83-4c8b-90ae-6894a71b398f')/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/Suppliers(guid'6967edb4-cd83-4c8b-90ae-6894a71b398f')",
+						"type": "northwind.Suppliers"
+					}
+				},
+				"DraftAdministrativeData": null,
+				"IsActiveEntity": true,
+				"HasActiveEntity": false,
+				"HasDraftEntity": false,
+				"ToUnitOfMeasure": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'5ee16f77-171c-4f1e-b455-221a1530b242',IsActiveEntity=true)/ToUnitOfMeasure"
+					}
+				},
+				"ToCurrency": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'5ee16f77-171c-4f1e-b455-221a1530b242',IsActiveEntity=true)/ToCurrency"
+					}
+				},
+				"ToCategory": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'5ee16f77-171c-4f1e-b455-221a1530b242',IsActiveEntity=true)/ToCategory"
+					}
+				},
+				"ToDimensionUnit": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'5ee16f77-171c-4f1e-b455-221a1530b242',IsActiveEntity=true)/ToDimensionUnit"
+					}
+				},
+				"ToSalesData": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'5ee16f77-171c-4f1e-b455-221a1530b242',IsActiveEntity=true)/ToSalesData"
+					}
+				},
+				"ToReviews": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'5ee16f77-171c-4f1e-b455-221a1530b242',IsActiveEntity=true)/ToReviews"
+					}
+				},
+				"SiblingEntity": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'5ee16f77-171c-4f1e-b455-221a1530b242',IsActiveEntity=true)/SiblingEntity"
+					}
+				},
+				"__metadata": {
+					"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'5ee16f77-171c-4f1e-b455-221a1530b242',IsActiveEntity=true)",
+					"type": "northwind.Products"
+				}
+			},
+			{
+				"ImageUrl": null,
+				"Name": "Test 5",
+				"Description": "description",
+				"ToCategory_Id": "B",
+				"Category": "Beverages",
+				"ReleaseDate": null,
+				"Rating": null,
+				"Price": "10",
+				"ToCurrency_Id": "USD",
+				"Id": "60f30a97-04c8-42f6-b098-f0f349e0adfb",
+				"ToStockAvailability": {
+					"Id": 3,
+					"Description": "In Stock",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)",
+						"type": "northwind.StockAvailability"
+					}
+				},
+				"ToSupplier": null,
+				"DraftAdministrativeData": null,
+				"IsActiveEntity": true,
+				"HasActiveEntity": false,
+				"HasDraftEntity": false,
+				"ToUnitOfMeasure": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'60f30a97-04c8-42f6-b098-f0f349e0adfb',IsActiveEntity=true)/ToUnitOfMeasure"
+					}
+				},
+				"ToCurrency": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'60f30a97-04c8-42f6-b098-f0f349e0adfb',IsActiveEntity=true)/ToCurrency"
+					}
+				},
+				"ToCategory": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'60f30a97-04c8-42f6-b098-f0f349e0adfb',IsActiveEntity=true)/ToCategory"
+					}
+				},
+				"ToDimensionUnit": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'60f30a97-04c8-42f6-b098-f0f349e0adfb',IsActiveEntity=true)/ToDimensionUnit"
+					}
+				},
+				"ToSalesData": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'60f30a97-04c8-42f6-b098-f0f349e0adfb',IsActiveEntity=true)/ToSalesData"
+					}
+				},
+				"ToReviews": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'60f30a97-04c8-42f6-b098-f0f349e0adfb',IsActiveEntity=true)/ToReviews"
+					}
+				},
+				"SiblingEntity": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'60f30a97-04c8-42f6-b098-f0f349e0adfb',IsActiveEntity=true)/SiblingEntity"
+					}
+				},
+				"__metadata": {
+					"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'60f30a97-04c8-42f6-b098-f0f349e0adfb',IsActiveEntity=true)",
+					"type": "northwind.Products"
+				}
+			},
+			{
+				"ImageUrl": null,
+				"Name": "Test 4",
+				"Description": "description",
+				"ToCategory_Id": "B",
+				"Category": "Beverages",
+				"ReleaseDate": null,
+				"Rating": null,
+				"Price": "10",
+				"ToCurrency_Id": "USD",
+				"Id": "641182c4-b303-43d4-bbdd-9edc11f216b5",
+				"ToStockAvailability": {
+					"Id": 3,
+					"Description": "In Stock",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)",
+						"type": "northwind.StockAvailability"
+					}
+				},
+				"ToSupplier": null,
+				"DraftAdministrativeData": null,
+				"IsActiveEntity": true,
+				"HasActiveEntity": false,
+				"HasDraftEntity": true,
+				"ToUnitOfMeasure": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'641182c4-b303-43d4-bbdd-9edc11f216b5',IsActiveEntity=true)/ToUnitOfMeasure"
+					}
+				},
+				"ToCurrency": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'641182c4-b303-43d4-bbdd-9edc11f216b5',IsActiveEntity=true)/ToCurrency"
+					}
+				},
+				"ToCategory": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'641182c4-b303-43d4-bbdd-9edc11f216b5',IsActiveEntity=true)/ToCategory"
+					}
+				},
+				"ToDimensionUnit": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'641182c4-b303-43d4-bbdd-9edc11f216b5',IsActiveEntity=true)/ToDimensionUnit"
+					}
+				},
+				"ToSalesData": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'641182c4-b303-43d4-bbdd-9edc11f216b5',IsActiveEntity=true)/ToSalesData"
+					}
+				},
+				"ToReviews": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'641182c4-b303-43d4-bbdd-9edc11f216b5',IsActiveEntity=true)/ToReviews"
+					}
+				},
+				"SiblingEntity": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'641182c4-b303-43d4-bbdd-9edc11f216b5',IsActiveEntity=true)/SiblingEntity"
+					}
+				},
+				"__metadata": {
+					"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'641182c4-b303-43d4-bbdd-9edc11f216b5',IsActiveEntity=true)",
+					"type": "northwind.Products"
+				}
+			},
+			{
+				"ImageUrl": null,
+				"Name": "Test",
+				"Description": "Sample description",
+				"ToCategory_Id": "B",
+				"Category": "Beverages",
+				"ReleaseDate": null,
+				"Rating": null,
+				"Price": "10",
+				"ToCurrency_Id": "USD",
+				"Id": "8d3e2e7e-d6d0-478c-870d-8e638c4456d3",
+				"ToStockAvailability": {
+					"Id": 3,
+					"Description": "In Stock",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)",
+						"type": "northwind.StockAvailability"
+					}
+				},
+				"ToSupplier": null,
+				"DraftAdministrativeData": null,
+				"IsActiveEntity": true,
+				"HasActiveEntity": false,
+				"HasDraftEntity": true,
+				"ToUnitOfMeasure": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'8d3e2e7e-d6d0-478c-870d-8e638c4456d3',IsActiveEntity=true)/ToUnitOfMeasure"
+					}
+				},
+				"ToCurrency": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'8d3e2e7e-d6d0-478c-870d-8e638c4456d3',IsActiveEntity=true)/ToCurrency"
+					}
+				},
+				"ToCategory": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'8d3e2e7e-d6d0-478c-870d-8e638c4456d3',IsActiveEntity=true)/ToCategory"
+					}
+				},
+				"ToDimensionUnit": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'8d3e2e7e-d6d0-478c-870d-8e638c4456d3',IsActiveEntity=true)/ToDimensionUnit"
+					}
+				},
+				"ToSalesData": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'8d3e2e7e-d6d0-478c-870d-8e638c4456d3',IsActiveEntity=true)/ToSalesData"
+					}
+				},
+				"ToReviews": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'8d3e2e7e-d6d0-478c-870d-8e638c4456d3',IsActiveEntity=true)/ToReviews"
+					}
+				},
+				"SiblingEntity": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'8d3e2e7e-d6d0-478c-870d-8e638c4456d3',IsActiveEntity=true)/SiblingEntity"
+					}
+				},
+				"__metadata": {
+					"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'8d3e2e7e-d6d0-478c-870d-8e638c4456d3',IsActiveEntity=true)",
+					"type": "northwind.Products"
+				}
+			},
+			{
+				"ImageUrl": "/assets/fruit-punch.png",
+				"Name": "Fruit Punch",
+				"Description": "Mango flavor, 8.3 Ounce Cans (Pack of 24)",
+				"ToCategory_Id": "B",
+				"Category": "Beverages",
+				"ReleaseDate": "/Date(1041724800000)/",
+				"Rating": "3",
+				"Price": "22.99",
+				"ToCurrency_Id": "USD",
+				"Id": "9e800613-7b96-4203-8817-f25fcc89dfbc",
+				"ToStockAvailability": {
+					"Id": 2,
+					"Description": "Limited Stock",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/StockAvailability(2)/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/StockAvailability(2)",
+						"type": "northwind.StockAvailability"
+					}
+				},
+				"ToSupplier": {
+					"Id": "aead11fd-e35b-4f6f-a37a-e4a860aaaad7",
+					"Name": "Exotic Liquids",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/Suppliers(guid'aead11fd-e35b-4f6f-a37a-e4a860aaaad7')/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/Suppliers(guid'aead11fd-e35b-4f6f-a37a-e4a860aaaad7')",
+						"type": "northwind.Suppliers"
+					}
+				},
+				"DraftAdministrativeData": null,
+				"IsActiveEntity": true,
+				"HasActiveEntity": false,
+				"HasDraftEntity": false,
+				"ToUnitOfMeasure": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'9e800613-7b96-4203-8817-f25fcc89dfbc',IsActiveEntity=true)/ToUnitOfMeasure"
+					}
+				},
+				"ToCurrency": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'9e800613-7b96-4203-8817-f25fcc89dfbc',IsActiveEntity=true)/ToCurrency"
+					}
+				},
+				"ToCategory": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'9e800613-7b96-4203-8817-f25fcc89dfbc',IsActiveEntity=true)/ToCategory"
+					}
+				},
+				"ToDimensionUnit": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'9e800613-7b96-4203-8817-f25fcc89dfbc',IsActiveEntity=true)/ToDimensionUnit"
+					}
+				},
+				"ToSalesData": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'9e800613-7b96-4203-8817-f25fcc89dfbc',IsActiveEntity=true)/ToSalesData"
+					}
+				},
+				"ToReviews": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'9e800613-7b96-4203-8817-f25fcc89dfbc',IsActiveEntity=true)/ToReviews"
+					}
+				},
+				"SiblingEntity": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'9e800613-7b96-4203-8817-f25fcc89dfbc',IsActiveEntity=true)/SiblingEntity"
+					}
+				},
+				"__metadata": {
+					"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'9e800613-7b96-4203-8817-f25fcc89dfbc',IsActiveEntity=true)",
+					"type": "northwind.Products"
+				}
+			},
+			{
+				"ImageUrl": "/assets/milk.jpg",
+				"Name": "Milk",
+				"Description": "Low fat milk",
+				"ToCategory_Id": "B",
+				"Category": "Beverages",
+				"ReleaseDate": "/Date(812505600000)/",
+				"Rating": "3",
+				"Price": "3.5",
+				"ToCurrency_Id": "USD",
+				"Id": "aa74747d-c297-4f0a-981a-8fb0ca92b756",
+				"ToStockAvailability": {
+					"Id": 3,
+					"Description": "In Stock",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)",
+						"type": "northwind.StockAvailability"
+					}
+				},
+				"ToSupplier": {
+					"Id": "aead11fd-e35b-4f6f-a37a-e4a860aaaad7",
+					"Name": "Exotic Liquids",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/Suppliers(guid'aead11fd-e35b-4f6f-a37a-e4a860aaaad7')/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/Suppliers(guid'aead11fd-e35b-4f6f-a37a-e4a860aaaad7')",
+						"type": "northwind.Suppliers"
+					}
+				},
+				"DraftAdministrativeData": null,
+				"IsActiveEntity": true,
+				"HasActiveEntity": false,
+				"HasDraftEntity": false,
+				"ToUnitOfMeasure": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'aa74747d-c297-4f0a-981a-8fb0ca92b756',IsActiveEntity=true)/ToUnitOfMeasure"
+					}
+				},
+				"ToCurrency": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'aa74747d-c297-4f0a-981a-8fb0ca92b756',IsActiveEntity=true)/ToCurrency"
+					}
+				},
+				"ToCategory": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'aa74747d-c297-4f0a-981a-8fb0ca92b756',IsActiveEntity=true)/ToCategory"
+					}
+				},
+				"ToDimensionUnit": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'aa74747d-c297-4f0a-981a-8fb0ca92b756',IsActiveEntity=true)/ToDimensionUnit"
+					}
+				},
+				"ToSalesData": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'aa74747d-c297-4f0a-981a-8fb0ca92b756',IsActiveEntity=true)/ToSalesData"
+					}
+				},
+				"ToReviews": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'aa74747d-c297-4f0a-981a-8fb0ca92b756',IsActiveEntity=true)/ToReviews"
+					}
+				},
+				"SiblingEntity": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'aa74747d-c297-4f0a-981a-8fb0ca92b756',IsActiveEntity=true)/SiblingEntity"
+					}
+				},
+				"__metadata": {
+					"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'aa74747d-c297-4f0a-981a-8fb0ca92b756',IsActiveEntity=true)",
+					"type": "northwind.Products"
+				}
+			},
+			{
+				"ImageUrl": "/assets/lemonade.jpg",
+				"Name": "Lemonade",
+				"Description": "Classic, refreshing lemonade (Single bottle)",
+				"ToCategory_Id": "B",
+				"Category": "Beverages",
+				"ReleaseDate": "/Date(0)/",
+				"Rating": "5",
+				"Price": "1.01",
+				"ToCurrency_Id": "USD",
+				"Id": "aa7d843f-c6c5-4bc9-846b-ddac07966f10",
+				"ToStockAvailability": {
+					"Id": 2,
+					"Description": "Limited Stock",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/StockAvailability(2)/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/StockAvailability(2)",
+						"type": "northwind.StockAvailability"
+					}
+				},
+				"ToSupplier": {
+					"Id": "6967edb4-cd83-4c8b-90ae-6894a71b398f",
+					"Name": "Tokyo Traders",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/Suppliers(guid'6967edb4-cd83-4c8b-90ae-6894a71b398f')/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/Suppliers(guid'6967edb4-cd83-4c8b-90ae-6894a71b398f')",
+						"type": "northwind.Suppliers"
+					}
+				},
+				"DraftAdministrativeData": null,
+				"IsActiveEntity": true,
+				"HasActiveEntity": false,
+				"HasDraftEntity": false,
+				"ToUnitOfMeasure": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'aa7d843f-c6c5-4bc9-846b-ddac07966f10',IsActiveEntity=true)/ToUnitOfMeasure"
+					}
+				},
+				"ToCurrency": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'aa7d843f-c6c5-4bc9-846b-ddac07966f10',IsActiveEntity=true)/ToCurrency"
+					}
+				},
+				"ToCategory": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'aa7d843f-c6c5-4bc9-846b-ddac07966f10',IsActiveEntity=true)/ToCategory"
+					}
+				},
+				"ToDimensionUnit": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'aa7d843f-c6c5-4bc9-846b-ddac07966f10',IsActiveEntity=true)/ToDimensionUnit"
+					}
+				},
+				"ToSalesData": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'aa7d843f-c6c5-4bc9-846b-ddac07966f10',IsActiveEntity=true)/ToSalesData"
+					}
+				},
+				"ToReviews": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'aa7d843f-c6c5-4bc9-846b-ddac07966f10',IsActiveEntity=true)/ToReviews"
+					}
+				},
+				"SiblingEntity": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'aa7d843f-c6c5-4bc9-846b-ddac07966f10',IsActiveEntity=true)/SiblingEntity"
+					}
+				},
+				"__metadata": {
+					"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'aa7d843f-c6c5-4bc9-846b-ddac07966f10',IsActiveEntity=true)",
+					"type": "northwind.Products"
+				}
+			},
+			{
+				"ImageUrl": null,
+				"Name": "Test 3",
+				"Description": "Description",
+				"ToCategory_Id": "B",
+				"Category": "Beverages",
+				"ReleaseDate": null,
+				"Rating": null,
+				"Price": "1",
+				"ToCurrency_Id": "USD",
+				"Id": "bc3ee33f-d457-428c-ab04-43250472cbe8",
+				"ToStockAvailability": {
+					"Id": 3,
+					"Description": "In Stock",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)",
+						"type": "northwind.StockAvailability"
+					}
+				},
+				"ToSupplier": null,
+				"DraftAdministrativeData": null,
+				"IsActiveEntity": true,
+				"HasActiveEntity": false,
+				"HasDraftEntity": true,
+				"ToUnitOfMeasure": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'bc3ee33f-d457-428c-ab04-43250472cbe8',IsActiveEntity=true)/ToUnitOfMeasure"
+					}
+				},
+				"ToCurrency": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'bc3ee33f-d457-428c-ab04-43250472cbe8',IsActiveEntity=true)/ToCurrency"
+					}
+				},
+				"ToCategory": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'bc3ee33f-d457-428c-ab04-43250472cbe8',IsActiveEntity=true)/ToCategory"
+					}
+				},
+				"ToDimensionUnit": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'bc3ee33f-d457-428c-ab04-43250472cbe8',IsActiveEntity=true)/ToDimensionUnit"
+					}
+				},
+				"ToSalesData": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'bc3ee33f-d457-428c-ab04-43250472cbe8',IsActiveEntity=true)/ToSalesData"
+					}
+				},
+				"ToReviews": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'bc3ee33f-d457-428c-ab04-43250472cbe8',IsActiveEntity=true)/ToReviews"
+					}
+				},
+				"SiblingEntity": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'bc3ee33f-d457-428c-ab04-43250472cbe8',IsActiveEntity=true)/SiblingEntity"
+					}
+				},
+				"__metadata": {
+					"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'bc3ee33f-d457-428c-ab04-43250472cbe8',IsActiveEntity=true)",
+					"type": "northwind.Products"
+				}
+			},
+			{
+				"ImageUrl": "/assets/havina-cola.jpg",
+				"Name": "Havina Cola",
+				"Description": "The Original Key Lime Cola",
+				"ToCategory_Id": "B",
+				"Category": "Beverages",
+				"ReleaseDate": "/Date(1128124800000)/",
+				"Rating": "3",
+				"Price": "19.9",
+				"ToCurrency_Id": "USD",
+				"Id": "d97de1ec-7fd1-4c56-8e15-0246dc7a0cbf",
+				"ToStockAvailability": {
+					"Id": 3,
+					"Description": "In Stock",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)",
+						"type": "northwind.StockAvailability"
+					}
+				},
+				"ToSupplier": {
+					"Id": "aead11fd-e35b-4f6f-a37a-e4a860aaaad7",
+					"Name": "Exotic Liquids",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/Suppliers(guid'aead11fd-e35b-4f6f-a37a-e4a860aaaad7')/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/Suppliers(guid'aead11fd-e35b-4f6f-a37a-e4a860aaaad7')",
+						"type": "northwind.Suppliers"
+					}
+				},
+				"DraftAdministrativeData": null,
+				"IsActiveEntity": true,
+				"HasActiveEntity": false,
+				"HasDraftEntity": false,
+				"ToUnitOfMeasure": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'd97de1ec-7fd1-4c56-8e15-0246dc7a0cbf',IsActiveEntity=true)/ToUnitOfMeasure"
+					}
+				},
+				"ToCurrency": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'd97de1ec-7fd1-4c56-8e15-0246dc7a0cbf',IsActiveEntity=true)/ToCurrency"
+					}
+				},
+				"ToCategory": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'd97de1ec-7fd1-4c56-8e15-0246dc7a0cbf',IsActiveEntity=true)/ToCategory"
+					}
+				},
+				"ToDimensionUnit": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'd97de1ec-7fd1-4c56-8e15-0246dc7a0cbf',IsActiveEntity=true)/ToDimensionUnit"
+					}
+				},
+				"ToSalesData": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'd97de1ec-7fd1-4c56-8e15-0246dc7a0cbf',IsActiveEntity=true)/ToSalesData"
+					}
+				},
+				"ToReviews": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'd97de1ec-7fd1-4c56-8e15-0246dc7a0cbf',IsActiveEntity=true)/ToReviews"
+					}
+				},
+				"SiblingEntity": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'd97de1ec-7fd1-4c56-8e15-0246dc7a0cbf',IsActiveEntity=true)/SiblingEntity"
+					}
+				},
+				"__metadata": {
+					"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'd97de1ec-7fd1-4c56-8e15-0246dc7a0cbf',IsActiveEntity=true)",
+					"type": "northwind.Products"
+				}
+			},
+			{
+				"ImageUrl": null,
+				"Name": "Test 6",
+				"Description": "description",
+				"ToCategory_Id": "B",
+				"Category": "Beverages",
+				"ReleaseDate": "/Date(1623059152000)/",
+				"Rating": null,
+				"Price": "10",
+				"ToCurrency_Id": "USD",
+				"Id": "dcd30b8b-9224-4a3f-8c28-4b44bf1438be",
+				"ToStockAvailability": {
+					"Id": 3,
+					"Description": "In Stock",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)",
+						"type": "northwind.StockAvailability"
+					}
+				},
+				"ToSupplier": null,
+				"DraftAdministrativeData": null,
+				"IsActiveEntity": true,
+				"HasActiveEntity": false,
+				"HasDraftEntity": false,
+				"ToUnitOfMeasure": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'dcd30b8b-9224-4a3f-8c28-4b44bf1438be',IsActiveEntity=true)/ToUnitOfMeasure"
+					}
+				},
+				"ToCurrency": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'dcd30b8b-9224-4a3f-8c28-4b44bf1438be',IsActiveEntity=true)/ToCurrency"
+					}
+				},
+				"ToCategory": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'dcd30b8b-9224-4a3f-8c28-4b44bf1438be',IsActiveEntity=true)/ToCategory"
+					}
+				},
+				"ToDimensionUnit": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'dcd30b8b-9224-4a3f-8c28-4b44bf1438be',IsActiveEntity=true)/ToDimensionUnit"
+					}
+				},
+				"ToSalesData": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'dcd30b8b-9224-4a3f-8c28-4b44bf1438be',IsActiveEntity=true)/ToSalesData"
+					}
+				},
+				"ToReviews": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'dcd30b8b-9224-4a3f-8c28-4b44bf1438be',IsActiveEntity=true)/ToReviews"
+					}
+				},
+				"SiblingEntity": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'dcd30b8b-9224-4a3f-8c28-4b44bf1438be',IsActiveEntity=true)/SiblingEntity"
+					}
+				},
+				"__metadata": {
+					"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'dcd30b8b-9224-4a3f-8c28-4b44bf1438be',IsActiveEntity=true)",
+					"type": "northwind.Products"
+				}
+			},
+			{
+				"ImageUrl": "/assets/coffee.jpg",
+				"Name": "Coffee",
+				"Description": "Bulk size can of instant coffee",
+				"ToCategory_Id": "B",
+				"Category": "Beverages",
+				"ReleaseDate": "/Date(410140800000)/",
+				"Rating": "1",
+				"Price": "6.99",
+				"ToCurrency_Id": "USD",
+				"Id": "de411986-f74c-4082-83bc-2aa5c5a25aad",
+				"ToStockAvailability": {
+					"Id": 3,
+					"Description": "In Stock",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)",
+						"type": "northwind.StockAvailability"
+					}
+				},
+				"ToSupplier": {
+					"Id": "6967edb4-cd83-4c8b-90ae-6894a71b398f",
+					"Name": "Tokyo Traders",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/Suppliers(guid'6967edb4-cd83-4c8b-90ae-6894a71b398f')/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/Suppliers(guid'6967edb4-cd83-4c8b-90ae-6894a71b398f')",
+						"type": "northwind.Suppliers"
+					}
+				},
+				"DraftAdministrativeData": null,
+				"IsActiveEntity": true,
+				"HasActiveEntity": false,
+				"HasDraftEntity": false,
+				"ToUnitOfMeasure": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'de411986-f74c-4082-83bc-2aa5c5a25aad',IsActiveEntity=true)/ToUnitOfMeasure"
+					}
+				},
+				"ToCurrency": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'de411986-f74c-4082-83bc-2aa5c5a25aad',IsActiveEntity=true)/ToCurrency"
+					}
+				},
+				"ToCategory": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'de411986-f74c-4082-83bc-2aa5c5a25aad',IsActiveEntity=true)/ToCategory"
+					}
+				},
+				"ToDimensionUnit": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'de411986-f74c-4082-83bc-2aa5c5a25aad',IsActiveEntity=true)/ToDimensionUnit"
+					}
+				},
+				"ToSalesData": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'de411986-f74c-4082-83bc-2aa5c5a25aad',IsActiveEntity=true)/ToSalesData"
+					}
+				},
+				"ToReviews": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'de411986-f74c-4082-83bc-2aa5c5a25aad',IsActiveEntity=true)/ToReviews"
+					}
+				},
+				"SiblingEntity": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'de411986-f74c-4082-83bc-2aa5c5a25aad',IsActiveEntity=true)/SiblingEntity"
+					}
+				},
+				"__metadata": {
+					"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'de411986-f74c-4082-83bc-2aa5c5a25aad',IsActiveEntity=true)",
+					"type": "northwind.Products"
+				}
+			},
+			{
+				"ImageUrl": null,
+				"Name": null,
+				"Description": null,
+				"ToCategory_Id": null,
+				"Category": null,
+				"ReleaseDate": null,
+				"Rating": null,
+				"Price": null,
+				"ToCurrency_Id": null,
+				"Id": "e4badb35-9002-442a-a25c-f91db2167088",
+				"ToStockAvailability": null,
+				"ToSupplier": null,
+				"DraftAdministrativeData": {
+					"DraftUUID": "f5898670-0faa-4bec-87e5-7fbe4337e3e0",
+					"CreationDateTime": "/Date(1623056743785)/",
+					"CreatedByUser": "anonymous",
+					"DraftIsCreatedByMe": true,
+					"LastChangeDateTime": "/Date(1623056743785)/",
+					"LastChangedByUser": "anonymous",
+					"InProcessByUser": "",
+					"DraftIsProcessedByMe": false,
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/DraftAdministrativeData(guid'f5898670-0faa-4bec-87e5-7fbe4337e3e0')",
+						"type": "northwind.DraftAdministrativeData"
+					}
+				},
+				"IsActiveEntity": false,
+				"HasActiveEntity": false,
+				"HasDraftEntity": false,
+				"ToUnitOfMeasure": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'e4badb35-9002-442a-a25c-f91db2167088',IsActiveEntity=false)/ToUnitOfMeasure"
+					}
+				},
+				"ToCurrency": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'e4badb35-9002-442a-a25c-f91db2167088',IsActiveEntity=false)/ToCurrency"
+					}
+				},
+				"ToCategory": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'e4badb35-9002-442a-a25c-f91db2167088',IsActiveEntity=false)/ToCategory"
+					}
+				},
+				"ToDimensionUnit": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'e4badb35-9002-442a-a25c-f91db2167088',IsActiveEntity=false)/ToDimensionUnit"
+					}
+				},
+				"ToSalesData": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'e4badb35-9002-442a-a25c-f91db2167088',IsActiveEntity=false)/ToSalesData"
+					}
+				},
+				"ToReviews": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'e4badb35-9002-442a-a25c-f91db2167088',IsActiveEntity=false)/ToReviews"
+					}
+				},
+				"SiblingEntity": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'e4badb35-9002-442a-a25c-f91db2167088',IsActiveEntity=false)/SiblingEntity"
+					}
+				},
+				"__metadata": {
+					"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'e4badb35-9002-442a-a25c-f91db2167088',IsActiveEntity=false)",
+					"type": "northwind.Products"
+				}
+			},
+			{
+				"ImageUrl": "/assets/vint-soda.jpg",
+				"Name": "Vint soda",
+				"Description": "Americana Variety - Mix of 6 flavors",
+				"ToCategory_Id": "B",
+				"Category": "Beverages",
+				"ReleaseDate": "/Date(970358400000)/",
+				"Rating": "3",
+				"Price": "20.9",
+				"ToCurrency_Id": "USD",
+				"Id": "ea610da1-ea93-4258-85e1-099167d67bf9",
+				"ToStockAvailability": {
+					"Id": 3,
+					"Description": "In Stock",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)",
+						"type": "northwind.StockAvailability"
+					}
+				},
+				"ToSupplier": {
+					"Id": "aead11fd-e35b-4f6f-a37a-e4a860aaaad7",
+					"Name": "Exotic Liquids",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/Suppliers(guid'aead11fd-e35b-4f6f-a37a-e4a860aaaad7')/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/Suppliers(guid'aead11fd-e35b-4f6f-a37a-e4a860aaaad7')",
+						"type": "northwind.Suppliers"
+					}
+				},
+				"DraftAdministrativeData": null,
+				"IsActiveEntity": true,
+				"HasActiveEntity": false,
+				"HasDraftEntity": false,
+				"ToUnitOfMeasure": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'ea610da1-ea93-4258-85e1-099167d67bf9',IsActiveEntity=true)/ToUnitOfMeasure"
+					}
+				},
+				"ToCurrency": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'ea610da1-ea93-4258-85e1-099167d67bf9',IsActiveEntity=true)/ToCurrency"
+					}
+				},
+				"ToCategory": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'ea610da1-ea93-4258-85e1-099167d67bf9',IsActiveEntity=true)/ToCategory"
+					}
+				},
+				"ToDimensionUnit": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'ea610da1-ea93-4258-85e1-099167d67bf9',IsActiveEntity=true)/ToDimensionUnit"
+					}
+				},
+				"ToSalesData": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'ea610da1-ea93-4258-85e1-099167d67bf9',IsActiveEntity=true)/ToSalesData"
+					}
+				},
+				"ToReviews": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'ea610da1-ea93-4258-85e1-099167d67bf9',IsActiveEntity=true)/ToReviews"
+					}
+				},
+				"SiblingEntity": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'ea610da1-ea93-4258-85e1-099167d67bf9',IsActiveEntity=true)/SiblingEntity"
+					}
+				},
+				"__metadata": {
+					"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'ea610da1-ea93-4258-85e1-099167d67bf9',IsActiveEntity=true)",
+					"type": "northwind.Products"
+				}
+			},
+			{
+				"ImageUrl": "/assets/cranberry-juice.jpg",
+				"Name": "Cranberry Juice",
+				"Description": "16-Ounce Plastic Bottles (Pack of 12)",
+				"ToCategory_Id": "B",
+				"Category": "Beverages",
+				"ReleaseDate": "/Date(1154649600000)/",
+				"Rating": "3",
+				"Price": "22.8",
+				"ToCurrency_Id": "USD",
+				"Id": "fe613858-7385-4c1c-8f4e-b3439a5ec637",
+				"ToStockAvailability": {
+					"Id": 3,
+					"Description": "In Stock",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/StockAvailability(3)",
+						"type": "northwind.StockAvailability"
+					}
+				},
+				"ToSupplier": {
+					"Id": "aead11fd-e35b-4f6f-a37a-e4a860aaaad7",
+					"Name": "Exotic Liquids",
+					"ToProduct": {
+						"__deferred": {
+							"uri": "http://localhost:4004/v2/northwind/Suppliers(guid'aead11fd-e35b-4f6f-a37a-e4a860aaaad7')/ToProduct"
+						}
+					},
+					"__metadata": {
+						"uri": "http://localhost:4004/v2/northwind/Suppliers(guid'aead11fd-e35b-4f6f-a37a-e4a860aaaad7')",
+						"type": "northwind.Suppliers"
+					}
+				},
+				"DraftAdministrativeData": null,
+				"IsActiveEntity": true,
+				"HasActiveEntity": false,
+				"HasDraftEntity": false,
+				"ToUnitOfMeasure": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'fe613858-7385-4c1c-8f4e-b3439a5ec637',IsActiveEntity=true)/ToUnitOfMeasure"
+					}
+				},
+				"ToCurrency": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'fe613858-7385-4c1c-8f4e-b3439a5ec637',IsActiveEntity=true)/ToCurrency"
+					}
+				},
+				"ToCategory": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'fe613858-7385-4c1c-8f4e-b3439a5ec637',IsActiveEntity=true)/ToCategory"
+					}
+				},
+				"ToDimensionUnit": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'fe613858-7385-4c1c-8f4e-b3439a5ec637',IsActiveEntity=true)/ToDimensionUnit"
+					}
+				},
+				"ToSalesData": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'fe613858-7385-4c1c-8f4e-b3439a5ec637',IsActiveEntity=true)/ToSalesData"
+					}
+				},
+				"ToReviews": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'fe613858-7385-4c1c-8f4e-b3439a5ec637',IsActiveEntity=true)/ToReviews"
+					}
+				},
+				"SiblingEntity": {
+					"__deferred": {
+						"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'fe613858-7385-4c1c-8f4e-b3439a5ec637',IsActiveEntity=true)/SiblingEntity"
+					}
+				},
+				"__metadata": {
+					"uri": "http://localhost:4004/v2/northwind/Products(Id=guid'fe613858-7385-4c1c-8f4e-b3439a5ec637',IsActiveEntity=true)",
+					"type": "northwind.Products"
+				}
+			}
+		],
+		"__count": "19"
+	}
+}
+--batch_f8e0-1658-dc67--

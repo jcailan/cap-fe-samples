@@ -1,0 +1,37 @@
+--batch_a724-f7d9-5f37
+Content-Type: multipart/mixed; boundary=changeset_0d9c-c5f7-0767
+
+--changeset_0d9c-c5f7-0767
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+DELETE Products(Id=guid'06f86ef1-1525-4932-b1ce-d40661464c66',IsActiveEntity=false) HTTP/1.1
+Prefer: handling=strict
+sap-contextid-accept: header
+Accept: application/json
+Accept-Language: en
+DataServiceVersion: 2.0
+MaxDataServiceVersion: 2.0
+If-Match: *
+
+
+--changeset_0d9c-c5f7-0767--
+
+--batch_a724-f7d9-5f37--
+
+
+
+--batch_a724-f7d9-5f37
+content-type: multipart/mixed; boundary=changeset_0d9c-c5f7-0767
+
+--changeset_0d9c-c5f7-0767
+content-type: application/http
+content-transfer-encoding: binary
+content-id: 1623471258464
+
+HTTP/1.1 204 No Content
+dataserviceversion: 2.0
+
+
+--changeset_0d9c-c5f7-0767--
+--batch_a724-f7d9-5f37--
