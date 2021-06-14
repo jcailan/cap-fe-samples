@@ -4,9 +4,8 @@ using {northwind} from './NorthWind';
  * Annotations for Products Entity
  */
 annotate northwind.Products with @(
-    Capabilities : {DeleteRestrictions : {Deletable : false}},
-    Common       : {Label : '{i18n>Products}'},
-    UI           : {
+    Common : {Label : '{i18n>Products}'},
+    UI     : {
         SelectionFields                : [
             ToCategory_Id,
             ToCurrency_Id,
