@@ -4,8 +4,13 @@ using {northwind} from './NorthWind';
  * Annotations for Products Entity
  */
 annotate northwind.Products with @(
-    Common : {Label : '{i18n>Products}'},
-    UI     : {
+    Capabilities : {FilterRestrictions : {FilterExpressionRestrictions : [{
+        $Type              : 'Capabilities.FilterExpressionRestrictionType',
+        Property           : ToCurrency_Id,
+        AllowedExpressions : 'SingleValue'
+    }, ], }},
+    Common       : {Label : '{i18n>Products}'},
+    UI           : {
         SelectionFields                : [
             ToCategory_Id,
             ToCurrency_Id,
