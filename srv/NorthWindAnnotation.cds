@@ -7,19 +7,30 @@ annotate northwind.Products with @(
     Capabilities : {DeleteRestrictions : {Deletable : false}},
     Common       : {Label : '{i18n>Products}'},
     UI           : {
-        SelectionFields                : [
+        SelectionFields                 : [
             ToCategory_Id,
             ToCurrency_Id,
             StockAvailability
         ],
-        HeaderInfo                     : {
+        SelectionVariant #DefaultFilter : {
+            $Type         : 'UI.SelectionVariantType',
+            SelectOptions : [{
+                PropertyName : ToCurrency_Id,
+                Ranges       : [{
+                    Sign   : #I,
+                    Option : #EQ,
+                    Low    : 'USD'
+                }]
+            }]
+        },
+        HeaderInfo                      : {
             TypeName       : '{i18n>Product}',
             TypeNamePlural : '{i18n>Products}',
             ImageUrl       : ImageUrl,
             Title          : {Value : Name},
             Description    : {Value : Description}
         },
-        LineItem                       : {$value : [
+        LineItem                        : {$value : [
             {Value : ImageUrl},
             {Value : Name},
             {Value : Description},
@@ -40,7 +51,7 @@ annotate northwind.Products with @(
             },
             {Value : Price}
         ]},
-        HeaderFacets                   : [
+        HeaderFacets                    : [
             {
                 $Type  : 'UI.ReferenceFacet',
                 Target : '@UI.FieldGroup#GeneralInformation',
@@ -63,7 +74,7 @@ annotate northwind.Products with @(
                 Target : '@UI.DataPoint#Availability'
             }
         ],
-        Facets                         : [
+        Facets                          : [
             {
                 $Type  : 'UI.ReferenceFacet',
                 Target : '@UI.FieldGroup#TechnicalData',
@@ -85,22 +96,22 @@ annotate northwind.Products with @(
                 Label  : '{i18n>SalesData}'
             }
         ],
-        DataPoint #AverageRatingValue  : {
+        DataPoint #AverageRatingValue   : {
             Value         : Rating,
             Title         : '{i18n>Rating}',
             TargetValue   : 5,
             Visualization : #Rating
         },
-        DataPoint #Price               : {
+        DataPoint #Price                : {
             Value : Price,
             Title : '{i18n>Price}'
         },
-        DataPoint #StockAvailability   : {
+        DataPoint #StockAvailability    : {
             Title       : '{i18n>StockAvailability}',
             Value       : ToStockAvailability.Id,
             Criticality : StockAvailability
         },
-        DataPoint #Availability        : {
+        DataPoint #Availability         : {
             Title         : '{i18n>Availability}',
             Description   : '{i18n>StockIndicator}',
             Value         : Quantity,
@@ -108,7 +119,7 @@ annotate northwind.Products with @(
             Criticality   : StockAvailability,
             Visualization : #Progress
         },
-        FieldGroup #GeneralInformation : {Data : [
+        FieldGroup #GeneralInformation  : {Data : [
             {Value : ToCategory_Id},
             {Value : ReleaseDate},
             {
@@ -117,7 +128,7 @@ annotate northwind.Products with @(
                 Target : 'ToSupplier/@Communication.Contact'
             }
         ]},
-        FieldGroup #TechnicalData      : {Data : [
+        FieldGroup #TechnicalData       : {Data : [
             {Value : Height},
             {Value : Width},
             {Value : Depth}
