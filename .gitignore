@@ -27,3 +27,5 @@ mta_archives/
 # IDEs
 .idea
 app/*/.vscode/
+
+.husky/

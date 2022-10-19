@@ -19,7 +19,9 @@
 	},
 	"scripts": {
 		"postinstall": "npx patch-package",
-		"start": "cds run"
+		"start": "cds run",
+		"husky": "npx husky install && npx husky add .husky/pre-commit \"npm run lint\"",
+		"lint": "eslint . --max-warnings 0"
 	},
 	"engines": {
 		"node": "^16.15"
