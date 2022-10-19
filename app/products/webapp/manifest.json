@@ -60,7 +60,8 @@
 				"sap.m": {},
 				"sap.ui.core": {},
 				"sap.ushell": {},
-				"sap.fe.templates": {}
+				"sap.fe.templates": {},
+				"sap.f": {}
 			}
 		},
 		"contentDensities": {
@@ -92,23 +93,44 @@
 		"resources": {
 			"css": []
 		},
+		"rootView": {
+			"viewName": "sap.fe.templates.RootContainer.view.Fcl",
+			"type": "XML",
+			"async": true,
+			"id": "appRootView"
+		},
 		"routing": {
-			"config": {},
+			"config": {
+				"routerClass": "sap.f.routing.Router",
+				"flexibleColumnLayout": {
+					"defaultTwoColumnLayoutType": "TwoColumnsMidExpanded",
+					"defaultThreeColumnLayoutType": "ThreeColumnsMidExpanded"
+				}
+			},
 			"routes": [
 				{
 					"pattern": ":?query:",
 					"name": "ProductsList",
-					"target": "ProductsList"
+					"target": [
+						"ProductsList"
+					]
 				},
 				{
 					"pattern": "Products({key}):?query:",
 					"name": "ProductsObjectPage",
-					"target": "ProductsObjectPage"
+					"target": [
+						"ProductsList",
+						"ProductsObjectPage"
+					]
 				},
 				{
 					"pattern": "Products({key})/Reviews({key2}):?query:",
 					"name": "ReviewsObjectPage",
-					"target": "ReviewsObjectPage"
+					"target": [
+						"ProductsList",
+						"ProductsObjectPage",
+						"ReviewsObjectPage"
+					]
 				}
 			],
 			"targets": {
@@ -116,6 +138,8 @@
 					"type": "Component",
 					"id": "ProductsList",
 					"name": "sap.fe.templates.ListReport",
+					"controlAggregation": "beginColumnPages",
+					"contextPattern": "",
 					"options": {
 						"settings": {
 							"entitySet": "Products",
@@ -134,6 +158,8 @@
 					"type": "Component",
 					"id": "ProductsObjectPage",
 					"name": "sap.fe.templates.ObjectPage",
+					"controlAggregation": "midColumnPages",
+					"contextPattern": "/Products({key})",
 					"options": {
 						"settings": {
 							"editableHeaderContent": false,
@@ -152,6 +178,8 @@
 					"type": "Component",
 					"id": "ReviewsObjectPage",
 					"name": "sap.fe.templates.ObjectPage",
+					"controlAggregation": "endColumnPages",
+					"contextPattern": "/Products({key})/Reviews({key2})",
 					"options": {
 						"settings": {
 							"editableHeaderContent": false,
