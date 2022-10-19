@@ -1,0 +1,51 @@
+diff --git a/node_modules/@sap/eslint-plugin-cds/lib/rules/start-elements-lowercase.js b/node_modules/@sap/eslint-plugin-cds/lib/rules/start-elements-lowercase.js
+index 715fa6f..b99e301 100644
+--- a/node_modules/@sap/eslint-plugin-cds/lib/rules/start-elements-lowercase.js
++++ b/node_modules/@sap/eslint-plugin-cds/lib/rules/start-elements-lowercase.js
+@@ -8,7 +8,9 @@ module.exports = {
+     hasSuggestions: true,
+     messages: {
+       startLowercase: "Element name '{{entityName}}.{{elementName}}' should start with a lowercase letter.",
+-      fixLowercase: 'Start element name with a lowercase letter.'
++      fixLowercase: 'Start element name with a lowercase letter.',
++	  startUppercase: "Element name '{{entityName}}.{{elementName}}' should start with an uppercase letter.",
++      fixUppercase: 'Start element name with an uppercase letter.'
+     },
+     fixable: 'code'
+   },
+@@ -22,13 +24,15 @@ module.exports = {
+     function checkStartLowercase (e) {
+       const elementName = e.name
+       const entityName = e.parent.name
++	  const isAssociation = e.isAssociation
+       if (elementName && !(entityName.startsWith('localized') || entityName.endsWith('texts'))) {
+-        if (elementName.charAt(0) !== elementName.charAt(0).toLowerCase() && !['ID'].includes(elementName)) {
++        if ((elementName.charAt(0) !== elementName.charAt(0).toLowerCase() && !isAssociation || elementName.charAt(0) !== elementName.charAt(0).toUpperCase() && isAssociation) && !['ID'].includes(elementName)) {
+           if (e.$location && e.$location.file) {
+             const file = e.$location.file
+             const loc = context.getLocation(elementName, e)
+             const fix = (fixer, source = sourcecode) => {
+-              const elementNameSanitized = elementName.charAt(0).toLowerCase() + elementName.slice(1)
++			  const startLetter = isAssociation ? elementName.charAt(0).toUpperCase() : elementName.charAt(0).toLowerCase()
++              const elementNameSanitized = startLetter + elementName.slice(1)
+               const rangeEnd = source.getIndexFromLoc({
+                 line: loc.end.line,
+                 column: loc.end.column
+@@ -37,7 +41,7 @@ module.exports = {
+               return fixer.replaceTextRange([rangeBeg, rangeEnd], elementNameSanitized)
+             }
+             context.report({
+-              messageId: 'startLowercase',
++              messageId: isAssociation ? 'startUppercase' : 'startLowercase',
+               loc,
+               file,
+               data: {
+@@ -46,7 +50,7 @@ module.exports = {
+               },
+               suggest: [
+                 {
+-                  messageId: 'fixLowercase',
++                  messageId: isAssociation ? 'fixUppercase' : 'fixLowercase',
+                   fix
+                 }
+               ]
