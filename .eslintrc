@@ -13,11 +13,9 @@
 		"sourceType": "module"
 	},
 	"ignorePatterns": [
-		"gen",
-		"swagger",
-		"node_modules",
-		"lib",
-		"resources"
+		"gen/",
+		"node_modules/",
+		"resources/"
 	],
 	"globals": {
 		"SELECT": true,

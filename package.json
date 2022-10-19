@@ -7,10 +7,6 @@
 	"private": true,
 	"dependencies": {
 		"@sap/cds": "^6",
-		"eslint": "^8.25.0",
-		"eslint-html-reporter": "^0.7.4",
-		"eslint-plugin-jsdoc": "^39.3.14",
-		"eslint-plugin-ui5": "^0.1.0",
 		"express": "^4",
 		"@sap/xssec": "^3",
 		"passport": "^0",
@@ -18,13 +14,25 @@
 	},
 	"devDependencies": {
 		"@sap/eslint-plugin-cds": "^2.6.0",
+		"@sap/eslint-plugin-ui5-jsdocs": "^2.0.5",
+		"@sap/ux-specification": "^1.102.10",
+		"@sapui5/ts-types": "^1.92.2",
+		"eslint": "^7.32.0",
+		"eslint-html-reporter": "^0.7.4",
+		"eslint-plugin-jsdoc": "^39.3.14",
+		"eslint-plugin-ui5": "^0.1.0",
+		"rimraf": "^3.0.2",
 		"sqlite3": "^5.0.4"
 	},
 	"scripts": {
 		"postinstall": "npx patch-package",
 		"start": "cds run",
 		"husky": "npx husky install && npx husky add .husky/pre-commit \"npm run lint\"",
-		"lint": "eslint . --max-warnings 0"
+		"lint": "eslint . --max-warnings 0",
+		"watch-products": "cds watch --open products/webapp/index.html?sap-ui-xx-viewCache=false",
+		"build": "rimraf resources mta_archives && mbt build --mtar archive",
+		"deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+		"undeploy": "cf undeploy com-jcailan-capfes --delete-services --delete-service-keys --delete-service-brokers"
 	},
 	"engines": {
 		"node": "^16.15"
@@ -46,5 +54,8 @@
 				}
 			}
 		}
-	}
+	},
+	"sapux": [
+		"app/products"
+	]
 }
