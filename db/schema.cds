@@ -118,7 +118,7 @@ context view {
         select from md.Products
         mixin {
             StockStatus   : Association to one md.StockStatuses
-                                on StockStatus.ID = $projection.stockStatus;
+                                on StockStatus.ID = $projection.StockStatus_ID;
             AverageRating : Association to one AverageRatings
                                 on AverageRating.productId = $projection.ID;
         }
@@ -136,7 +136,7 @@ context view {
                     2
                 else
                     1
-            end                         as stockStatus : Integer,
+            end                         as StockStatus_ID : Integer,
             StockStatus
         };
 }
