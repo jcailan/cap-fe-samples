@@ -1,4 +1,6 @@
 {
+	"editor.formatOnSave": true,
+	"cds.compiler.markMissingI18nDefault": true,
 	"eslint.validate": [
 		"cds",
 		"csn",
