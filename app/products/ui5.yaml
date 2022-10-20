@@ -1,0 +1,13 @@
+specVersion: "2.5"
+metadata:
+  name: com.jcailan.products
+type: application
+server:
+  customMiddleware:
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        ignoreCertError: false
+        backend:
+          - path: /product
+            url: http://localhost:4004

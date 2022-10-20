@@ -1,4 +1,13 @@
 {
 	"editor.formatOnSave": true,
-	"cds.compiler.markMissingI18nDefault": true
+	"cds.compiler.markMissingI18nDefault": true,
+	"eslint.validate": [
+		"cds",
+		"csn",
+		"csv",
+		"csv",
+		"csv (semicolon)",
+		"tsv",
+		"tab"
+	]
 }

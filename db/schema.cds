@@ -1,130 +1,142 @@
 using {
     cuid,
     managed
-} from './lib/common';
+} from '@sap/cds/common';
 
 context md {
     entity Products : cuid, managed {
-        Name             : localized String;
-        Description      : localized String;
-        ImageUrl         : String;
-        ReleaseDate      : DateTime;
-        DiscontinuedDate : DateTime;
-        Price            : Decimal(16, 2);
-        Height           : Decimal(16, 2);
-        Width            : Decimal(16, 2);
-        Depth            : Decimal(16, 2);
-        Quantity         : Decimal(16, 2);
-        ToUnitOfMeasure  : Association to UnitOfMeasures;
-        ToCurrency       : Association to Currencies;
-        ToDimensionUnit  : Association to DimensionUnits;
-        ToSalesData      : Association to many td.SalesData
-                               on ToSalesData.ToProduct = $self;
-        ToCategory       : Association to Categories;
-        ToSupplier       : Association to Suppliers;
-        ToReviews        : Association to many td.ProductReviews
-                               on ToReviews.ToProduct = $self;
+        @mandatory
+        name             : localized String;
+        @mandatory
+        description      : localized String;
+        imageUrl         : String;
+        releaseDate      : DateTime;
+        discontinuedDate : DateTime;
+        @mandatory
+        price            : Decimal(16, 2);
+        height           : Decimal(16, 2);
+        width            : Decimal(16, 2);
+        depth            : Decimal(16, 2);
+        @(
+            mandatory,
+            assert.range : [
+                0.00,
+                20.00
+            ]
+        )
+        quantity         : Decimal(16, 2);
+        @mandatory
+        UnitOfMeasure    : Association to one UnitOfMeasures;
+        @mandatory
+        Currency         : Association to one Currencies;
+        DimensionUnit    : Association to one DimensionUnits;
+        SalesData        : Association to many td.SalesData
+                               on SalesData.Product = $self;
+        @mandatory
+        Category         : Association to one Categories;
+        Supplier         : Association to one Suppliers;
+        Reviews          : Association to many td.ProductReviews
+                               on Reviews.Product = $self;
     }
 
     entity Suppliers : cuid, managed {
-        Name       : String;
-        Street     : String;
-        City       : String;
-        State      : String(2);
-        PostalCode : String(5);
-        Country    : String(3);
-        Email      : String;
-        Phone      : String;
-        Fax        : String;
-        ToProduct  : Association to Products
-                         on ToProduct.ToSupplier = $self;
+        name       : String;
+        street     : String;
+        city       : String;
+        state      : String(2);
+        postalCode : String(5);
+        country    : String(3);
+        email      : String;
+        phone      : String;
+        fax        : String;
+        Product    : Association to one Products
+                         on Product.Supplier = $self;
     }
 
     entity Categories {
-        key Id   : String(1);
-            Name : localized String;
+        key ID   : String(1);
+            name : localized String;
     }
 
-    entity StockAvailability {
-        key Id          : Integer;
-            Description : localized String;
-            ToProduct   : Association to view.Products
-                              on ToProduct.StockAvailability = Id;
+    entity StockStatuses {
+        key ID      : Integer;
+            name    : localized String;
+            Product : Association to one view.Products
+                          on Product.StockStatus = $self;
     }
 
     entity Currencies {
-        key Id          : String(3);
-            Description : localized String;
+        key ID   : String(3);
+            name : localized String;
     }
 
     entity UnitOfMeasures {
-        key Id          : String(2);
-            Description : localized String;
+        key ID   : String(2);
+            name : localized String;
     }
 
     entity DimensionUnits {
-        key Id          : String(2);
-            Description : localized String;
+        key ID   : String(2);
+            name : localized String;
     }
 
     entity Months {
-        key Id               : String(2);
-            Description      : localized String;
-            ShortDescription : localized String(3);
+        key ID   : String(2);
+            name : localized String;
+            code : localized String(3);
     }
 }
 
 context td {
     entity ProductReviews : cuid, managed {
-        Name      : String;
-        Rating    : Integer;
-        Comment   : String;
-        ToProduct : Association to md.Products;
+        name    : String;
+        rating  : Integer;
+        comment : String;
+        Product : Association to one md.Products;
     }
 
     entity SalesData : cuid {
-        DeliveryDate    : DateTime;
-        Revenue         : Decimal(16, 2);
-        ToProduct       : Association to md.Products;
-        ToCurrency      : Association to md.Currencies;
-        ToDeliveryMonth : Association to md.Months;
+        deliveryDate  : DateTime;
+        revenue       : Decimal(16, 2);
+        Product       : Association to one md.Products;
+        Currency      : Association to one md.Currencies;
+        DeliveryMonth : Association to one md.Months;
     }
 }
 
 context view {
-    entity AverageRating as
+
+    entity AverageRatings as
         select from td.ProductReviews {
-            ToProduct.Id as ProductId,
-            avg(
-                Rating
-            )            as AverageRating : Decimal(16, 2)
+            Product.ID  as productId,
+            avg(rating) as averageRating : Decimal(16, 2)
         }
         group by
-            ToProduct.Id;
+            Product.ID;
 
-    entity Products      as
+    entity Products       as
         select from md.Products
         mixin {
-            ToStockAvailability : Association to md.StockAvailability
-                                      on ToStockAvailability.Id = $projection.StockAvailability;
-            ToAverageRating     : Association to AverageRating
-                                      on ToAverageRating.ProductId = Id;
+            StockStatus   : Association to one md.StockStatuses
+                                on StockStatus.ID = $projection.StockStatus_ID;
+            AverageRating : Association to one AverageRatings
+                                on AverageRating.productId = $projection.ID;
         }
         into {
             *,
-            ToAverageRating.AverageRating as Rating,
+            AverageRating.averageRating as rating,
             case
                 when
-                    Quantity >= 8
+                    quantity >= 8
                 then
                     3
                 when
-                    Quantity > 0
+                    quantity > 0
                 then
                     2
                 else
                     1
-            end                           as StockAvailability : Integer,
-            ToStockAvailability
+            end                         as StockStatus_ID : Integer,
+            StockStatus
         };
 }

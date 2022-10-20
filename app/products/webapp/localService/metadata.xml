@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+        <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
+        <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="ProductService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Products" EntityType="ProductService.Products">
+                    <NavigationPropertyBinding Path="UnitOfMeasure" Target="VH_UnitOfMeasures"/>
+                    <NavigationPropertyBinding Path="Currency" Target="VH_Currencies"/>
+                    <NavigationPropertyBinding Path="Category" Target="VH_Categories"/>
+                    <NavigationPropertyBinding Path="DimensionUnit" Target="VH_DimensionUnits"/>
+                    <NavigationPropertyBinding Path="SalesData" Target="SalesData"/>
+                    <NavigationPropertyBinding Path="StockStatus" Target="StockStatuses"/>
+                    <NavigationPropertyBinding Path="Supplier" Target="Suppliers"/>
+                    <NavigationPropertyBinding Path="Reviews" Target="Reviews"/>
+                </EntitySet>
+                <EntitySet Name="Suppliers" EntityType="ProductService.Suppliers">
+                    <NavigationPropertyBinding Path="Product" Target="Products"/>
+                </EntitySet>
+                <EntitySet Name="Reviews" EntityType="ProductService.Reviews">
+                    <NavigationPropertyBinding Path="Product" Target="Products"/>
+                </EntitySet>
+                <EntitySet Name="SalesData" EntityType="ProductService.SalesData">
+                    <NavigationPropertyBinding Path="Product" Target="Products"/>
+                </EntitySet>
+                <EntitySet Name="StockStatuses" EntityType="ProductService.StockStatuses">
+                    <NavigationPropertyBinding Path="Product" Target="Products"/>
+                    <NavigationPropertyBinding Path="texts" Target="StockStatuses_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="StockStatuses_texts"/>
+                </EntitySet>
+                <EntitySet Name="VH_Categories" EntityType="ProductService.VH_Categories">
+                    <NavigationPropertyBinding Path="texts" Target="VH_Categories_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="VH_Categories_texts"/>
+                </EntitySet>
+                <EntitySet Name="VH_Currencies" EntityType="ProductService.VH_Currencies">
+                    <NavigationPropertyBinding Path="texts" Target="VH_Currencies_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="VH_Currencies_texts"/>
+                </EntitySet>
+                <EntitySet Name="VH_UnitOfMeasures" EntityType="ProductService.VH_UnitOfMeasures">
+                    <NavigationPropertyBinding Path="texts" Target="VH_UnitOfMeasures_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="VH_UnitOfMeasures_texts"/>
+                </EntitySet>
+                <EntitySet Name="VH_DimensionUnits" EntityType="ProductService.VH_DimensionUnits">
+                    <NavigationPropertyBinding Path="texts" Target="VH_DimensionUnits_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="VH_DimensionUnits_texts"/>
+                </EntitySet>
+                <EntitySet Name="StockStatuses_texts" EntityType="ProductService.StockStatuses_texts"/>
+                <EntitySet Name="VH_Categories_texts" EntityType="ProductService.VH_Categories_texts"/>
+                <EntitySet Name="VH_Currencies_texts" EntityType="ProductService.VH_Currencies_texts"/>
+                <EntitySet Name="VH_UnitOfMeasures_texts" EntityType="ProductService.VH_UnitOfMeasures_texts"/>
+                <EntitySet Name="VH_DimensionUnits_texts" EntityType="ProductService.VH_DimensionUnits_texts"/>
+            </EntityContainer>
+            <EntityType Name="Products">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String"/>
+                <Property Name="imageUrl" Type="Edm.String"/>
+                <Property Name="releaseDate" Type="Edm.DateTimeOffset"/>
+                <Property Name="discontinuedDate" Type="Edm.DateTimeOffset"/>
+                <Property Name="rating" Type="Edm.Decimal" Scale="2" Precision="16"/>
+                <Property Name="price" Type="Edm.Decimal" Scale="2" Precision="16"/>
+                <Property Name="height" Type="Edm.Decimal" Scale="2" Precision="16"/>
+                <Property Name="width" Type="Edm.Decimal" Scale="2" Precision="16"/>
+                <Property Name="depth" Type="Edm.Decimal" Scale="2" Precision="16"/>
+                <Property Name="quantity" Type="Edm.Decimal" Scale="2" Precision="16"/>
+                <NavigationProperty Name="UnitOfMeasure" Type="ProductService.VH_UnitOfMeasures">
+                    <ReferentialConstraint Property="UnitOfMeasure_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="UnitOfMeasure_ID" Type="Edm.String" MaxLength="2"/>
+                <NavigationProperty Name="Currency" Type="ProductService.VH_Currencies">
+                    <ReferentialConstraint Property="Currency_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Currency_ID" Type="Edm.String" MaxLength="3"/>
+                <NavigationProperty Name="Category" Type="ProductService.VH_Categories">
+                    <ReferentialConstraint Property="Category_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Category_ID" Type="Edm.String" MaxLength="1"/>
+                <Property Name="category" Type="Edm.String"/>
+                <NavigationProperty Name="DimensionUnit" Type="ProductService.VH_DimensionUnits">
+                    <ReferentialConstraint Property="DimensionUnit_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="DimensionUnit_ID" Type="Edm.String" MaxLength="2"/>
+                <NavigationProperty Name="SalesData" Type="Collection(ProductService.SalesData)" Partner="Product"/>
+                <NavigationProperty Name="StockStatus" Type="ProductService.StockStatuses" Partner="Product">
+                    <ReferentialConstraint Property="stockStatus" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="stockStatus" Type="Edm.Int32"/>
+                <NavigationProperty Name="Supplier" Type="ProductService.Suppliers" Partner="Product">
+                    <ReferentialConstraint Property="Supplier_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Supplier_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="Reviews" Type="Collection(ProductService.Reviews)" Partner="Product"/>
+            </EntityType>
+            <EntityType Name="Suppliers">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="email" Type="Edm.String"/>
+                <Property Name="phone" Type="Edm.String"/>
+                <Property Name="fax" Type="Edm.String"/>
+                <NavigationProperty Name="Product" Type="ProductService.Products" Partner="Supplier">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="Supplier_ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Reviews">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="rating" Type="Edm.Int32"/>
+                <Property Name="comment" Type="Edm.String"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <NavigationProperty Name="Product" Type="ProductService.Products" Partner="Reviews">
+                    <ReferentialConstraint Property="Product_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Product_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="SalesData">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="deliveryDate" Type="Edm.DateTimeOffset"/>
+                <Property Name="revenue" Type="Edm.Decimal" Scale="2" Precision="16"/>
+                <Property Name="currencyId" Type="Edm.String" MaxLength="3"/>
+                <Property Name="deliveryMonthId" Type="Edm.String" MaxLength="2"/>
+                <Property Name="deliveryMonth" Type="Edm.String"/>
+                <NavigationProperty Name="Product" Type="ProductService.Products" Partner="SalesData">
+                    <ReferentialConstraint Property="Product_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Product_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="StockStatuses">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <NavigationProperty Name="Product" Type="ProductService.Products" Partner="StockStatus">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="stockStatus"/>
+                </NavigationProperty>
+                <NavigationProperty Name="texts" Type="Collection(ProductService.StockStatuses_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="ProductService.StockStatuses_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="VH_Categories">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" MaxLength="1" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Type="Collection(ProductService.VH_Categories_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="ProductService.VH_Categories_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="VH_Currencies">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Type="Collection(ProductService.VH_Currencies_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="ProductService.VH_Currencies_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="VH_UnitOfMeasures">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" MaxLength="2" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Type="Collection(ProductService.VH_UnitOfMeasures_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="ProductService.VH_UnitOfMeasures_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="VH_DimensionUnits">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" MaxLength="2" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Type="Collection(ProductService.VH_DimensionUnits_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="ProductService.VH_DimensionUnits_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="StockStatuses_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="VH_Categories_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.String" MaxLength="1" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="VH_Currencies_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="VH_UnitOfMeasures_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.String" MaxLength="2" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="VH_DimensionUnits_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.String" MaxLength="2" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+            </EntityType>
+            <Annotations Target="ProductService.Products/name">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ProductService.Products/description">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ProductService.Products/rating">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ProductService.Products/price">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ProductService.Products/quantity">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Validation.Minimum" Int="0"/>
+                <Annotation Term="Validation.Maximum" Int="20"/>
+            </Annotations>
+            <Annotations Target="ProductService.Products/UnitOfMeasure_ID">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ProductService.Products/Currency_ID">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ProductService.Products/Category_ID">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ProductService.Products/category">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ProductService.Products/stockStatus">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ProductService.EntityContainer/Suppliers">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record Type="Capabilities.DeleteRestrictionsType">
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record Type="Capabilities.InsertRestrictionsType">
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record Type="Capabilities.UpdateRestrictionsType">
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ProductService.EntityContainer/Reviews">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record Type="Capabilities.DeleteRestrictionsType">
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record Type="Capabilities.InsertRestrictionsType">
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record Type="Capabilities.UpdateRestrictionsType">
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ProductService.Reviews/createdAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                </Annotations>
+                <Annotations Target="ProductService.EntityContainer/SalesData">
+                    <Annotation Term="Capabilities.DeleteRestrictions">
+                        <Record Type="Capabilities.DeleteRestrictionsType">
+                            <PropertyValue Property="Deletable" Bool="false"/>
+                        </Record>
+                    </Annotation>
+                    <Annotation Term="Capabilities.InsertRestrictions">
+                        <Record Type="Capabilities.InsertRestrictionsType">
+                            <PropertyValue Property="Insertable" Bool="false"/>
+                        </Record>
+                    </Annotation>
+                    <Annotation Term="Capabilities.UpdateRestrictions">
+                        <Record Type="Capabilities.UpdateRestrictionsType">
+                            <PropertyValue Property="Updatable" Bool="false"/>
+                        </Record>
+                    </Annotation>
+                </Annotations>
+                <Annotations Target="ProductService.EntityContainer/StockStatuses">
+                    <Annotation Term="Capabilities.DeleteRestrictions">
+                        <Record Type="Capabilities.DeleteRestrictionsType">
+                            <PropertyValue Property="Deletable" Bool="false"/>
+                        </Record>
+                    </Annotation>
+                    <Annotation Term="Capabilities.InsertRestrictions">
+                        <Record Type="Capabilities.InsertRestrictionsType">
+                            <PropertyValue Property="Insertable" Bool="false"/>
+                        </Record>
+                    </Annotation>
+                    <Annotation Term="Capabilities.UpdateRestrictions">
+                        <Record Type="Capabilities.UpdateRestrictionsType">
+                            <PropertyValue Property="Updatable" Bool="false"/>
+                        </Record>
+                    </Annotation>
+                </Annotations>
+                <Annotations Target="ProductService.EntityContainer/VH_Categories">
+                    <Annotation Term="Capabilities.DeleteRestrictions">
+                        <Record Type="Capabilities.DeleteRestrictionsType">
+                            <PropertyValue Property="Deletable" Bool="false"/>
+                        </Record>
+                    </Annotation>
+                    <Annotation Term="Capabilities.InsertRestrictions">
+                        <Record Type="Capabilities.InsertRestrictionsType">
+                            <PropertyValue Property="Insertable" Bool="false"/>
+                        </Record>
+                    </Annotation>
+                    <Annotation Term="Capabilities.UpdateRestrictions">
+                        <Record Type="Capabilities.UpdateRestrictionsType">
+                            <PropertyValue Property="Updatable" Bool="false"/>
+                        </Record>
+                    </Annotation>
+                </Annotations>
+                <Annotations Target="ProductService.EntityContainer/VH_Currencies">
+                    <Annotation Term="Capabilities.DeleteRestrictions">
+                        <Record Type="Capabilities.DeleteRestrictionsType">
+                            <PropertyValue Property="Deletable" Bool="false"/>
+                        </Record>
+                    </Annotation>
+                    <Annotation Term="Capabilities.InsertRestrictions">
+                        <Record Type="Capabilities.InsertRestrictionsType">
+                            <PropertyValue Property="Insertable" Bool="false"/>
+                        </Record>
+                    </Annotation>
+                    <Annotation Term="Capabilities.UpdateRestrictions">
+                        <Record Type="Capabilities.UpdateRestrictionsType">
+                            <PropertyValue Property="Updatable" Bool="false"/>
+                        </Record>
+                    </Annotation>
+                </Annotations>
+                <Annotations Target="ProductService.EntityContainer/VH_UnitOfMeasures">
+                    <Annotation Term="Capabilities.DeleteRestrictions">
+                        <Record Type="Capabilities.DeleteRestrictionsType">
+                            <PropertyValue Property="Deletable" Bool="false"/>
+                        </Record>
+                    </Annotation>
+                    <Annotation Term="Capabilities.InsertRestrictions">
+                        <Record Type="Capabilities.InsertRestrictionsType">
+                            <PropertyValue Property="Insertable" Bool="false"/>
+                        </Record>
+                    </Annotation>
+                    <Annotation Term="Capabilities.UpdateRestrictions">
+                        <Record Type="Capabilities.UpdateRestrictionsType">
+                            <PropertyValue Property="Updatable" Bool="false"/>
+                        </Record>
+                    </Annotation>
+                </Annotations>
+                <Annotations Target="ProductService.EntityContainer/VH_DimensionUnits">
+                    <Annotation Term="Capabilities.DeleteRestrictions">
+                        <Record Type="Capabilities.DeleteRestrictionsType">
+                            <PropertyValue Property="Deletable" Bool="false"/>
+                        </Record>
+                    </Annotation>
+                    <Annotation Term="Capabilities.InsertRestrictions">
+                        <Record Type="Capabilities.InsertRestrictionsType">
+                            <PropertyValue Property="Insertable" Bool="false"/>
+                        </Record>
+                    </Annotation>
+                    <Annotation Term="Capabilities.UpdateRestrictions">
+                        <Record Type="Capabilities.UpdateRestrictionsType">
+                            <PropertyValue Property="Updatable" Bool="false"/>
+                        </Record>
+                    </Annotation>
+                </Annotations>
+                <Annotations Target="ProductService.StockStatuses_texts/locale">
+                    <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                    </Annotations>
+                    <Annotations Target="ProductService.VH_Categories_texts/locale">
+                        <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                        </Annotations>
+                        <Annotations Target="ProductService.VH_Currencies_texts/locale">
+                            <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                            </Annotations>
+                            <Annotations Target="ProductService.VH_UnitOfMeasures_texts/locale">
+                                <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                                </Annotations>
+                                <Annotations Target="ProductService.VH_DimensionUnits_texts/locale">
+                                    <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                                    </Annotations>
+                                </Schema>
+                            </edmx:DataServices>
+                        </edmx:Edmx>

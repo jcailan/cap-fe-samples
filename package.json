@@ -1,20 +1,63 @@
 {
 	"name": "cap-fe-samples",
 	"version": "1.0.0",
-	"description": "SAP Fiori Element and CAP Model - Demo Project",
-	"repository": "https://github.com/jcailan/cap-fe-samples",
-	"license": "MIT",
-	"private": false,
+	"description": "A simple CAP project.",
+	"repository": "<Add your repository here>",
+	"license": "UNLICENSED",
+	"private": true,
 	"dependencies": {
-		"@sap/cds": "^4",
-		"@sap/cds-odata-v2-adapter-proxy": "^1.4.46",
-		"express": "^4"
+		"@sap/cds": "^6",
+		"express": "^4",
+		"@sap/xssec": "^3",
+		"passport": "^0",
+		"hdb": "^0.19.0"
 	},
 	"devDependencies": {
-		"sqlite3": "^5"
+		"@sap/eslint-plugin-cds": "^2.6.0",
+		"@sap/eslint-plugin-ui5-jsdocs": "^2.0.5",
+		"@sap/ux-specification": "^1.102.10",
+		"@sapui5/ts-types": "^1.92.2",
+		"concurrently": "^7.4.0",
+		"eslint": "^7.32.0",
+		"eslint-html-reporter": "^0.7.4",
+		"eslint-plugin-jsdoc": "^39.3.14",
+		"eslint-plugin-ui5": "^0.1.0",
+		"rimraf": "^3.0.2",
+		"sqlite3": "^5.0.4"
 	},
 	"scripts": {
-		"version": "cds --version > .cdsversion",
-		"start": "npx cds run"
-	}
+		"postinstall": "npx patch-package",
+		"start": "cds run",
+		"test:ui": "concurrently --kill-others \"npm start\" \"npm run karma --prefix app/products\"",
+		"husky": "npx husky install && npx husky add .husky/pre-commit \"npm run lint\"",
+		"lint": "eslint . --max-warnings 0",
+		"watch-products": "cds watch --open products/webapp/index.html?sap-ui-xx-viewCache=false",
+		"build": "rimraf resources mta_archives && mbt build --mtar archive",
+		"deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+		"undeploy": "cf undeploy com-jcailan-capfes --delete-services --delete-service-keys --delete-service-brokers"
+	},
+	"engines": {
+		"node": "^16.15"
+	},
+	"cds": {
+		"hana": {
+			"deploy-format": "hdbtable"
+		},
+		"requires": {
+			"[production]": {
+				"auth": {
+					"kind": "xsuaa"
+				}
+			},
+			"db": {
+				"kind": "sql",
+				"[production]": {
+					"kind": "hana"
+				}
+			}
+		}
+	},
+	"sapux": [
+		"app/products"
+	]
 }

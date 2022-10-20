@@ -1,0 +1,53 @@
+diff --git a/node_modules/@sap/cds/app/index.html b/node_modules/@sap/cds/app/index.html
+index 23acd86..d292cc9 100644
+--- a/node_modules/@sap/cds/app/index.html
++++ b/node_modules/@sap/cds/app/index.html
+@@ -68,6 +68,11 @@
+             {{apps}}
+         </ul>
+ 
++        <h2> Integration Tests: </h2>
++        <ul>
++            {{tests}}
++        </ul>
++
+         <h2> Service Endpoints: </h2>
+         {{services}}
+ 
+diff --git a/node_modules/@sap/cds/app/index.js b/node_modules/@sap/cds/app/index.js
+index 109556d..e53bb56 100644
+--- a/node_modules/@sap/cds/app/index.js
++++ b/node_modules/@sap/cds/app/index.js
+@@ -14,6 +14,10 @@ module.exports = { get html(){
+       html => `\n<li><a href="${html}">/${html.replace(/^[/]/,'')}</a></li>`
+     ).join('\n') || '— none —'
+   )
++  .replace ('{{tests}}', _test_links().map(
++	html => `\n<li><a href="${html}">/${html.replace(/^[/]/,'')}</a></li>`
++  ).join('\n') || '— none —'
++  )
+   .replace ('{{services}}', cds.service.providers.map (srv => srv._is_dark ? '' : `
+         <h3>
+           <a href="${srv.path}">${srv.path}</a>${metadata(srv)} ${_moreLinks(srv)}
+@@ -44,12 +48,20 @@ module.exports = { get html(){
+ 
+ function _app_links() {
+   const folder = path.resolve (cds.root, cds.env.folders.app)
+-  const files = find (folder, ['*.html', '*/*.html', '*/*/*.html']).map (
++  const files = find (folder, ['*.html', '*/*.html', '*/webapp/*.html']).map (
+     file => path.relative(folder,file).replace (/\\/g,'/')
+   )
+   return files.concat (cds.app._app_links || [])
+ }
+ 
++function _test_links() {
++	const folder = path.resolve (cds.root, cds.env.folders.app)
++	const files = find (folder, ['*/*/test/*/*.html']).map (
++	  file => path.relative(folder,file).replace (/\\/g,'/')
++	)
++	return files.concat (cds.app._test_links || [])
++}
++
+ function _entities_in (service) {
+   const exposed=[], {entities} = service
+   for (let each in entities) {

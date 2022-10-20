@@ -1,5 +1,8 @@
 {
-	"extends": "eslint:recommended",
+	"extends": [
+		"eslint:recommended",
+		"plugin:@sap/cds/recommended"
+	],
 	"env": {
 		"node": true,
 		"es6": true,
@@ -10,10 +13,9 @@
 		"sourceType": "module"
 	},
 	"ignorePatterns": [
-		"gen",
-		"swagger",
-		"node_modules",
-		"lib"
+		"gen/",
+		"node_modules/",
+		"resources/"
 	],
 	"globals": {
 		"SELECT": true,
@@ -25,6 +27,10 @@
 		"cds": true
 	},
 	"rules": {
+		"@sap/cds/no-db-keywords": "off",
+		"@sap/cds/min-node-version": "warn",
+		"@sap/cds/start-elements-lowercase": "warn",
+		"@sap/cds/start-entities-uppercase": "warn",
 		"semi": "error",
 		"no-extra-semi": "warn",
 		"curly": "warn",
@@ -54,7 +60,7 @@
 				"allow": [
 					"^VH_",
 					"^SH_",
-					"_Id$"
+					"_ID$"
 				]
 			}
 		],
