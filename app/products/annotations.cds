@@ -85,7 +85,7 @@ annotate service.Products with @(
             },
             {
                 $Type  : 'UI.ReferenceFacet',
-                Target : 'SalesData/@UI.LineItem',
+                Target : 'SalesData/@UI.PresentationVariant',
                 Label  : '{i18n>salesData}'
             }
         ],
@@ -341,56 +341,66 @@ annotate service.Suppliers with @(Communication : {Contact : {
 /**
  * Annotations for SalesData Entity
  */
-annotate service.SalesData with @(UI : {
-    PresentationVariant : {
-        SortOrder      : [{Property : DeliveryMonth_ID}],
-        Visualizations : ['@UI.LineItem']
+annotate service.SalesData with @(
+    Aggregation.ApplySupported : {
+        GroupableProperties    : [
+            ID,
+            DeliveryMonth_ID,
+            deliveryDate,
+            Currency_ID,
+            Product_ID
+        ],
+        AggregatableProperties : [{Property : revenue}]
     },
-    HeaderInfo          : {
-        TypeName       : '{i18n>salesOrder}',
-        TypeNamePlural : '{i18n>salesOrders}'
-    },
-    LineItem            : [
-        {Value : DeliveryMonth_ID},
-        {Value : revenue},
-        {Value : deliveryDate}
-    ],
-// Chart               : {
-//     Title      : '{i18n>revenueHistory}',
-//     ChartType  : #Column,
-//     Dimensions : [DeliveryMonth_ID],
-//     Measures   : [revenue]
-// }
-}) {
-    ID            @(
-        sap.aggregation.role : 'dimension',
-        UI                   : {Hidden : true}
-    );
+    UI                         : {
+        PresentationVariant : {
+            SortOrder      : [{Property : DeliveryMonth_ID}],
+            GroupBy        : [DeliveryMonth_ID],
+            Visualizations : [
+                '@UI.LineItem',
+                '@UI.Chart'
+            ]
+        },
+        HeaderInfo          : {
+            TypeName       : '{i18n>salesOrder}',
+            TypeNamePlural : '{i18n>salesOrders}'
+        },
+        LineItem            : [
+            {Value : DeliveryMonth_ID},
+            {Value : revenue},
+            {Value : deliveryDate}
+        ],
+        Chart               : {
+            Title               : '{i18n>revenueHistory}',
+            ChartType           : #Line,
+            Dimensions          : [DeliveryMonth_ID],
+            DimensionAttributes : [{
+                Dimension : DeliveryMonth_ID,
+                Role      : #Category
+            }],
+            Measures            : [revenue],
+            MeasureAttributes   : [{
+                Measure : revenue,
+                Role    : #Axis1
+            }]
+        }
+    }
+) {
+    ID            @(UI : {Hidden : true});
     DeliveryMonth @(
-        title                : '{i18n>deliveryMonth}',
-        sap.aggregation.role : 'dimension',
-        Common               : {Text : {
+        title  : '{i18n>deliveryMonth}',
+        Common : {Text : {
             $value                 : DeliveryMonth.name,
             ![@UI.TextArrangement] : #TextOnly
         }}
     );
     revenue       @(
-        title                : '{i18n>revenue}',
-        sap.aggregation.role : 'measure',
-        Measures             : {Unit : Currency_ID}
+        title    : '{i18n>revenue}',
+        Measures : {Unit : Currency_ID}
     );
-    deliveryDate  @(
-        title                : '{i18n>deliveryDate}',
-        sap.aggregation.role : 'dimension'
-    );
-    Currency      @(
-        sap.aggregation.role : 'dimension',
-        UI                   : {Hidden : true}
-    );
-    Product       @(
-        sap.aggregation.role : 'dimension',
-        UI                   : {Hidden : true}
-    );
+    deliveryDate  @(title : '{i18n>deliveryDate}');
+    Currency      @(UI : {Hidden : true});
+    Product       @(UI : {Hidden : true});
 };
 
 /**

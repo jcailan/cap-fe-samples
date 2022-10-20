@@ -6,6 +6,7 @@ using {
 
 service ProductService {
 
+    @readonly
     entity Products          as projection on view.Products;
 
     @readonly
