@@ -7,10 +7,11 @@
 	"private": true,
 	"dependencies": {
 		"@sap/cds": "^6",
-		"express": "^4",
+		"@sap/cds-odata-v2-adapter-proxy": "^1.9.10",
 		"@sap/xssec": "^3",
-		"passport": "^0",
-		"hdb": "^0.19.0"
+		"express": "^4",
+		"hdb": "^0.19.0",
+		"passport": "^0"
 	},
 	"devDependencies": {
 		"@sap/eslint-plugin-cds": "^2.6.0",
