@@ -224,8 +224,8 @@ annotate service.Products with @(
         }
     );
     quantity         @(
-        title         : '{i18n>quantity}',
-        Measures.Unit : UnitOfMeasure_ID
+        title    : '{i18n>quantity}',
+        Measures : {Unit : UnitOfMeasure_ID}
     );
     UnitOfMeasure    @(
         title  : '{i18n>unitOfMeasure}',
@@ -342,24 +342,21 @@ annotate service.Suppliers with @(Communication : {Contact : {
  * Annotations for SalesData Entity
  */
 annotate service.SalesData with @(
-    Aggregation.ApplySupported : {
-        GroupableProperties    : [
-            ID,
-            DeliveryMonth_ID,
-            deliveryDate,
-            Currency_ID,
-            Product_ID
-        ],
+    Aggregation : {ApplySupported : {
+        GroupableProperties    : [DeliveryMonth_ID],
         AggregatableProperties : [{Property : revenue}]
-    },
-    UI                         : {
+    }},
+    Analytics   : {AggregatedProperty : {
+        Name                 : 'totalRevenue',
+        AggregationMethod    : 'sum',
+        AggregatableProperty : 'revenue',
+        ![@Common.Label]     : '{i18n>totalRevenue}'
+    }},
+    UI          : {
         PresentationVariant : {
             SortOrder      : [{Property : DeliveryMonth_ID}],
             GroupBy        : [DeliveryMonth_ID],
-            Visualizations : [
-                '@UI.LineItem',
-                '@UI.Chart'
-            ]
+            Visualizations : ['@UI.LineItem']
         },
         HeaderInfo          : {
             TypeName       : '{i18n>salesOrder}',
@@ -371,17 +368,14 @@ annotate service.SalesData with @(
             {Value : deliveryDate}
         ],
         Chart               : {
-            Title               : '{i18n>revenueHistory}',
-            ChartType           : #Line,
-            Dimensions          : [DeliveryMonth_ID],
-            DimensionAttributes : [{
-                Dimension : DeliveryMonth_ID,
-                Role      : #Category
-            }],
-            Measures            : [revenue],
-            MeasureAttributes   : [{
-                Measure : revenue,
-                Role    : #Axis1
+            Title             : '{i18n>revenueHistory}',
+            ChartType         : #Column,
+            Dimensions        : [DeliveryMonth_ID],
+            DynamicMeasures   : ['@Analytics.AggregatedProperty'],
+            MeasureAttributes : [{
+                $Type          : 'UI.ChartMeasureAttributeType',
+                DynamicMeasure : '@Analytics.AggregatedProperty',
+                Role           : #Axis1
             }]
         }
     }
@@ -390,7 +384,7 @@ annotate service.SalesData with @(
     DeliveryMonth @(
         title  : '{i18n>deliveryMonth}',
         Common : {Text : {
-            $value                 : DeliveryMonth.name,
+            $value                 : deliveryMonth,
             ![@UI.TextArrangement] : #TextOnly
         }}
     );

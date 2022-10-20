@@ -16,7 +16,13 @@ service ProductService {
     entity Reviews           as projection on td.ProductReviews;
 
     @readonly
-    entity SalesData         as projection on td.SalesData;
+    entity SalesData         as
+        select from td.SalesData {
+            *,
+            // @UI.Chart term doesn't support navigation properties
+            // so here lies a workaround
+            DeliveryMonth.name as deliveryMonth
+        };
 
     @readonly
     entity VH_StockStatuses  as projection on md.StockStatuses;
