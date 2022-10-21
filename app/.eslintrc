@@ -12,7 +12,8 @@
 		"dist/",
 		"test/",
 		"resources/",
-		"karma*.js"
+		"karma*.js",
+		"locate-reuse-libs.js"
 	],
 	"parserOptions": {
 		"ecmaVersion": 2018
