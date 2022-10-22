@@ -14,6 +14,36 @@
 				<Annotation Term="UI.Hidden"
 					Bool="false"/>
 			</Annotations>
+			<Annotations Target="ProductService.Products">
+				<Annotation Term="UI.Facets">
+					<Collection>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target"
+								AnnotationPath="@UI.FieldGroup#TechnicalData"/>
+							<PropertyValue Property="Label"
+								String="{@i18n>technicalData}"/>
+						</Record>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target"
+								AnnotationPath="Reviews/@UI.LineItem"/>
+							<PropertyValue Property="Label"
+								String="{@i18n>productReviews}"/>
+						</Record>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target"
+								AnnotationPath="SalesData/@UI.Chart"/>
+							<PropertyValue Property="Label"
+								String="{@i18n>monthlyRevenue}"/>
+						</Record>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target"
+								AnnotationPath="SalesData/@UI.LineItem"/>
+							<PropertyValue Property="Label"
+								String="{@i18n>salesData}"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
 		</Schema>
 	</edmx:DataServices>
 </edmx:Edmx>
