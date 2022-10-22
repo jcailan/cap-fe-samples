@@ -138,6 +138,15 @@
 						"defaultLayoutTypeIfExternalNavigation": "MidColumnFullScreen",
 						"component": {
 							"name": "sap.suite.ui.generic.template.ObjectPage"
+						},
+						"pages": {
+							"ObjectPage|Reviews": {
+								"entitySet": "Reviews",
+								"defaultLayoutTypeIfExternalNavigation": "MidColumnFullScreen",
+								"component": {
+									"name": "sap.suite.ui.generic.template.ObjectPage"
+								}
+							}
 						}
 					}
 				}
