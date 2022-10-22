@@ -138,11 +138,9 @@ annotate service.Products with @(
     Category         @(
         title  : '{i18n>category}',
         Common : {
-            Text      : {
-                $value                 : Category.name,
-                ![@UI.TextArrangement] : #TextOnly
-            },
-            ValueList : {
+            Text            : Category.name,
+            TextArrangement : #TextOnly,
+            ValueList       : {
                 Label           : '{i18n>category}',
                 SearchSupported : true,
                 CollectionPath  : 'VH_Categories',
@@ -251,10 +249,8 @@ annotate service.Products with @(
     StockStatus_ID   @(
         title  : '{i18n>stockStatus}',
         Common : {
-            Text                     : {
-                $value                 : StockStatus.name,
-                ![@UI.TextArrangement] : #TextOnly
-            },
+            Text                     : StockStatus.name,
+            TextArrangement          : #TextOnly,
             ValueListWithFixedValues : true,
             ValueList                : {
                 CollectionPath : 'VH_StockStatuses',
@@ -383,10 +379,10 @@ annotate service.SalesData with @(
     ID            @(UI : {Hidden : true});
     DeliveryMonth @(
         title  : '{i18n>deliveryMonth}',
-        Common : {Text : {
-            $value                 : deliveryMonth,
-            ![@UI.TextArrangement] : #TextOnly
-        }}
+        Common : {
+            Text            : deliveryMonth,
+            TextArrangement : #TextOnly
+        }
     );
     revenue       @(
         title    : '{i18n>revenue}',
@@ -403,10 +399,10 @@ annotate service.SalesData with @(
 annotate service.VH_StockStatuses with {
     ID @(
         title  : '{i18n>stockStatus}',
-        Common : {Text : {
-            $value                 : name,
-            ![@UI.TextArrangement] : #TextOnly
-        }}
+        Common : {
+            Text            : name,
+            TextArrangement : #TextOnly
+        }
     )
 };
 
@@ -431,10 +427,10 @@ annotate service.VH_Categories with {
     ID   @(
         title  : '{i18n>category}',
         UI     : {HiddenFilter : true},
-        Common : {Text : {
-            $value                 : name,
-            ![@UI.TextArrangement] : #TextOnly
-        }}
+        Common : {
+            Text            : name,
+            TextArrangement : #TextOnly
+        }
     );
     name @(UI : {Hidden : true});
 };
