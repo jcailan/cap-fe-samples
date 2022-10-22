@@ -109,7 +109,11 @@
 			"forceGlobalRefresh": false,
 			"objectPageHeaderType": "Dynamic",
 			"considerAnalyticalParameters": true,
-			"showDraftToggle": false
+			"showDraftToggle": false,
+			"flexibleColumnLayout": {
+				"defaultTwoColumnLayoutType": "TwoColumnsMidExpanded",
+				"defaultThreeColumnLayoutType": "ThreeColumnsMidExpanded"
+			}
 		},
 		"pages": {
 			"ListReport|Products": {
