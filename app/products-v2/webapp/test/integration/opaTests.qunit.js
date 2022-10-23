@@ -10,7 +10,7 @@ sap.ui.require(
 		'use strict';
 		var JourneyRunner = new JourneyRunner({
 			// start index.html in web folder
-			launchUrl: sap.ui.require.toUrl('com/jcailan/v2/products') + '/index.html'
+			launchUrl: sap.ui.require.toUrl('com/jcailan/v2/products') + '/test/index.html'
 		});
 
 
