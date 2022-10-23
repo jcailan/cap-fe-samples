@@ -1,0 +1,59 @@
+{
+	"configurations": [
+		{
+			"name": "Start products Mock",
+			"type": "node",
+			"request": "launch",
+			"cwd": "${workspaceFolder}/products",
+			"runtimeExecutable": "npx",
+			"windows": {
+				"runtimeExecutable": "npx.cmd"
+			},
+			"runtimeArgs": [
+				"fiori",
+				"run"
+			],
+			"args": [
+				"--config",
+				"./ui5-mock.yaml",
+				"--open",
+				"test/flpSandbox.html#comjcailanv2products-tile"
+			],
+			"console": "internalConsole",
+			"internalConsoleOptions": "openOnSessionStart",
+			"outputCapture": "std",
+			"port": 9229,
+			"env": {
+				"FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false"
+			}
+		},
+		{
+			"name": "Start products Local",
+			"type": "node",
+			"request": "launch",
+			"cwd": "${workspaceFolder}/products",
+			"runtimeExecutable": "npx",
+			"windows": {
+				"runtimeExecutable": "npx.cmd"
+			},
+			"runtimeArgs": [
+				"fiori",
+				"run"
+			],
+			"args": [
+				"--config",
+				"./ui5-local.yaml",
+				"--open",
+				"test/flpSandbox.html#comjcailanv2products-tile"
+			],
+			"console": "internalConsole",
+			"internalConsoleOptions": "openOnSessionStart",
+			"outputCapture": "std",
+			"port": 9229,
+			"env": {
+				"FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false"
+			}
+		}
+	],
+	"compounds": []
+}

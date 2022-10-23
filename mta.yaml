@@ -50,10 +50,25 @@ modules:
             - comjcailanproducts.zip
           name: comjcailanproducts
           target-path: resources/
+        - artifacts:
+            - comjcailanv2products.zip
+          name: comjcailanv2products
+          target-path: resources/
 
   - name: comjcailanproducts
     type: html5
     path: app/products
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      supported-platforms: []
+
+  - name: comjcailanv2products
+    type: html5
+    path: products
     build-parameters:
       build-result: dist
       builder: custom

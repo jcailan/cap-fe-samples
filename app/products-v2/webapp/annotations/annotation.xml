@@ -1,0 +1,101 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+	Version="4.0">
+	<edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Analytics.xml">
+		<edmx:Include Namespace="com.sap.vocabularies.Analytics.v1"
+			Alias="Analytics"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Aggregation.V1.xml">
+		<edmx:Include Namespace="Org.OData.Aggregation.V1"
+			Alias="Aggregation"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+		<edmx:Include Namespace="com.sap.vocabularies.UI.v1"
+			Alias="UI"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/here/goes/your/serviceurl/$metadata">
+		<edmx:Include Namespace="ProductService"/>
+	</edmx:Reference>
+	<edmx:DataServices>
+		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm"
+			Namespace="local">
+			<Annotations Target="ProductService.VH_Categories/name">
+				<Annotation Term="UI.Hidden"
+					Bool="false"/>
+			</Annotations>
+			<Annotations Target="ProductService.Products">
+				<Annotation Term="UI.Facets">
+					<Collection>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target"
+								AnnotationPath="@UI.FieldGroup#TechnicalData"/>
+							<PropertyValue Property="Label"
+								String="{@i18n>technicalData}"/>
+						</Record>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target"
+								AnnotationPath="Reviews/@UI.LineItem"/>
+							<PropertyValue Property="Label"
+								String="{@i18n>productReviews}"/>
+						</Record>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target"
+								AnnotationPath="SalesData/@UI.Chart"/>
+							<PropertyValue Property="Label"
+								String="{@i18n>monthlyRevenue}"/>
+						</Record>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target"
+								AnnotationPath="SalesData/@UI.LineItem"/>
+							<PropertyValue Property="Label"
+								String="{@i18n>salesData}"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="ProductService.SalesData">
+				<Annotation Term="UI.Chart">
+					<Record Type="UI.ChartDefinitionType">
+						<PropertyValue Property="Title"
+							String="{@i18n>revenueHistory}"/>
+						<PropertyValue Property="ChartType"
+							EnumMember="UI.ChartType/Column"/>
+						<PropertyValue Property="Dimensions">
+							<Collection>
+								<PropertyPath>DeliveryMonth_ID</PropertyPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="DimensionAttributes">
+							<Collection>
+								<Record Type="UI.ChartDimensionAttributeType">
+									<PropertyValue Property="Dimension"
+										PropertyPath="DeliveryMonth_ID"/>
+									<PropertyValue Property="Role"
+										EnumMember="UI.ChartDimensionRoleType/Category"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Measures">
+							<Collection>
+								<PropertyPath>revenue</PropertyPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="MeasureAttributes">
+							<Collection>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure"
+										PropertyPath="revenue"/>
+									<PropertyValue Property="Role"
+										EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="Aggregation.ApplySupported">
+				</Annotation>
+				<Annotation Term="Analytics.AggregatedProperty">
+				</Annotation>
+			</Annotations>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>
