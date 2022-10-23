@@ -1,29 +1,8 @@
 sap.ui.define([
 	"sap/ui/test/OpaBuilder",
-	"sap/fe/test/Utils",
-	"./builder/TableBuilder",
-	"sap/fe/test/api/TableActions",
-	"sap/fe/test/api/TableAssertions",
-	"./builder/FilterBarBuilder",
-	"sap/fe/test/api/FilterBarActions"
-], function(OpaBuilder, Utils, TableBuilder, TableActions, TableAssertions, FilterBarBuilder, FilterBarActions) {
+	"sap/fe/test/Utils"
+], function(OpaBuilder, Utils) {
 	"use strict";
-
-	function _getTableBuilder(vOpaInstance, vTableIdentifier) {
-		var oTableBuilder = TableBuilder.create(vOpaInstance);
-		if (Utils.isOfType(vTableIdentifier, String)) {
-			oTableBuilder.hasProperties({
-				header: vTableIdentifier
-			});
-		} else {
-			oTableBuilder.hasId(vTableIdentifier.id);
-		}
-		return oTableBuilder;
-	}
-
-	function _getFilterBarBuilder(vOpaInstance, vFilterBarIdentifier) {
-		return FilterBarBuilder.create(vOpaInstance).hasId(vFilterBarIdentifier.id);
-	}
 
 	function TemplatePage(vViewId, aAdditionalPageDefinitions) {
 		var sViewId = vViewId,
@@ -33,21 +12,8 @@ sap.ui.define([
 			Utils,
 			[{
 				viewId: sViewId,
-				actions: Utils.mergeObjects({
-					_onTable: function(vTableIdentifier) {
-						return new TableActions(_getTableBuilder(this, vTableIdentifier), vTableIdentifier);
-					},
-					_onFilterBar: function(vFilterBarIdentifier) {
-						return new FilterBarActions(_getFilterBarBuilder(this, vFilterBarIdentifier), vFilterBarIdentifier);
-					}
-				}),
+				actions: Utils.mergeObjects({}),
 				assertions: Utils.mergeObjects({
-					_onTable: function(vTableIdentifier) {
-						return new TableAssertions(_getTableBuilder(this, vTableIdentifier), vTableIdentifier);
-					},
-					_onFilterBar: function(vFilterBarIdentifier) {
-						return new FilterBarActions(_getFilterBarBuilder(this, vFilterBarIdentifier), vFilterBarIdentifier);
-					},
 					iSeeThisPage: function() {
 						return OpaBuilder.create(this)
 							.hasId(sViewId)

@@ -1,4 +1,4 @@
-sap.ui.define(['sap/fe/test/ObjectPage'], function(ObjectPage) {
+sap.ui.define(['../lib/ObjectPage'], function(ObjectPage) {
 	'use strict';
 
 	var CustomPageDefinitions = {
@@ -8,8 +8,8 @@ sap.ui.define(['sap/fe/test/ObjectPage'], function(ObjectPage) {
 
 	return new ObjectPage(
 		{
-			appId: 'com.jcailan.products',
-			componentId: 'ReviewsObjectPage',
+			appId: 'com.jcailan.v2.products',
+			componentId: 'Reviews',
 			entitySet: 'Reviews'
 		},
 		CustomPageDefinitions
