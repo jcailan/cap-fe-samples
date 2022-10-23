@@ -338,17 +338,19 @@ annotate service.Suppliers with @(Communication : {Contact : {
  * Annotations for SalesData Entity
  */
 annotate service.SalesData with @(
-    Aggregation : {ApplySupported : {
+    // required by FEV2, otherwise do not use @sap annotations
+    sap.semantics : 'aggregate',
+    Aggregation   : {ApplySupported : {
         GroupableProperties    : [DeliveryMonth_ID],
         AggregatableProperties : [{Property : revenue}]
     }},
-    Analytics   : {AggregatedProperty #totalRevenue : {
+    Analytics     : {AggregatedProperty #totalRevenue : {
         Name                 : 'totalRevenue',
         AggregationMethod    : 'sum',
         AggregatableProperty : 'revenue',
         ![@Common.Label]     : '{i18n>totalRevenue}'
     }},
-    UI          : {
+    UI            : {
         PresentationVariant : {
             SortOrder      : [{Property : DeliveryMonth_ID}],
             GroupBy        : [DeliveryMonth_ID],
@@ -378,17 +380,26 @@ annotate service.SalesData with @(
 ) {
     ID            @(UI : {Hidden : true});
     DeliveryMonth @(
-        title  : '{i18n>deliveryMonth}',
-        Common : {
+        title                : '{i18n>deliveryMonth}',
+        Common               : {
             Text            : deliveryMonth,
             TextArrangement : #TextOnly
-        }
+        },
+        // required by FEV2, otherwise do not use @sap annotations
+        sap.aggregation.role : 'dimension'
     );
     revenue       @(
-        title    : '{i18n>revenue}',
-        Measures : {Unit : Currency_ID}
+        title                : '{i18n>revenue}',
+        Measures             : {Unit : Currency_ID},
+        // required by FEV2, otherwise do not use @sap annotations
+        sap.aggregation.role : 'measure',
     );
-    deliveryDate  @(title : '{i18n>deliveryDate}');
+    deliveryDate  @(
+        title                : '{i18n>deliveryDate}',
+        // required by FEV2, otherwise do not use @sap annotations
+        sap.aggregation.role : 'dimension'
+    );
+    deliveryMonth @(UI : {Hidden : true});
     Currency      @(UI : {Hidden : true});
     Product       @(UI : {Hidden : true});
 };
