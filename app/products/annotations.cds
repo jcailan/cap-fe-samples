@@ -342,7 +342,7 @@ annotate service.SalesData with @(
         GroupableProperties    : [DeliveryMonth_ID],
         AggregatableProperties : [{Property : revenue}]
     }},
-    Analytics   : {AggregatedProperty : {
+    Analytics   : {AggregatedProperty #totalRevenue : {
         Name                 : 'totalRevenue',
         AggregationMethod    : 'sum',
         AggregatableProperty : 'revenue',
@@ -367,10 +367,10 @@ annotate service.SalesData with @(
             Title             : '{i18n>revenueHistory}',
             ChartType         : #Column,
             Dimensions        : [DeliveryMonth_ID],
-            DynamicMeasures   : ['@Analytics.AggregatedProperty'],
+            DynamicMeasures   : ['@Analytics.AggregatedProperty#totalRevenue'],
             MeasureAttributes : [{
                 $Type          : 'UI.ChartMeasureAttributeType',
-                DynamicMeasure : '@Analytics.AggregatedProperty',
+                DynamicMeasure : '@Analytics.AggregatedProperty#totalRevenue',
                 Role           : #Axis1
             }]
         }
