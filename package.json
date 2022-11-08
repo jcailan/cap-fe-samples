@@ -16,7 +16,7 @@
 	"devDependencies": {
 		"@sap/eslint-plugin-cds": "^2.6.0",
 		"@sap/eslint-plugin-ui5-jsdocs": "^2.0.5",
-		"@sap/ux-specification": "^1.102.10",
+		"@sap/ux-specification": "^1.102.11",
 		"@sapui5/ts-types": "^1.92.2",
 		"concurrently": "^7.4.0",
 		"eslint": "^7.32.0",
@@ -59,6 +59,8 @@
 		}
 	},
 	"sapux": [
-		"app/products"
+		"app/products",
+		"app/products-v2",
+		"app/custom"
 	]
 }

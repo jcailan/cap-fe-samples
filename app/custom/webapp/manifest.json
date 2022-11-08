@@ -38,10 +38,12 @@
 	},
 	"sap.ui5": {
 		"dependencies": {
-			"minUI5Version": "1.60.0",
+			"minUI5Version": "1.102.1",
 			"libs": {
 				"sap.ui.core": {},
-				"sap.fe.templates": {}
+				"sap.ushell": {},
+				"sap.fe.templates": {},
+				"sap.fe.macros": {}
 			}
 		},
 		"contentDensities": {
@@ -51,7 +53,7 @@
 		"models": {
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
-				"uri": "../../i18n/i18n.properties"
+				"uri": "./i18n/i18n.properties"
 			},
 			"": {
 				"dataSource": "mainService",
@@ -67,19 +69,19 @@
 			"routes": [
 				{
 					"pattern": ":?query:",
-					"name": "entryPage",
-					"target": "entryPage"
+					"name": "EntryPage",
+					"target": "EntryPage"
 				},
 				{
 					"pattern": "/Products({key}):?query:",
-					"name": "detailPage",
-					"target": "detailPage"
+					"name": "DetailPage",
+					"target": "DetailPage"
 				}
 			],
 			"targets": {
-				"entryPage": {
+				"EntryPage": {
 					"type": "Component",
-					"id": "entryPage",
+					"id": "EntryPage",
 					"name": "sap.fe.core.fpm",
 					"options": {
 						"settings": {
@@ -90,16 +92,16 @@
 							"navigation": {
 								"Products": {
 									"detail": {
-										"route": "detailPage"
+										"route": "DetailPage"
 									}
 								}
 							}
 						}
 					}
 				},
-				"detailPage": {
+				"DetailPage": {
 					"type": "Component",
-					"id": "detailPage",
+					"id": "DetailPage",
 					"name": "sap.fe.core.fpm",
 					"options": {
 						"settings": {
