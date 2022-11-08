@@ -1,0 +1,115 @@
+{
+	"_version": "1.12.0",
+	"sap.app": {
+		"id": "com.jcailan.custom",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"dataSources": {
+			"mainService": {
+				"uri": "/product/",
+				"type": "OData",
+				"settings": {
+					"annotations": [],
+					"odataVersion": "4.0"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"dependencies": {
+			"minUI5Version": "1.60.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.fe.templates": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "../../i18n/i18n.properties"
+			},
+			"": {
+				"dataSource": "mainService",
+				"settings": {
+					"synchronizationMode": "None",
+					"operationMode": "Server",
+					"autoExpandSelect": true,
+					"earlyRequests": true
+				}
+			}
+		},
+		"routing": {
+			"routes": [
+				{
+					"pattern": ":?query:",
+					"name": "entryPage",
+					"target": "entryPage"
+				},
+				{
+					"pattern": "/Products({key}):?query:",
+					"name": "detailPage",
+					"target": "detailPage"
+				}
+			],
+			"targets": {
+				"entryPage": {
+					"type": "Component",
+					"id": "entryPage",
+					"name": "sap.fe.core.fpm",
+					"options": {
+						"settings": {
+							"viewName": "com/jcailan/custom/view/EntryPage",
+							"controllerName": "com.jcailan.custom.controller.EntryPage",
+							"viewType": "XML",
+							"entitySet": "Products",
+							"navigation": {
+								"Products": {
+									"detail": {
+										"route": "detailPage"
+									}
+								}
+							}
+						}
+					}
+				},
+				"detailPage": {
+					"type": "Component",
+					"id": "detailPage",
+					"name": "sap.fe.core.fpm",
+					"options": {
+						"settings": {
+							"viewName": "com.jcailan.custom.view.DetailPage",
+							"entitySet": "Products",
+							"navigation": {}
+						}
+					}
+				}
+			}
+		}
+	}
+}

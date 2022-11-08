@@ -1,0 +1,14 @@
+<mvc:View id="application-product"
+	height="100%"
+	controllerName="com.jcailan.custom.controller.EntryPage"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:fe="sap.fe.macros">
+	<Page>
+		<content>
+			<fe:Table contextPath="/Products"
+				metaPath="@com.sap.vocabularies.UI.v1.LineItem"
+				id="myTable" />
+		</content>
+	</Page>
+</mvc:View>

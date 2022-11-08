@@ -1,0 +1,13 @@
+<mvc:View id="customDetail"
+	controllerName="com.jcailan.custom.controller.DetailPage"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:macros="sap.fe.macros">
+	<Page title="Custom Page">
+		<content>
+			<Label text="This is a custom page." />
+		</content>
+	</Page>
+</mvc:View>
