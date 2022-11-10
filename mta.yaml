@@ -11,6 +11,7 @@ build-parameters:
     - builder: custom
       commands:
         - npx -p @sap/cds-dk cds build --production
+        - npm run copy:assets
 
 modules:
   - name: capfes-srv
@@ -18,6 +19,9 @@ modules:
     path: gen/srv
     parameters:
       buildpack: nodejs_buildpack
+      host: capfes-srv-${space}
+      memory: 128M
+      disk-quota: 256M
     build-parameters:
       builder: npm-ci
     provides:
@@ -27,6 +31,58 @@ modules:
     requires:
       - name: capfes-uaa
       - name: capfes-db
+
+  - name: capfes-app-router
+    type: nodejs
+    path: app/router
+    parameters:
+      host: capfes-${space}
+      memory: 128M
+      disk-quota: 256M
+    requires:
+      - name: capfes-uaa
+      - name: capfes-html5-runtime
+      - name: capfes-destination
+
+  - name: capfes-destination-deployer
+    type: com.sap.application.content
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Authentication: OAuth2UserTokenExchange
+              Name: capfes-srv
+              TokenServiceInstanceName: capfes-uaa
+              TokenServiceKeyName: capfes-uaa-key
+              URL: ~{srv-api/srv-url}
+              sap.cloud.service: com.jcailan.capfes
+            - Name: capfes-html5-host
+              ServiceInstanceName: capfes-html5-host
+              ServiceKeyName: capfes-html5-host-key
+              sap.cloud.service: com.jcailan.capfes
+            - Authentication: OAuth2UserTokenExchange
+              Name: capfes-uaa
+              ServiceInstanceName: capfes-uaa
+              ServiceKeyName: capfes-uaa-key
+              sap.cloud.service: com.jcailan.capfes
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+    requires:
+      - name: capfes-uaa
+        parameters:
+          service-key:
+            name: capfes-uaa-key
+      - name: capfes-html5-host
+        parameters:
+          service-key:
+            name: capfes-html5-host-key
+      - name: srv-api
+      - name: capfes-destination
+        parameters:
+          content-target: true
+          service-key:
+            name: capfes-destination-key
 
   - name: capfes-db-deployer
     type: hdb
@@ -40,7 +96,7 @@ modules:
     type: com.sap.application.content
     path: .
     requires:
-      - name: capfes-repo-host
+      - name: capfes-html5-host
         parameters:
           content-target: true
     build-parameters:
@@ -72,7 +128,7 @@ modules:
 
   - name: comjcailanv2products
     type: html5
-    path: products
+    path: app/products-v2
     build-parameters:
       build-result: dist
       builder: custom
@@ -109,11 +165,17 @@ resources:
       service: hana
       service-plan: hdi-shared
 
-  - name: capfes-repo-host
+  - name: capfes-html5-host
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
       service-plan: app-host
+
+  - name: capfes-html5-runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo
 
   - name: capfes-destination
     type: org.cloudfoundry.managed-service

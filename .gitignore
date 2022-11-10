@@ -29,3 +29,5 @@ mta_archives/
 app/*/.vscode/
 
 .husky/
+dist/
+/resources/

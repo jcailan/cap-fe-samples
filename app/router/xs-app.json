@@ -1,0 +1,13 @@
+{
+	"authenticationMethod": "route",
+	"welcomeFile": "/launchpage.html",
+	"routes": [
+		{
+			"source": "^/assets/(.*)$",
+			"target": "/assets/$1",
+			"destination": "capfes-srv",
+			"authenticationType": "xsuaa",
+			"csrfProtection": false
+		}
+	]
+}

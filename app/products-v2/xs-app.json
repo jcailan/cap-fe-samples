@@ -3,8 +3,8 @@
 	"authenticationMethod": "route",
 	"routes": [
 		{
-			"source": "^/here/(.*)$",
-			"target": "/here/$1",
+			"source": "^/v2/product/(.*)$",
+			"target": "/v2/product/$1",
 			"destination": "capfes-srv",
 			"authenticationType": "xsuaa",
 			"csrfProtection": false
