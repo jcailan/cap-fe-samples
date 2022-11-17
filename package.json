@@ -16,7 +16,7 @@
 	"devDependencies": {
 		"@sap/eslint-plugin-cds": "^2.6.0",
 		"@sap/eslint-plugin-ui5-jsdocs": "^2.0.5",
-		"@sap/ux-specification": "^1.102.11",
+		"@sap/ux-specification": "^1.102.12",
 		"@sapui5/ts-types": "^1.92.2",
 		"chai": "^4.3.7",
 		"chai-as-promised": "^7.1.1",
@@ -68,6 +68,7 @@
 	"sapux": [
 		"app/products",
 		"app/products-v2",
-		"app/custom"
+		"app/custom",
+		"app/products-manage"
 	]
 }
