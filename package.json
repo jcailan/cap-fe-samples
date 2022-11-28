@@ -9,6 +9,7 @@
 		"@sap/cds": "^6",
 		"@sap/cds-odata-v2-adapter-proxy": "^1.9.10",
 		"@sap/xssec": "^3",
+		"body-parser": "^1.20.1",
 		"express": "^4",
 		"hdb": "^0.19.0",
 		"passport": "^0"
