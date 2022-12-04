@@ -117,6 +117,7 @@
 		],
 		"no-multi-spaces": "warn",
 		"require-await": "warn",
+		"prefer-const": "warn",
 		"yoda": [
 			"error",
 			"never"
