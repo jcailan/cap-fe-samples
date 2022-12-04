@@ -13,9 +13,10 @@
 		"sourceType": "module"
 	},
 	"ignorePatterns": [
-		"gen/",
-		"node_modules/",
-		"resources/"
+		"gen",
+		"node_modules",
+		"resources",
+		"*.csv"
 	],
 	"globals": {
 		"SELECT": true,
@@ -24,7 +25,8 @@
 		"DELETE": true,
 		"CREATE": true,
 		"DROP": true,
-		"cds": true
+		"cds": true,
+		"cdsx": true
 	},
 	"rules": {
 		"@sap/cds/no-db-keywords": "off",
@@ -79,6 +81,45 @@
 		"brace-style": [
 			"warn",
 			"1tbs"
+		],
+		"max-len": [
+			"error",
+			{
+				"code": 90
+			}
+		],
+		"max-nested-callbacks": [
+			"warn",
+			3
+		],
+		"max-params": [
+			"error",
+			3
+		],
+		"max-statements": [
+			"error",
+			20
+		],
+		"no-multiple-empty-lines": [
+			"warn",
+			{
+				"max": 2
+			}
+		],
+		"no-nested-ternary": "warn",
+		"no-plusplus": "warn",
+		"no-unused-vars": [
+			"warn",
+			{
+				"args": "all",
+				"argsIgnorePattern": "^_"
+			}
+		],
+		"no-multi-spaces": "warn",
+		"require-await": "warn",
+		"yoda": [
+			"error",
+			"never"
 		]
 	}
 }
