@@ -96,8 +96,9 @@ annotate service.Products with @(
             Visualization: #Rating
         },
         DataPoint #Price              : {
-            Value: price,
-            Title: '{i18n>price}'
+            Value      : price,
+            ValueFormat: {NumberOfFractionalDigits: 3},
+            Title      : '{i18n>price}'
         },
         DataPoint #StockAvailability  : {
             Title      : '{i18n>stockStatus}',
