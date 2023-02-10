@@ -42,7 +42,11 @@ annotate service.Products with @(
                 Criticality      : StockStatus_ID,
                 ![@UI.Importance]: #High
             },
-            {Value: quantity}
+            {Value: quantity},
+            {
+                $Type : 'UI.DataFieldForAnnotation',
+                Target: '@UI.DataPoint#Price'
+            }
         ]},
         HeaderFacets                  : [
             {
