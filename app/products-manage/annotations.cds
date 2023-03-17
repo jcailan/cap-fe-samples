@@ -178,7 +178,7 @@ annotate service.Products.texts with @(UI: {
     ID       @UI.Hidden;
     ID_texts @UI.Hidden;
     locale   @(
-        ValueList.entity: 'Languages',
-        Common.ValueListWithFixedValues,
+        ValueList: {entity: 'Languages'},
+        Common   : {ValueListWithFixedValues: true}
     );
 };
