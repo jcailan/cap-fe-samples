@@ -61,6 +61,15 @@
 			sap.ushell.Container.createRenderer().placeAt('content');
 		});
 	</script>
+	<script>
+		(function() {
+			const url = new URL(window.location.href);
+			if (!url.searchParams.get("sap-ui-xx-viewCache")) {
+				url.searchParams.append("sap-ui-xx-viewCache", "false");
+				window.location.href = url.href;
+			}
+		})();
+	</script>
 </head>
 
 <body class="sapUiBody" id="content"></body>
