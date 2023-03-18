@@ -2,8 +2,9 @@
 	"name": "cap-fe-samples",
 	"version": "1.0.0",
 	"description": "A simple CAP project.",
-	"repository": "<Add your repository here>",
-	"license": "UNLICENSED",
+	"repository": "https://github.com/jcailan/cap-fe-samples",
+	"author": "Jhodel Cailan",
+	"license": "MIT",
 	"private": true,
 	"dependencies": {
 		"@cap-js/graphql": "^0.3.1",
