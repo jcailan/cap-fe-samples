@@ -79,7 +79,7 @@ context md {
     }
 
     entity UnitOfMeasures {
-        key ID   : String(2);
+        key ID   : String(3);
             name : localized String;
     }
 
