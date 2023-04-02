@@ -51,8 +51,8 @@ annotate service.Products with @(
         HeaderFacets                  : [
             {
                 $Type : 'UI.ReferenceFacet',
-                Target: '@UI.FieldGroup#GeneralInformation',
-                Label : '{i18n>generalInformation}'
+                Target: '@UI.FieldGroup#BasicData',
+                Label : '{i18n>technicalData}'
             },
             {
                 $Type : 'UI.ReferenceFacet',
@@ -74,8 +74,8 @@ annotate service.Products with @(
         Facets                        : [
             {
                 $Type : 'UI.ReferenceFacet',
-                Target: '@UI.FieldGroup#TechnicalData',
-                Label : '{i18n>technicalData}'
+                Target: '@UI.FieldGroup#GeneralInformation',
+                Label : '{i18n>generalInformation}'
             },
             {
                 $Type : 'UI.ReferenceFacet',
@@ -117,7 +117,7 @@ annotate service.Products with @(
             Criticality  : StockStatus_ID,
             Visualization: #Progress
         },
-        FieldGroup #GeneralInformation: {Data: [
+        FieldGroup #BasicData         : {Data: [
             {Value: Category_ID},
             {Value: releaseDate},
             {
@@ -126,7 +126,7 @@ annotate service.Products with @(
                 Target: 'Supplier/@Communication.Contact'
             }
         ]},
-        FieldGroup #TechnicalData     : {Data: [
+        FieldGroup #GeneralInformation: {Data: [
             {Value: height},
             {Value: width},
             {Value: depth}
