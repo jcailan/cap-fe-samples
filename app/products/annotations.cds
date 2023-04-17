@@ -64,7 +64,7 @@ annotate service.Products with @(
             },
             {
                 $Type : 'UI.ReferenceFacet',
-                Target: '@UI.DataPoint#StockAvailability'
+                Target: '@UI.DataPoint#StockStatus'
             },
             {
                 $Type : 'UI.ReferenceFacet',
@@ -104,7 +104,7 @@ annotate service.Products with @(
             ValueFormat: {NumberOfFractionalDigits: 3},
             Title      : '{i18n>price}'
         },
-        DataPoint #StockAvailability  : {
+        DataPoint #StockStatus        : {
             Title      : '{i18n>stockStatus}',
             Value      : StockStatus.ID,
             Criticality: StockStatus_ID
@@ -280,11 +280,15 @@ annotate service.Reviews with @(UI: {
         Description   : {Value: createdAt}
     },
     LineItem           : [
-        {Value: name},
+        {
+            Value            : name,
+            ![@UI.Importance]: #High
+        },
         {Value: createdAt},
         {
-            $Type : 'UI.DataFieldForAnnotation',
-            Target: '@UI.DataPoint#Rating'
+            $Type            : 'UI.DataFieldForAnnotation',
+            Target           : '@UI.DataPoint#Rating',
+            ![@UI.Importance]: #High
         },
         {Value: comment}
     ],
@@ -305,15 +309,18 @@ annotate service.Reviews with @(UI: {
     },
     FieldGroup #Comment: {Data: [{Value: comment}]}
 }) {
-    ID        @(UI: {Hidden: true});
-    Product   @(UI: {Hidden: true});
-    name      @(title: '{i18n>name}');
-    rating    @(title: '{i18n>rating}');
-    createdAt @(title: '{i18n>createdOn}');
-    comment   @(
+    ID         @(UI: {Hidden: true});
+    Product    @(UI: {Hidden: true});
+    name       @(title: '{i18n>name}');
+    rating     @(title: '{i18n>rating}');
+    createdAt  @(title: '{i18n>createdOn}');
+    comment    @(
         title: '{i18n>comment}',
         UI   : {MultiLineText: true}
     );
+    createdBy  @(UI: {Hidden: true});
+    modifiedAt @(UI: {Hidden: true});
+    modifiedBy @(UI: {Hidden: true});
 };
 
 /**
@@ -366,8 +373,14 @@ annotate service.SalesData with @(
             TypeNamePlural: '{i18n>salesOrders}'
         },
         LineItem           : [
-            {Value: DeliveryMonth_ID},
-            {Value: revenue},
+            {
+                Value            : DeliveryMonth_ID,
+                ![@UI.Importance]: #High
+            },
+            {
+                Value            : revenue,
+                ![@UI.Importance]: #High
+            },
             {Value: deliveryDate}
         ],
         Chart              : {
