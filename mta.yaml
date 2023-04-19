@@ -19,13 +19,14 @@ modules:
     path: gen/srv
     parameters:
       buildpack: nodejs_buildpack
-      host: capfes-srv-${space}
+      host: capfes-srv-${org}-${space}
       memory: 128M
       disk-quota: 256M
     build-parameters:
       builder: npm-ci
     requires:
       - name: capfes-db
+      - name: capfes-uaa
 
   - name: capfes-db-deployer
     type: hdb
@@ -36,6 +37,16 @@ modules:
       - name: capfes-db
 
 resources:
+  - name: capfes-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: capfes-${space}
+        tenant-mode: dedicated
+
   - name: capfes-db
     type: com.sap.xs.hdi-container
     parameters:
