@@ -44,7 +44,7 @@
 		"copy:assets": "copyfiles assets/* gen/srv",
 		"build": "rimraf resources mta_archives && mbt build --mtar archive",
 		"deploy": "npm run build && cf deploy mta_archives/archive.mtar --retries 1 -f",
-		"undeploy": "cf undeploy com-jcailan-capfes --delete-services --delete-service-keys --delete-service-brokers"
+		"undeploy": "cf undeploy com.jcailan.capfes --delete-services --delete-service-keys --delete-service-brokers"
 	},
 	"engines": {
 		"node": "^16.15"
@@ -56,7 +56,8 @@
 		"requires": {
 			"[production]": {
 				"auth": {
-					"kind": "xsuaa"
+					"kind": "xsuaa",
+					"restrict_all_services": false
 				}
 			},
 			"db": {

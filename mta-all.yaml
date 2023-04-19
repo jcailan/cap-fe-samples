@@ -1,0 +1,196 @@
+---
+_schema-version: "3.1"
+ID: com.jcailan.capfes
+version: 1.0.0
+description: "A demo CAP project using Fiori Elements."
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npx -p @sap/cds-dk cds build --production
+        - npm run copy:assets
+
+modules:
+  - name: capfes-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      buildpack: nodejs_buildpack
+      host: capfes-srv-${space}
+      memory: 128M
+      disk-quota: 256M
+    build-parameters:
+      builder: npm-ci
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: capfes-uaa
+      - name: capfes-db
+
+  - name: capfes-app-router
+    type: nodejs
+    path: app/router
+    parameters:
+      host: capfes-${space}
+      memory: 128M
+      disk-quota: 256M
+    requires:
+      - name: capfes-uaa
+      - name: capfes-html5-runtime
+      - name: capfes-destination
+
+  - name: capfes-destination-deployer
+    type: com.sap.application.content
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Authentication: OAuth2UserTokenExchange
+              Name: capfes-srv
+              TokenServiceInstanceName: capfes-uaa
+              TokenServiceKeyName: capfes-uaa-key
+              URL: ~{srv-api/srv-url}
+              sap.cloud.service: com.jcailan.capfes
+            - Name: capfes-html5-host
+              ServiceInstanceName: capfes-html5-host
+              ServiceKeyName: capfes-html5-host-key
+              sap.cloud.service: com.jcailan.capfes
+            - Authentication: OAuth2UserTokenExchange
+              Name: capfes-uaa
+              ServiceInstanceName: capfes-uaa
+              ServiceKeyName: capfes-uaa-key
+              sap.cloud.service: com.jcailan.capfes
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+    requires:
+      - name: capfes-uaa
+        parameters:
+          service-key:
+            name: capfes-uaa-key
+      - name: capfes-html5-host
+        parameters:
+          service-key:
+            name: capfes-html5-host-key
+      - name: srv-api
+      - name: capfes-destination
+        parameters:
+          content-target: true
+          service-key:
+            name: capfes-destination-key
+
+  - name: capfes-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: capfes-db
+
+  - name: capfes-ui-deployer
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: capfes-html5-host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - artifacts:
+            - comjcailanproducts.zip
+          name: comjcailanproducts
+          target-path: resources/
+        - artifacts:
+            - comjcailanv2products.zip
+          name: comjcailanv2products
+          target-path: resources/
+        - artifacts:
+            - comjcailancustom.zip
+          name: comjcailancustom
+          target-path: resources/
+
+  - name: comjcailanproducts
+    type: html5
+    path: app/products
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      supported-platforms: []
+
+  - name: comjcailanv2products
+    type: html5
+    path: app/products-v2
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      supported-platforms: []
+
+  - name: comjcailancustom
+    type: html5
+    path: app/custom
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      supported-platforms: []
+
+resources:
+  - name: capfes-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: capfes-${space}
+        tenant-mode: dedicated
+
+  - name: capfes-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+
+  - name: capfes-html5-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: capfes-html5-runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo
+
+  - name: capfes-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        version: 1.0.0
+        HTML5Runtime_enabled: true
+        init_data:
+          instance:
+            existing_destinations_policy: ignore
+            destinations:
+              - Authentication: NoAuthentication
+                Name: ui5
+                ProxyType: Internet
+                Type: HTTP
+                URL: https://ui5.sap.com
