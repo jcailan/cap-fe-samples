@@ -30,7 +30,14 @@ For more information see blog posts below:
 ### [master](../../tree/master) branch
 This is the main and the default branch where the core demo application is located.
 
-### Demo branches
+### Demo Apps
+
+1. **Create Product**
+	- is a Fiori Element app that is used as Create Form template for creating new product which can be triggered via cross app navigation that accepts URL parameters to prepopulate the form fields.
+	- to be able to test this app, you need to click this [link](http://localhost:4004/launchpage.html#ProductsV2-create?Category_ID=B&Currency_ID=USD&UnitOfMeasure_ID=EA&description=Milk%2520tea%2520with%2520chewy%2520black%2520pearls&name=Pearl%2520Milk%2520Tea&price=10&quantity=20&/Products(-)/) (works on VS Code).
+	- Then when you click on `Create` button, it will do another cross app navigation to **Manage Products** app and show the created product in this apps Object Page.
+
+### Demo Branches
 
 These are the branches that may be a copy of the main master branch or can be a branch on their own. The branches in this category serves a particular purpose.
 

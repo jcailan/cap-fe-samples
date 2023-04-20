@@ -25,6 +25,18 @@
 					"odataVersion": "2.0"
 				}
 			}
+		},
+		"crossNavigation": {
+			"inbounds": {
+				"intent1": {
+					"signature": {
+						"parameters": {},
+						"additionalParameters": "allowed"
+					},
+					"semanticObject": "ProductsV2",
+					"action": "create"
+				}
+			}
 		}
 	},
 	"sap.ui": {
@@ -89,6 +101,15 @@
 			"config": {},
 			"routes": [],
 			"targets": {}
+		},
+		"extends": {
+			"extensions": {
+				"sap.ui.controllerExtensions": {
+					"sap.suite.ui.generic.template.ObjectPage.view.Details": {
+						"controllerName": "com.jcailan.v2.products.form.ext.controller.ObjectPage"
+					}
+				}
+			}
 		}
 	},
 	"sap.ui.generic.app": {
