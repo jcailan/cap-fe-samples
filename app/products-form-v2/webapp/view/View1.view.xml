@@ -1,9 +1,0 @@
-<mvc:View controllerName="com.jcailan.v2.products.form.controller.View1"
-	xmlns:mvc="sap.ui.core.mvc"
-	displayBlock="true"
-	xmlns="sap.m">
-	<Page id="page"
-		title="{i18n>title}">
-		<content />
-	</Page>
-</mvc:View>
