@@ -3,7 +3,7 @@ sap.ui.define([
 ], function(Controller) {
 	"use strict";
 
-	return Controller.extend("com.jcailan.productformv2.controller.View1", {
+	return Controller.extend("com.jcailan.v2.products.form.controller.View1", {
 		onInit: function() {
 
 		}

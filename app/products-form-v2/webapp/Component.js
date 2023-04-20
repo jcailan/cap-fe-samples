@@ -1,11 +1,11 @@
 sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/Device",
-	"com/jcailan/productformv2/model/models"
+	"./model/models"
 ], function(UIComponent, Device, models) {
 	"use strict";
 
-	return UIComponent.extend("com.jcailan.productformv2.Component", {
+	return UIComponent.extend("com.jcailan.v2.products.form.Component", {
 		metadata: {
 			manifest: "json"
 		},

@@ -1,4 +1,4 @@
-<mvc:View controllerName="com.jcailan.productformv2.controller.App"
+<mvc:View controllerName="com.jcailan.v2.products.form.controller.App"
 	xmlns:html="http://www.w3.org/1999/xhtml"
 	xmlns:mvc="sap.ui.core.mvc"
 	displayBlock="true"
