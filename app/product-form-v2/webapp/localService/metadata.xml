@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+        <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
+        <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="ManageProductService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Products" EntityType="ManageProductService.Products">
+                    <NavigationPropertyBinding Path="texts" Target="Products_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Products_texts"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Products"/>
+                </EntitySet>
+                <EntitySet Name="Languages" EntityType="ManageProductService.Languages">
+                    <NavigationPropertyBinding Path="texts" Target="Languages_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Languages_texts"/>
+                </EntitySet>
+                <EntitySet Name="Products_texts" EntityType="ManageProductService.Products_texts">
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Products_texts"/>
+                </EntitySet>
+                <EntitySet Name="Languages_texts" EntityType="ManageProductService.Languages_texts"/>
+            </EntityContainer>
+            <EntityType Name="Products">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String"/>
+                <Property Name="imageUrl" Type="Edm.String"/>
+                <Property Name="releaseDate" Type="Edm.DateTimeOffset"/>
+                <Property Name="discontinuedDate" Type="Edm.DateTimeOffset"/>
+                <Property Name="price" Type="Edm.Decimal" Scale="2" Precision="16"/>
+                <Property Name="height" Type="Edm.Decimal" Scale="2" Precision="16"/>
+                <Property Name="width" Type="Edm.Decimal" Scale="2" Precision="16"/>
+                <Property Name="depth" Type="Edm.Decimal" Scale="2" Precision="16"/>
+                <Property Name="quantity" Type="Edm.Decimal" Scale="2" Precision="16"/>
+                <Property Name="UnitOfMeasure_ID" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Currency_ID" Type="Edm.String" MaxLength="3"/>
+                <Property Name="DimensionUnit_ID" Type="Edm.String" MaxLength="2"/>
+                <Property Name="Category_ID" Type="Edm.String" MaxLength="1"/>
+                <Property Name="Supplier_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="texts" Type="Collection(ManageProductService.Products_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="ManageProductService.Products_texts"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="ManageProductService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="ManageProductService.Products"/>
+            </EntityType>
+            <EntityType Name="Languages">
+                <Key>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <NavigationProperty Name="texts" Type="Collection(ManageProductService.Languages_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="ManageProductService.Languages_texts">
+                    <ReferentialConstraint Property="code" ReferencedProperty="code"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="DraftAdministrativeData">
+                <Key>
+                    <PropertyRef Name="DraftUUID"/>
+                </Key>
+                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="Products_texts">
+                <Key>
+                    <PropertyRef Name="ID_texts"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID_texts" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="locale" Type="Edm.String" MaxLength="14"/>
+                <Property Name="ID" Type="Edm.Guid"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="ManageProductService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="ManageProductService.Products_texts"/>
+            </EntityType>
+            <EntityType Name="Languages_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="14" Nullable="false"/>
+            </EntityType>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="ManageProductService.Products"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="ManageProductService.Products"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="ManageProductService.Products_texts"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="ManageProductService.Products_texts"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="ManageProductService.Products"/>
+                <ReturnType Type="ManageProductService.Products"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="ManageProductService.Products"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="ManageProductService.Products"/>
+            </Action>
+            <Annotations Target="ManageProductService.EntityContainer/Products">
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="ManageProductService.draftActivate"/>
+                        <PropertyValue Property="EditAction" String="ManageProductService.draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="ManageProductService.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ManageProductService.Products/createdAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                </Annotations>
+                <Annotations Target="ManageProductService.Products/createdBy">
+                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                    <Annotation Term="Core.Immutable" Bool="true"/>
+                    <Annotation Term="Core.Computed" Bool="true"/>
+                    <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                        </Annotations>
+                        <Annotations Target="ManageProductService.Products/modifiedAt">
+                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                            <Annotation Term="Core.Computed" Bool="true"/>
+                            <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                            </Annotations>
+                            <Annotations Target="ManageProductService.Products/modifiedBy">
+                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                <Annotation Term="Core.Computed" Bool="true"/>
+                                <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                    <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                    </Annotations>
+                                    <Annotations Target="ManageProductService.Products/name">
+                                        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                                    </Annotations>
+                                    <Annotations Target="ManageProductService.Products/description">
+                                        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                                    </Annotations>
+                                    <Annotations Target="ManageProductService.Products/price">
+                                        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                                    </Annotations>
+                                    <Annotations Target="ManageProductService.Products/quantity">
+                                        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                                        <Annotation Term="Validation.Minimum" Int="0"/>
+                                        <Annotation Term="Validation.Maximum" Int="20"/>
+                                    </Annotations>
+                                    <Annotations Target="ManageProductService.Products/UnitOfMeasure_ID">
+                                        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                                    </Annotations>
+                                    <Annotations Target="ManageProductService.Products/Currency_ID">
+                                        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                                    </Annotations>
+                                    <Annotations Target="ManageProductService.Products/Category_ID">
+                                        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                                    </Annotations>
+                                    <Annotations Target="ManageProductService.Products/IsActiveEntity">
+                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                    </Annotations>
+                                    <Annotations Target="ManageProductService.Products/HasActiveEntity">
+                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                    </Annotations>
+                                    <Annotations Target="ManageProductService.Products/HasDraftEntity">
+                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                    </Annotations>
+                                    <Annotations Target="ManageProductService.Products/DraftAdministrativeData">
+                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                    </Annotations>
+                                    <Annotations Target="ManageProductService.Languages">
+                                        <Annotation Term="UI.Identification">
+                                            <Collection>
+                                                <Record Type="UI.DataField">
+                                                    <PropertyValue Property="Value" Path="name"/>
+                                                </Record>
+                                            </Collection>
+                                        </Annotation>
+                                    </Annotations>
+                                    <Annotations Target="ManageProductService.EntityContainer/Languages">
+                                        <Annotation Term="Capabilities.DeleteRestrictions">
+                                            <Record Type="Capabilities.DeleteRestrictionsType">
+                                                <PropertyValue Property="Deletable" Bool="false"/>
+                                            </Record>
+                                        </Annotation>
+                                        <Annotation Term="Capabilities.InsertRestrictions">
+                                            <Record Type="Capabilities.InsertRestrictionsType">
+                                                <PropertyValue Property="Insertable" Bool="false"/>
+                                            </Record>
+                                        </Annotation>
+                                        <Annotation Term="Capabilities.UpdateRestrictions">
+                                            <Record Type="Capabilities.UpdateRestrictionsType">
+                                                <PropertyValue Property="Updatable" Bool="false"/>
+                                            </Record>
+                                        </Annotation>
+                                    </Annotations>
+                                    <Annotations Target="ManageProductService.Languages/name">
+                                        <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                        </Annotations>
+                                        <Annotations Target="ManageProductService.Languages/descr">
+                                            <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                            </Annotations>
+                                            <Annotations Target="ManageProductService.Languages/code">
+                                                <Annotation Term="Common.Text" Path="name"/>
+                                                <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                                                </Annotations>
+                                                <Annotations Target="ManageProductService.DraftAdministrativeData">
+                                                    <Annotation Term="Common.Label" String="{i18n>Draft_DraftAdministrativeData}"/>
+                                                    </Annotations>
+                                                    <Annotations Target="ManageProductService.DraftAdministrativeData/DraftUUID">
+                                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                                        <Annotation Term="Common.Label" String="{i18n>Draft_DraftUUID}"/>
+                                                        </Annotations>
+                                                        <Annotations Target="ManageProductService.DraftAdministrativeData/CreationDateTime">
+                                                            <Annotation Term="Common.Label" String="{i18n>Draft_CreationDateTime}"/>
+                                                            </Annotations>
+                                                            <Annotations Target="ManageProductService.DraftAdministrativeData/CreatedByUser">
+                                                                <Annotation Term="Common.Label" String="{i18n>Draft_CreatedByUser}"/>
+                                                                </Annotations>
+                                                                <Annotations Target="ManageProductService.DraftAdministrativeData/DraftIsCreatedByMe">
+                                                                    <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                    <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsCreatedByMe}"/>
+                                                                    </Annotations>
+                                                                    <Annotations Target="ManageProductService.DraftAdministrativeData/LastChangeDateTime">
+                                                                        <Annotation Term="Common.Label" String="{i18n>Draft_LastChangeDateTime}"/>
+                                                                        </Annotations>
+                                                                        <Annotations Target="ManageProductService.DraftAdministrativeData/LastChangedByUser">
+                                                                            <Annotation Term="Common.Label" String="{i18n>Draft_LastChangedByUser}"/>
+                                                                            </Annotations>
+                                                                            <Annotations Target="ManageProductService.DraftAdministrativeData/InProcessByUser">
+                                                                                <Annotation Term="Common.Label" String="{i18n>Draft_InProcessByUser}"/>
+                                                                                </Annotations>
+                                                                                <Annotations Target="ManageProductService.DraftAdministrativeData/DraftIsProcessedByMe">
+                                                                                    <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                    <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsProcessedByMe}"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="ManageProductService.EntityContainer/Products_texts">
+                                                                                        <Annotation Term="Common.DraftNode">
+                                                                                            <Record Type="Common.DraftNodeType">
+                                                                                                <PropertyValue Property="PreparationAction" String="ManageProductService.draftPrepare"/>
+                                                                                            </Record>
+                                                                                        </Annotation>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="ManageProductService.Products_texts/locale">
+                                                                                        <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                                                                                        </Annotations>
+                                                                                        <Annotations Target="ManageProductService.Products_texts/name">
+                                                                                            <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                                                                                        </Annotations>
+                                                                                        <Annotations Target="ManageProductService.Products_texts/description">
+                                                                                            <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                                                                                        </Annotations>
+                                                                                        <Annotations Target="ManageProductService.Products_texts/IsActiveEntity">
+                                                                                            <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                        </Annotations>
+                                                                                        <Annotations Target="ManageProductService.Products_texts/HasActiveEntity">
+                                                                                            <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                        </Annotations>
+                                                                                        <Annotations Target="ManageProductService.Products_texts/HasDraftEntity">
+                                                                                            <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                        </Annotations>
+                                                                                        <Annotations Target="ManageProductService.Products_texts/DraftAdministrativeData">
+                                                                                            <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                        </Annotations>
+                                                                                        <Annotations Target="ManageProductService.Languages_texts/locale">
+                                                                                            <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                                                                                            </Annotations>
+                                                                                            <Annotations Target="ManageProductService.Languages_texts/name">
+                                                                                                <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                                                                </Annotations>
+                                                                                                <Annotations Target="ManageProductService.Languages_texts/descr">
+                                                                                                    <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                                                                    </Annotations>
+                                                                                                    <Annotations Target="ManageProductService.Languages_texts/code">
+                                                                                                        <Annotation Term="Common.Text" Path="name"/>
+                                                                                                        <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                                                                                                        </Annotations>
+                                                                                                    </Schema>
+                                                                                                </edmx:DataServices>
+                                                                                            </edmx:Edmx>
