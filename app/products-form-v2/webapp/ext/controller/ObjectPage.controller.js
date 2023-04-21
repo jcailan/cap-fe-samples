@@ -30,9 +30,12 @@ sap.ui.define([], function() {
 		_setFieldValue: function(sFieldName, sValue) {
 			var sId = sNamespace + sTemplate + sEntity + sAnnotation + sFieldName + sField,
 				oField = this.getView().byId(sId);
-			oField.attachEventOnce("innerControlsCreated", function() {
-				oField.setValue(sValue);
-			});
+
+			if (oField) {
+				oField.attachEventOnce("innerControlsCreated", function() {
+					oField.setValue(sValue);
+				});
+			}
 		},
 
 		_navToChangeNotification: function(oEvent) {
