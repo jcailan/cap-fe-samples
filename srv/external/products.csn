@@ -1,0 +1,143 @@
+{
+	"meta": {
+		"creator": "cds-dk 6.6.1"
+	},
+	"$version": "2.0",
+	"definitions": {
+		"product_external": {
+			"kind": "service",
+			"@cds.external": true,
+			"@m.IsDefaultEntityContainer": "true"
+		},
+		"product_external.Products": {
+			"kind": "entity",
+			"@cds.external": true,
+			"@cds.persistence.skip": true,
+			"elements": {
+				"ID": {
+					"key": true,
+					"type": "cds.UUID",
+					"notNull": true
+				},
+				"createdAt": {
+					"type": "cds.Timestamp",
+					"@odata.Type": "Edm.DateTimeOffset",
+					"@odata.Precision": 7
+				},
+				"createdBy": {
+					"type": "cds.String",
+					"length": 255
+				},
+				"modifiedAt": {
+					"type": "cds.Timestamp",
+					"@odata.Type": "Edm.DateTimeOffset",
+					"@odata.Precision": 7
+				},
+				"modifiedBy": {
+					"type": "cds.String",
+					"length": 255
+				},
+				"name": {
+					"type": "cds.LargeString"
+				},
+				"description": {
+					"type": "cds.LargeString"
+				},
+				"imageUrl": {
+					"type": "cds.LargeString"
+				},
+				"releaseDate": {
+					"type": "cds.DateTime",
+					"@odata.Type": "Edm.DateTimeOffset"
+				},
+				"discontinuedDate": {
+					"type": "cds.DateTime",
+					"@odata.Type": "Edm.DateTimeOffset"
+				},
+				"price": {
+					"type": "cds.Decimal",
+					"precision": 16,
+					"scale": 2
+				},
+				"height": {
+					"type": "cds.Decimal",
+					"precision": 16,
+					"scale": 2
+				},
+				"width": {
+					"type": "cds.Decimal",
+					"precision": 16,
+					"scale": 2
+				},
+				"depth": {
+					"type": "cds.Decimal",
+					"precision": 16,
+					"scale": 2
+				},
+				"quantity": {
+					"type": "cds.Decimal",
+					"precision": 16,
+					"scale": 2
+				},
+				"UnitOfMeasure_ID": {
+					"type": "cds.String",
+					"length": 3
+				},
+				"Currency_ID": {
+					"type": "cds.String",
+					"length": 3
+				},
+				"DimensionUnit_ID": {
+					"type": "cds.String",
+					"length": 2
+				},
+				"Category_ID": {
+					"type": "cds.String",
+					"length": 1
+				},
+				"Supplier_ID": {
+					"type": "cds.UUID"
+				},
+				"texts": {
+					"@cds.ambiguous": "missing on condition?",
+					"type": "cds.Composition",
+					"target": "product_external.Products_texts",
+					"cardinality": {
+						"max": "*"
+					}
+				},
+				"localized": {
+					"@cds.ambiguous": "missing on condition?",
+					"type": "cds.Association",
+					"target": "product_external.Products_texts",
+					"keys": []
+				}
+			}
+		},
+		"product_external.Products_texts": {
+			"kind": "entity",
+			"@cds.external": true,
+			"@cds.persistence.skip": true,
+			"elements": {
+				"ID_texts": {
+					"key": true,
+					"type": "cds.UUID",
+					"notNull": true
+				},
+				"locale": {
+					"type": "cds.String",
+					"length": 14
+				},
+				"ID": {
+					"type": "cds.UUID"
+				},
+				"name": {
+					"type": "cds.LargeString"
+				},
+				"description": {
+					"type": "cds.LargeString"
+				}
+			}
+		}
+	}
+}

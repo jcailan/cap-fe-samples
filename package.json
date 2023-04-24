@@ -65,6 +65,10 @@
 				"[production]": {
 					"kind": "hana"
 				}
+			},
+			"product_external": {
+				"kind": "odata-v2",
+				"model": "srv/external/products"
 			}
 		},
 		"protocols": {
