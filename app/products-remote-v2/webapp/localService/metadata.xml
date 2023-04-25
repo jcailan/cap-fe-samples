@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ProductRemoteService" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="Products" EntityType="ProductRemoteService.Products"/>
+                <EntitySet Name="Products_texts" EntityType="ProductRemoteService.Products_texts"/>
+                <AssociationSet Name="Products_texts_1" Association="ProductRemoteService.Products_texts_1">
+                    <End Role="Products" EntitySet="Products"/>
+                    <End Role="Products_texts" EntitySet="Products_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="Products_localized" Association="ProductRemoteService.Products_localized">
+                    <End Role="Products" EntitySet="Products"/>
+                    <End Role="Products_texts" EntitySet="Products_texts"/>
+                </AssociationSet>
+            </EntityContainer>
+            <EntityType Name="Products">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String"/>
+                <Property Name="imageUrl" Type="Edm.String"/>
+                <Property Name="releaseDate" Type="Edm.DateTimeOffset"/>
+                <Property Name="discontinuedDate" Type="Edm.DateTimeOffset"/>
+                <Property Name="price" Type="Edm.Decimal" Scale="2" Precision="16"/>
+                <Property Name="height" Type="Edm.Decimal" Scale="2" Precision="16"/>
+                <Property Name="width" Type="Edm.Decimal" Scale="2" Precision="16"/>
+                <Property Name="depth" Type="Edm.Decimal" Scale="2" Precision="16"/>
+                <Property Name="quantity" Type="Edm.Decimal" Scale="2" Precision="16"/>
+                <Property Name="UnitOfMeasure_ID" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Currency_ID" Type="Edm.String" MaxLength="3"/>
+                <Property Name="DimensionUnit_ID" Type="Edm.String" MaxLength="2"/>
+                <Property Name="Category_ID" Type="Edm.String" MaxLength="1"/>
+                <Property Name="Supplier_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="texts" Relationship="ProductRemoteService.Products_texts_1" FromRole="Products" ToRole="Products_texts"/>
+                <Property Name="texts_ID_texts" Type="Edm.Guid"/>
+                <NavigationProperty Name="localized" Relationship="ProductRemoteService.Products_localized" FromRole="Products" ToRole="Products_texts"/>
+            </EntityType>
+            <EntityType Name="Products_texts">
+                <Key>
+                    <PropertyRef Name="ID_texts"/>
+                </Key>
+                <Property Name="ID_texts" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="locale" Type="Edm.String" MaxLength="14"/>
+                <Property Name="ID" Type="Edm.Guid"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String"/>
+            </EntityType>
+            <Association Name="Products_texts_1">
+                <End Role="Products" Type="ProductRemoteService.Products" Multiplicity="1">
+                    <OnDelete Action="Cascade"/>
+                </End>
+                <End Role="Products_texts" Type="ProductRemoteService.Products_texts" Multiplicity="*"/>
+            </Association>
+            <Association Name="Products_localized">
+                <End Role="Products" Type="ProductRemoteService.Products" Multiplicity="*"/>
+                <End Role="Products_texts" Type="ProductRemoteService.Products_texts" Multiplicity="0..1"/>
+            </Association>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
