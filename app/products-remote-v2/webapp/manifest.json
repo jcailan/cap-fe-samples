@@ -17,7 +17,7 @@
 		},
 		"dataSources": {
 			"mainService": {
-				"uri": "/here/goes/your/serviceurl/",
+				"uri": "/v2/product-remote/",
 				"type": "OData",
 				"settings": {
 					"annotations": [

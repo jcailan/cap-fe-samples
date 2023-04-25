@@ -87,6 +87,7 @@
 		"app/products-v2",
 		"app/custom",
 		"app/products-manage",
+		"app/products-remote-v2",
 		"app/product-form-v2"
 	]
 }
