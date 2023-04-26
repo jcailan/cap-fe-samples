@@ -23,6 +23,7 @@ For more information see blog posts below:
 
 - [SAP Fiori Element using CAP Model – Introduction](https://blogs.sap.com/2020/09/29/sap-fiori-element-using-cap-model-introduction/)
 - [SAP Fiori Element using CAP Model – List Report App](https://blogs.sap.com/2020/10/19/sap-fiori-element-using-cap-model-list-report-app/)
+- [CAP: GraphQL as new protocol](https://blogs.sap.com/2023/03/18/cap-graphql-as-new-protocol/)
 
 
 ## REPOSITORY
