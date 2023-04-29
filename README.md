@@ -31,12 +31,6 @@ For more information see blog posts below:
 ### [master](../../tree/master) branch
 This is the main and the default branch where the core demo application is located.
 
-### Demo Apps
-
-1. **Create Product**
-	- is a Fiori Element app that is used as Create Form template for creating new product which can be triggered via cross app navigation that accepts URL parameters to prepopulate the form fields.
-	- to be able to test this app, you need to click this [link](http://localhost:4004/launchpage.html#ProductsV2-create?Category_ID=B&Currency_ID=USD&UnitOfMeasure_ID=EA&description=Milk%2520tea%2520with%2520chewy%2520black%2520pearls&name=Pearl%2520Milk%2520Tea&price=10&quantity=20&/Products(-)/) (works on VS Code).
-	- Then when you click on `Create` button, it will do another cross app navigation to **Manage Products** app and show the created product in this apps Object Page.
 
 ### Demo Branches
 
@@ -49,6 +43,19 @@ These are the branches that may be a copy of the main master branch or can be a 
 
 [branch-1]: ../../tree/demo-list-report
 [branch-2]: ../../tree/demo-job-scheduler
+
+
+### Demo Apps
+
+| No. | App Name | Purpose |
+| ---:|:-------- |:------- |
+| 1.  | **Display Products**<br>OData V4 | <ul><li>is a Fiori Element app that is used to showcase CAP CDS capabilities without the need for writing a single line of JavaScript code.</li></ul> |
+| 2.  | **Display Products**<br>OData V2 | <ul><li>same as **Display Products** but done using Fiori Elements for OData V2.</li></ul> |
+| 3.  | **Manage Products**<br>OData V4 | <ul><li>is a Fiori Element app that is used to showcase CAP's capabilities for the _managed scenario_.</li></ul> |
+| 4.  | **Manage Products**<br>External Service<br>OData V4 | <ul><li>is a Fiori Element app that is used to showcase CAP's capabilities for the _managed scenario_ but in this case using an external OData V2 service.</li><li>Fiori Elements for OData V4 doesn't support non-draft OData V4 service, therefore, `create` and `update` operations are not supported in this scenario.</li></ul> |
+| 5.  | **Manage Products**<br>External Service<br>OData V2 | <ul><li>same as **Manage Products** External Service but done using Fiori Elements for OData V2.</li><li>Fiori Elements for OData V2 supports non-draft OData V2 service, therefore, all `CRUD` operations are supported in this scenario.</li></ul> |
+| 6.  | **Create Products**<br>OData V2 | <ul><li>is a Fiori Element app that is used as Create Form template for creating new product which can be triggered via cross app navigation that accepts URL parameters to prepopulate the form fields.</li><li>to be able to test this app, you need to click this [link](http://localhost:4004/launchpage.html#ProductsV2-create?Category_ID=B&Currency_ID=USD&UnitOfMeasure_ID=EA&description=Milk%2520tea%2520with%2520chewy%2520black%2520pearls&name=Pearl%2520Milk%2520Tea&price=10&quantity=20&/Products(-)/) (works on VS Code).</li><li>then when you click on `Create` button, it will do another cross app navigation to **Manage Products** app and show the created product in this apps Object Page.</li><ul>
+| 7.  | **Display Products**<br>FPM | <ul><li>is a custom Fiori Element app that is used to showcase how to use the new Flexible Programming Model framework.</li></ul> |
 
 
 ## APPENDIX
