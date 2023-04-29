@@ -69,9 +69,18 @@ annotate service.Products with @(UI: {
         UI   : {IsImageURL: true}
     );
     ID               @(UI: {Hidden: true});
-    name             @(title: '{i18n>name}');
-    description      @(title: '{i18n>description}');
-    Category_ID      @(title: '{i18n>category}');
+    name             @(
+        title: '{i18n>name}',
+        mandatory
+    );
+    description      @(
+        title: '{i18n>description}',
+        mandatory
+    );
+    Category_ID      @(
+        title: '{i18n>category}',
+        mandatory
+    );
     releaseDate      @title: '{i18n>releaseDate}';
     discontinuedDate @title: '{i18n>discontinuedDate}';
     height           @(
@@ -89,12 +98,26 @@ annotate service.Products with @(UI: {
     DimensionUnit_ID @(title: '{i18n>dimensionUnit}');
     price            @(
         title   : '{i18n>price}',
+        mandatory,
         Measures: {Unit: Currency_ID}
     );
-    Currency_ID      @(title: '{i18n>currency}');
+    Currency_ID      @(
+        title: '{i18n>currency}',
+        mandatory
+    );
     quantity         @(
         title   : '{i18n>quantity}',
+        mandatory,
         Measures: {Unit: UnitOfMeasure_ID}
     );
-    UnitOfMeasure_ID @(title: '{i18n>unitOfMeasure}');
+    UnitOfMeasure_ID @(
+        title: '{i18n>unitOfMeasure}',
+        mandatory
+    );
+    Supplier_ID      @(UI: {Hidden});
+    texts            @(UI: {Hidden});
+    createdBy        @(title: '{i18n>createdBy}');
+    createdAt        @(title: '{i18n>createdAt}');
+    modifiedBy       @(title: '{i18n>modifiedBy}');
+    modifiedAt       @(title: '{i18n>modifiedAt}');
 };
