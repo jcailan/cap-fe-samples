@@ -8,7 +8,7 @@ sap.ui.define(['sap/fe/test/ObjectPage'], function(ObjectPage) {
 
 	return new ObjectPage(
 		{
-			appId: 'com.jcailan.remote.productsremote',
+			appId: 'com.jcailan.remote.products',
 			componentId: 'ProductsObjectPage',
 			entitySet: 'Products'
 		},
