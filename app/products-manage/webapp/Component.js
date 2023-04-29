@@ -19,14 +19,15 @@ sap.ui.define([
 		 */
 		init: function() {
 			// Get parameters passed from cross navigation
-			var oComponentData = this.getComponentData(),
-				aStartupParams = oComponentData.startupParameters;
+			var oComponentData = this.getComponentData();
 
 			// Check if there is a parameter passed.
-			if (aStartupParams && aStartupParams.ID && aStartupParams.ID[0]) {
+			if (oComponentData && oComponentData.startupParameters
+				&& oComponentData.startupParameters.ID && oComponentData.startupParameters.ID[0]) {
 				// Go to the detailed object page of the app.
 				var oHashChangerInstance = HashChanger.getInstance(),
-					sHash = "Products(ID=" + aStartupParams.ID[0] + ",IsActiveEntity=true)";
+					sId = oComponentData.startupParameters.ID[0],
+					sHash = "Products(ID=" + sId + ",IsActiveEntity=true)";
 				oHashChangerInstance.replaceHash(sHash);
 			}
 
