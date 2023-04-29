@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="ProductRemoteService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Products" EntityType="ProductRemoteService.Products">
+                    <NavigationPropertyBinding Path="texts" Target="Products_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Products_texts"/>
+                </EntitySet>
+                <EntitySet Name="Products_texts" EntityType="ProductRemoteService.Products_texts"/>
+            </EntityContainer>
+            <EntityType Name="Products">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String"/>
+                <Property Name="imageUrl" Type="Edm.String"/>
+                <Property Name="releaseDate" Type="Edm.DateTimeOffset"/>
+                <Property Name="discontinuedDate" Type="Edm.DateTimeOffset"/>
+                <Property Name="price" Type="Edm.Decimal" Scale="2" Precision="16"/>
+                <Property Name="height" Type="Edm.Decimal" Scale="2" Precision="16"/>
+                <Property Name="width" Type="Edm.Decimal" Scale="2" Precision="16"/>
+                <Property Name="depth" Type="Edm.Decimal" Scale="2" Precision="16"/>
+                <Property Name="quantity" Type="Edm.Decimal" Scale="2" Precision="16"/>
+                <Property Name="UnitOfMeasure_ID" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Currency_ID" Type="Edm.String" MaxLength="3"/>
+                <Property Name="DimensionUnit_ID" Type="Edm.String" MaxLength="2"/>
+                <Property Name="Category_ID" Type="Edm.String" MaxLength="1"/>
+                <Property Name="Supplier_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="texts" Type="Collection(ProductRemoteService.Products_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <Property Name="texts_ID_texts" Type="Edm.Guid"/>
+                <NavigationProperty Name="localized" Type="ProductRemoteService.Products_texts"/>
+            </EntityType>
+            <EntityType Name="Products_texts">
+                <Key>
+                    <PropertyRef Name="ID_texts"/>
+                </Key>
+                <Property Name="ID_texts" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="locale" Type="Edm.String" MaxLength="14"/>
+                <Property Name="ID" Type="Edm.Guid"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String"/>
+            </EntityType>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
