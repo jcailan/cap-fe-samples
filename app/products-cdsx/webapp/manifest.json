@@ -1,7 +1,7 @@
 {
 	"_version": "1.49.0",
 	"sap.app": {
-		"id": "com.jcailan.remote.cdsx.productscdsx",
+		"id": "com.jcailan.remote.cdsx.products",
 		"type": "application",
 		"i18n": "i18n/i18n.properties",
 		"applicationVersion": {
@@ -62,7 +62,7 @@
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
 				"settings": {
-					"bundleName": "com.jcailan.remote.cdsx.productscdsx.i18n.i18n"
+					"bundleName": "com.jcailan.remote.cdsx.products.i18n.i18n"
 				}
 			},
 			"": {
