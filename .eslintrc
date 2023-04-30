@@ -16,7 +16,8 @@
 		"gen",
 		"node_modules",
 		"resources",
-		"*.csv"
+		"*.csv",
+		"remote.cds"
 	],
 	"globals": {
 		"SELECT": true,
