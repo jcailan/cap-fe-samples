@@ -1,152 +1,342 @@
 <?xml version="1.0" encoding="utf-8"?>
 <edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
-    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
-        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
-    </edmx:Reference>
-    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
-        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
-    </edmx:Reference>
-    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
-        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
-    </edmx:Reference>
-    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
-        <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
-    </edmx:Reference>
-    <edmx:DataServices>
-        <Schema Namespace="ProductCDSX" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-            <EntityContainer Name="EntityContainer">
-                <EntitySet Name="Products" EntityType="ProductCDSX.Products">
-                    <NavigationPropertyBinding Path="SiblingEntity" Target="Products"/>
-                </EntitySet>
-            </EntityContainer>
-            <EntityType Name="Products">
-                <Key>
-                    <PropertyRef Name="ID"/>
-                    <PropertyRef Name="IsActiveEntity"/>
-                </Key>
-                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
-                <Property Name="name" Type="Edm.String"/>
-                <Property Name="description" Type="Edm.String"/>
-                <Property Name="imageUrl" Type="Edm.String"/>
-                <Property Name="releaseDate" Type="Edm.DateTimeOffset"/>
-                <Property Name="discontinuedDate" Type="Edm.DateTimeOffset"/>
-                <Property Name="price" Type="Edm.Decimal" Scale="2" Precision="16"/>
-                <Property Name="height" Type="Edm.Decimal" Scale="2" Precision="16"/>
-                <Property Name="width" Type="Edm.Decimal" Scale="2" Precision="16"/>
-                <Property Name="depth" Type="Edm.Decimal" Scale="2" Precision="16"/>
-                <Property Name="quantity" Type="Edm.Decimal" Scale="2" Precision="16"/>
-                <Property Name="UnitOfMeasure_ID" Type="Edm.String" MaxLength="3"/>
-                <Property Name="Currency_ID" Type="Edm.String" MaxLength="3"/>
-                <Property Name="DimensionUnit_ID" Type="Edm.String" MaxLength="2"/>
-                <Property Name="Category_ID" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Supplier_ID" Type="Edm.Guid"/>
-                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
-                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
-                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
-                <NavigationProperty Name="DraftAdministrativeData" Type="ProductCDSX.DraftAdministrativeData" ContainsTarget="true"/>
-                <NavigationProperty Name="SiblingEntity" Type="ProductCDSX.Products"/>
-            </EntityType>
-            <EntityType Name="DraftAdministrativeData">
-                <Key>
-                    <PropertyRef Name="DraftUUID"/>
-                </Key>
-                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false"/>
-                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
-                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="256"/>
-                <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean"/>
-                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
-                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256"/>
-                <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256"/>
-                <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean"/>
-            </EntityType>
-            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
-                <Parameter Name="in" Type="ProductCDSX.Products"/>
-                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
-                <ReturnType Type="ProductCDSX.Products"/>
-            </Action>
-            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
-                <Parameter Name="in" Type="ProductCDSX.Products"/>
-                <ReturnType Type="ProductCDSX.Products"/>
-            </Action>
-            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
-                <Parameter Name="in" Type="ProductCDSX.Products"/>
-                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
-                <ReturnType Type="ProductCDSX.Products"/>
-            </Action>
-            <Annotations Target="ProductCDSX.EntityContainer/Products">
-                <Annotation Term="Common.DraftRoot">
-                    <Record Type="Common.DraftRootType">
-                        <PropertyValue Property="ActivationAction" String="ProductCDSX.draftActivate"/>
-                        <PropertyValue Property="EditAction" String="ProductCDSX.draftEdit"/>
-                        <PropertyValue Property="PreparationAction" String="ProductCDSX.draftPrepare"/>
-                    </Record>
-                </Annotation>
-            </Annotations>
-            <Annotations Target="ProductCDSX.Products/name">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
-            </Annotations>
-            <Annotations Target="ProductCDSX.Products/description">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
-            </Annotations>
-            <Annotations Target="ProductCDSX.Products/price">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
-            </Annotations>
-            <Annotations Target="ProductCDSX.Products/quantity">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
-                <Annotation Term="Validation.Minimum" Int="0"/>
-                <Annotation Term="Validation.Maximum" Int="20"/>
-            </Annotations>
-            <Annotations Target="ProductCDSX.Products/UnitOfMeasure_ID">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
-            </Annotations>
-            <Annotations Target="ProductCDSX.Products/Currency_ID">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
-            </Annotations>
-            <Annotations Target="ProductCDSX.Products/Category_ID">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
-            </Annotations>
-            <Annotations Target="ProductCDSX.Products/IsActiveEntity">
-                <Annotation Term="UI.Hidden" Bool="true"/>
-            </Annotations>
-            <Annotations Target="ProductCDSX.Products/HasActiveEntity">
-                <Annotation Term="UI.Hidden" Bool="true"/>
-            </Annotations>
-            <Annotations Target="ProductCDSX.Products/HasDraftEntity">
-                <Annotation Term="UI.Hidden" Bool="true"/>
-            </Annotations>
-            <Annotations Target="ProductCDSX.Products/DraftAdministrativeData">
-                <Annotation Term="UI.Hidden" Bool="true"/>
-            </Annotations>
-            <Annotations Target="ProductCDSX.DraftAdministrativeData">
-                <Annotation Term="Common.Label" String="{i18n>Draft_DraftAdministrativeData}"/>
-                </Annotations>
-                <Annotations Target="ProductCDSX.DraftAdministrativeData/DraftUUID">
-                    <Annotation Term="UI.Hidden" Bool="true"/>
-                    <Annotation Term="Common.Label" String="{i18n>Draft_DraftUUID}"/>
-                    </Annotations>
-                    <Annotations Target="ProductCDSX.DraftAdministrativeData/CreationDateTime">
-                        <Annotation Term="Common.Label" String="{i18n>Draft_CreationDateTime}"/>
-                        </Annotations>
-                        <Annotations Target="ProductCDSX.DraftAdministrativeData/CreatedByUser">
-                            <Annotation Term="Common.Label" String="{i18n>Draft_CreatedByUser}"/>
-                            </Annotations>
-                            <Annotations Target="ProductCDSX.DraftAdministrativeData/DraftIsCreatedByMe">
-                                <Annotation Term="UI.Hidden" Bool="true"/>
-                                <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsCreatedByMe}"/>
-                                </Annotations>
-                                <Annotations Target="ProductCDSX.DraftAdministrativeData/LastChangeDateTime">
-                                    <Annotation Term="Common.Label" String="{i18n>Draft_LastChangeDateTime}"/>
-                                    </Annotations>
-                                    <Annotations Target="ProductCDSX.DraftAdministrativeData/LastChangedByUser">
-                                        <Annotation Term="Common.Label" String="{i18n>Draft_LastChangedByUser}"/>
-                                        </Annotations>
-                                        <Annotations Target="ProductCDSX.DraftAdministrativeData/InProcessByUser">
-                                            <Annotation Term="Common.Label" String="{i18n>Draft_InProcessByUser}"/>
-                                            </Annotations>
-                                            <Annotations Target="ProductCDSX.DraftAdministrativeData/DraftIsProcessedByMe">
-                                                <Annotation Term="UI.Hidden" Bool="true"/>
-                                                <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsProcessedByMe}"/>
-                                                </Annotations>
-                                            </Schema>
-                                        </edmx:DataServices>
-                                    </edmx:Edmx>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+    <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Measures.V1.xml">
+    <edmx:Include Alias="Measures" Namespace="Org.OData.Measures.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+    <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
+    <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema Namespace="ProductCDSX" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityContainer Name="EntityContainer">
+        <EntitySet Name="Products" EntityType="ProductCDSX.Products">
+          <NavigationPropertyBinding Path="SiblingEntity" Target="Products"/>
+        </EntitySet>
+      </EntityContainer>
+      <EntityType Name="Products">
+        <Key>
+          <PropertyRef Name="ID"/>
+          <PropertyRef Name="IsActiveEntity"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="name" Type="Edm.String"/>
+        <Property Name="description" Type="Edm.String"/>
+        <Property Name="imageUrl" Type="Edm.String"/>
+        <Property Name="releaseDate" Type="Edm.DateTimeOffset"/>
+        <Property Name="discontinuedDate" Type="Edm.DateTimeOffset"/>
+        <Property Name="price" Type="Edm.Decimal" Scale="2" Precision="16"/>
+        <Property Name="height" Type="Edm.Decimal" Scale="2" Precision="16"/>
+        <Property Name="width" Type="Edm.Decimal" Scale="2" Precision="16"/>
+        <Property Name="depth" Type="Edm.Decimal" Scale="2" Precision="16"/>
+        <Property Name="quantity" Type="Edm.Decimal" Scale="2" Precision="16"/>
+        <Property Name="UnitOfMeasure_ID" Type="Edm.String" MaxLength="3"/>
+        <Property Name="Currency_ID" Type="Edm.String" MaxLength="3"/>
+        <Property Name="DimensionUnit_ID" Type="Edm.String" MaxLength="2"/>
+        <Property Name="Category_ID" Type="Edm.String" MaxLength="1"/>
+        <Property Name="Supplier_ID" Type="Edm.Guid"/>
+        <Property Name="createdBy" Type="Edm.String"/>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="modifiedBy" Type="Edm.String"/>
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+        <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+        <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+        <NavigationProperty Name="DraftAdministrativeData" Type="ProductCDSX.DraftAdministrativeData" ContainsTarget="true"/>
+        <NavigationProperty Name="SiblingEntity" Type="ProductCDSX.Products"/>
+      </EntityType>
+      <EntityType Name="DraftAdministrativeData">
+        <Key>
+          <PropertyRef Name="DraftUUID"/>
+        </Key>
+        <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="CreatedByUser" Type="Edm.String" MaxLength="256"/>
+        <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean"/>
+        <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256"/>
+        <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256"/>
+        <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean"/>
+      </EntityType>
+      <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="ProductCDSX.Products"/>
+        <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+        <ReturnType Type="ProductCDSX.Products"/>
+      </Action>
+      <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="ProductCDSX.Products"/>
+        <ReturnType Type="ProductCDSX.Products"/>
+      </Action>
+      <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="ProductCDSX.Products"/>
+        <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+        <ReturnType Type="ProductCDSX.Products"/>
+      </Action>
+      <Annotations Target="ProductCDSX.Products">
+        <Annotation Term="UI.SelectionFields">
+          <Collection>
+            <PropertyPath>Category_ID</PropertyPath>
+            <PropertyPath>Currency_ID</PropertyPath>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.HeaderInfo">
+          <Record Type="UI.HeaderInfoType">
+            <PropertyValue Property="TypeName" String="Product"/>
+            <PropertyValue Property="TypeNamePlural" String="Products"/>
+            <PropertyValue Property="ImageUrl" Path="imageUrl"/>
+            <PropertyValue Property="Title">
+              <Record Type="UI.DataField">
+                <PropertyValue Property="Value" Path="name"/>
+              </Record>
+            </PropertyValue>
+            <PropertyValue Property="Description">
+              <Record Type="UI.DataField">
+                <PropertyValue Property="Value" Path="description"/>
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="imageUrl"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="name"/>
+              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="description"/>
+              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Low"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="Category_ID"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="price"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="quantity"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.HeaderFacets">
+          <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#BasicData"/>
+              <PropertyValue Property="Label" String="Basic Data"/>
+            </Record>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#Price"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.Facets">
+          <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneralInformation"/>
+              <PropertyValue Property="Label" String="General Information"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.DataPoint" Qualifier="Price">
+          <Record Type="UI.DataPointType">
+            <PropertyValue Property="Value" Path="price"/>
+            <PropertyValue Property="ValueFormat">
+              <Record Type="UI.NumberFormat">
+                <PropertyValue Property="NumberOfFractionalDigits" Int="3"/>
+              </Record>
+            </PropertyValue>
+            <PropertyValue Property="Title" String="Price"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.FieldGroup" Qualifier="BasicData">
+          <Record Type="UI.FieldGroupType">
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="Category_ID"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="releaseDate"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.FieldGroup" Qualifier="GeneralInformation">
+          <Record Type="UI.FieldGroupType">
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="name"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="description"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="height"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="width"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="depth"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="price"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="quantity"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="Category_ID"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="UnitOfMeasure_ID"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="Currency_ID"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="ProductCDSX.EntityContainer/Products">
+        <Annotation Term="Common.DraftRoot">
+          <Record Type="Common.DraftRootType">
+            <PropertyValue Property="ActivationAction" String="ProductCDSX.draftActivate"/>
+            <PropertyValue Property="EditAction" String="ProductCDSX.draftEdit"/>
+            <PropertyValue Property="PreparationAction" String="ProductCDSX.draftPrepare"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/ID">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/name">
+        <Annotation Term="Common.Label" String="Name"/>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/description">
+        <Annotation Term="Common.Label" String="Description"/>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/imageUrl">
+        <Annotation Term="UI.IsImageURL" Bool="true"/>
+        <Annotation Term="Common.Label" String="Image"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/releaseDate">
+        <Annotation Term="Common.Label" String="Release Date"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/discontinuedDate">
+        <Annotation Term="Common.Label" String="Discontinued Date"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/price">
+        <Annotation Term="Measures.Unit" Path="Currency_ID"/>
+        <Annotation Term="Common.Label" String="Price"/>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/height">
+        <Annotation Term="Measures.Unit" Path="DimensionUnit_ID"/>
+        <Annotation Term="Common.Label" String="Height"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/width">
+        <Annotation Term="Measures.Unit" Path="DimensionUnit_ID"/>
+        <Annotation Term="Common.Label" String="Width"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/depth">
+        <Annotation Term="Measures.Unit" Path="DimensionUnit_ID"/>
+        <Annotation Term="Common.Label" String="Depth"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/quantity">
+        <Annotation Term="Measures.Unit" Path="UnitOfMeasure_ID"/>
+        <Annotation Term="Common.Label" String="Quantity"/>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+        <Annotation Term="Validation.Minimum" Int="0"/>
+        <Annotation Term="Validation.Maximum" Int="20"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/UnitOfMeasure_ID">
+        <Annotation Term="Common.Label" String="Unit of Measure"/>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/Currency_ID">
+        <Annotation Term="Common.Label" String="Currency"/>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/DimensionUnit_ID">
+        <Annotation Term="Common.Label" String="Dimension Unit"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/Category_ID">
+        <Annotation Term="Common.Label" String="Category"/>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/Supplier_ID">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/createdBy">
+        <Annotation Term="Common.Label" String="Created By"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/createdAt">
+        <Annotation Term="Common.Label" String="Created At"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/modifiedBy">
+        <Annotation Term="Common.Label" String="Modified By"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/modifiedAt">
+        <Annotation Term="Common.Label" String="Modified At"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/IsActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/HasActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/HasDraftEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.Products/DraftAdministrativeData">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.DraftAdministrativeData">
+        <Annotation Term="Common.Label" String="Draft Administrative Data"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.DraftAdministrativeData/DraftUUID">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+        <Annotation Term="Common.Label" String="Draft (Technical ID)"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.DraftAdministrativeData/CreationDateTime">
+        <Annotation Term="Common.Label" String="Draft Created On"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.DraftAdministrativeData/CreatedByUser">
+        <Annotation Term="Common.Label" String="Draft Created By"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.DraftAdministrativeData/DraftIsCreatedByMe">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+        <Annotation Term="Common.Label" String="Draft Created By Me"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.DraftAdministrativeData/LastChangeDateTime">
+        <Annotation Term="Common.Label" String="Draft Last Changed On"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.DraftAdministrativeData/LastChangedByUser">
+        <Annotation Term="Common.Label" String="Draft Last Changed By"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.DraftAdministrativeData/InProcessByUser">
+        <Annotation Term="Common.Label" String="Draft In Process By"/>
+      </Annotations>
+      <Annotations Target="ProductCDSX.DraftAdministrativeData/DraftIsProcessedByMe">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+        <Annotation Term="Common.Label" String="Draft In Process By Me"/>
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

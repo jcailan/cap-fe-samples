@@ -38,5 +38,9 @@ context remote {
             @mandatory
             Category_ID      : String(1);
             Supplier_ID      : UUID;
+            createdBy        : String;
+            createdAt        : Timestamp;
+            modifiedBy       : String;
+            modifiedAt       : Timestamp;
     }
 }
