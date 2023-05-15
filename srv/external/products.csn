@@ -97,45 +97,6 @@
 				},
 				"Supplier_ID": {
 					"type": "cds.UUID"
-				},
-				"texts": {
-					"@cds.ambiguous": "missing on condition?",
-					"type": "cds.Composition",
-					"target": "product_external.Products_texts",
-					"cardinality": {
-						"max": "*"
-					}
-				},
-				"localized": {
-					"@cds.ambiguous": "missing on condition?",
-					"type": "cds.Association",
-					"target": "product_external.Products_texts",
-					"keys": []
-				}
-			}
-		},
-		"product_external.Products_texts": {
-			"kind": "entity",
-			"@cds.external": true,
-			"@cds.persistence.skip": true,
-			"elements": {
-				"ID_texts": {
-					"key": true,
-					"type": "cds.UUID",
-					"notNull": true
-				},
-				"locale": {
-					"type": "cds.String",
-					"length": 14
-				},
-				"ID": {
-					"type": "cds.UUID"
-				},
-				"name": {
-					"type": "cds.LargeString"
-				},
-				"description": {
-					"type": "cds.LargeString"
 				}
 			}
 		}

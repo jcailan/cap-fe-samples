@@ -31,3 +31,5 @@ app/*/.vscode/
 .husky/
 dist/
 /resources/
+/.nyc_output/
+/coverage/

@@ -38,7 +38,7 @@
 	"scripts": {
 		"postinstall": "npx patch-package",
 		"start": "cds run",
-		"test": "mocha",
+		"test": "nyc --reporter=html mocha --timeout 5000",
 		"test:ui": "concurrently --kill-others \"npm start\" \"npm run karma --prefix app/products\"",
 		"husky": "npx husky install && npx husky add .husky/pre-commit \"npm run lint\"",
 		"lint": "eslint . --max-warnings 0",
@@ -70,7 +70,12 @@
 			},
 			"product_external": {
 				"kind": "odata-v2",
-				"model": "srv/external/products"
+				"model": "srv/external/products",
+				"[backend]": {
+					"credentials": {
+						"url": "http://localhost:4005/v2/product-api"
+					}
+				}
 			}
 		},
 		"protocols": {
