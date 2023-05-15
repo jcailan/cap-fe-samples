@@ -8,6 +8,10 @@ module.exports = function product() {
 		});
 	});
 
+	if (process.env.NODE_ENV !== "backend") {
+		return;
+	}
+
 	describe("Products Entity, create a new record", function() {
 		it("- should return error", async function() {
 			try {
