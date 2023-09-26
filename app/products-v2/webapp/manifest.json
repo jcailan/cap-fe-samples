@@ -34,6 +34,18 @@
 					"localUri": "annotations/annotation.xml"
 				}
 			}
+		},
+		"crossNavigation": {
+			"inbounds": {
+				"intent": {
+					"semanticObject": "ProductsV2",
+					"action": "display",
+					"title": "{{appTitle}}",
+					"subTitle": "{{subtitle}}",
+					"icon": "sap-icon://product",
+					"info": "{{info}}"
+				}
+			}
 		}
 	},
 	"sap.ui": {
@@ -156,5 +168,9 @@
 	"sap.fiori": {
 		"registrationIds": [],
 		"archeType": "transactional"
+	},
+	"sap.cloud": {
+		"public": true,
+		"service": "com.jcailan.capfes"
 	}
 }

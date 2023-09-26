@@ -75,6 +75,11 @@
 					"credentials": {
 						"url": "http://localhost:4005/v2/product-api"
 					}
+				},
+				"[production]": {
+					"credentials": {
+						"destination": "capfes-srv"
+					}
 				}
 			}
 		},
